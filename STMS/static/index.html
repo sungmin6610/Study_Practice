@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STMS Inventory Management</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>STMS</h2>
+                <p>Inventory Core</p>
+            </div>
+            <nav>
+                <button class="nav-btn active" data-target="dashboard">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    대시보드
+                </button>
+                <button class="nav-btn" data-target="inventory">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                    재고 현황
+                </button>
+                <button class="nav-btn" data-target="operations">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                    입/출고 관리
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard View -->
+            <section id="dashboard" class="view-section active">
+                <header>
+                    <h1>대시보드</h1>
+                    <p>전체 부품 재고 현황 요약</p>
+                </header>
+                
+                <div class="summary-cards">
+                    <div class="card glass">
+                        <h3>총 재고 수량</h3>
+                        <p class="big-number" id="dash-total-stock">0</p>
+                    </div>
+                    <div class="card glass">
+                        <h3>관리 부품 수</h3>
+                        <p class="big-number" id="dash-total-items">0</p>
+                    </div>
+                    <div class="card glass alert-card">
+                        <h3>재고 부족 위험군</h3>
+                        <p class="big-number" id="dash-low-stock">0</p>
+                    </div>
+                </div>
+
+                <div class="charts-container">
+                    <div class="chart-wrapper glass">
+                        <h3>카테고리별 재고 분포</h3>
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                    <div class="chart-wrapper glass">
+                        <h3>재고 부족 리스트 (Top 10)</h3>
+                        <div class="low-stock-list" id="low-stock-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Inventory View -->
+            <section id="inventory" class="view-section">
+                <header>
+                    <h1>재고 현황</h1>
+                    <div class="header-actions">
+                        <input type="text" id="search-input" placeholder="품번/품명 검색..." class="input-field">
+                        <button id="refresh-btn" class="btn btn-secondary">새로고침</button>
+                    </div>
+                </header>
+                
+                <div class="table-container glass">
+                    <table id="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>카테고리</th>
+                                <th>신품번</th>
+                                <th>구품번</th>
+                                <th>품명</th>
+                                <th>재고수량</th>
+                                <th>공정 진행중</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-tbody">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Operations View -->
+            <section id="operations" class="view-section">
+                <header>
+                    <h1>입/출고 및 재고 관리</h1>
+                    <p>납품명세서 업로드 및 재고 조정</p>
+                </header>
+
+                <div class="operations-grid">
+                    <!-- Delivery Upload -->
+                    <div class="card glass op-card">
+                        <div class="card-header">
+                            <div class="icon-wrap bg-blue"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg></div>
+                            <h3>납품명세서 업로드</h3>
+                        </div>
+                        <p class="desc">납품명세서 엑셀 파일을 업로드하여 재고를 일괄 차감합니다.</p>
+                        <div class="file-upload-area" id="drop-zone">
+                            <p>클릭하거나 파일을 여기로 드래그하세요.</p>
+                            <input type="file" id="delivery-file" accept=".xlsx, .xls, .csv" style="display: none;">
+                        </div>
+                        <p id="file-name-display" class="file-name"></p>
+                        <button id="upload-btn" class="btn btn-primary btn-block" disabled>업로드 및 반영</button>
+                    </div>
+
+                    <!-- Add Production -->
+                    <div class="card glass op-card">
+                        <div class="card-header">
+                            <div class="icon-wrap bg-green"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></div>
+                            <h3>생산 재고 추가</h3>
+                        </div>
+                        <p class="desc">새롭게 생산된 부품의 재고를 추가합니다.</p>
+                        <div class="form-group">
+                            <label>품번 (신품번 또는 구품번)</label>
+                            <input type="text" id="prod-part-no" class="input-field" placeholder="예: MD000113">
+                        </div>
+                        <div class="form-group">
+                            <label>추가 수량</label>
+                            <input type="number" id="prod-qty" class="input-field" placeholder="0" min="1">
+                        </div>
+                        <button id="add-prod-btn" class="btn btn-success btn-block">재고 추가</button>
+                    </div>
+
+                    <!-- Manual Override -->
+                    <div class="card glass op-card border-warning">
+                        <div class="card-header">
+                            <div class="icon-wrap bg-warning"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></div>
+                            <h3>수동 모드 (강제 수정)</h3>
+                        </div>
+                        <p class="desc warning-text">관리자 전용 기능입니다. 현재 재고를 강제로 덮어씁니다.</p>
+                        <div class="toggle-wrap">
+                            <span>수동 모드 활성화</span>
+                            <label class="switch">
+                                <input type="checkbox" id="manual-toggle">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div id="manual-controls" class="disabled-area">
+                            <div class="form-group">
+                                <label>품번</label>
+                                <input type="text" id="manual-part-no" class="input-field" placeholder="품번 입력" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label>최종 수정 수량</label>
+                                <input type="number" id="manual-qty" class="input-field" placeholder="0" disabled>
+                            </div>
+                            <button id="manual-btn" class="btn btn-warning btn-block" disabled>강제 수정</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Manual Warning Modal -->
+    <div id="warning-modal" class="modal">
+        <div class="modal-content glass">
+            <h2><span class="warning-icon">⚠️</span> 경고: 수동 재고 수정</h2>
+            <p>이 기능은 재고를 강제로 덮어씌웁니다. 오입력 시 데이터가 유실될 수 있습니다.</p>
+            <p>정말 <strong id="modal-part"></strong>의 재고를 <strong id="modal-qty"></strong>(으)로 수정하시겠습니까?</p>
+            <div class="modal-actions">
+                <button id="modal-cancel" class="btn btn-secondary">취소</button>
+                <button id="modal-confirm" class="btn btn-warning">수정 강행</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
