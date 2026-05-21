@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STMS2 - 부품 재고 및 매출 관리 시스템</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.15);
+            --primary-hover: #4f46e5;
+            --emerald: #10b981;
+            --rose: #f43f5e;
+            --amber: #f59e0b;
+            
+            --bg-dark: #090d16;
+            --bg-gradient: radial-gradient(circle at 10% 20%, #1e1b4b 0%, #090d16 90%);
+            
+            --card-bg: rgba(30, 41, 59, 0.45);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --sidebar-bg: rgba(15, 23, 42, 0.85);
+            
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-dark: #64748b;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', 'Noto Sans KR', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Layout Structure */
+        .app-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--card-border);
+            backdrop-filter: blur(20px);
+            padding: 2.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            position: fixed;
+            height: 100vh;
+            box-sizing: border-box;
+            z-index: 10;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary), #a855f7);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            color: var(--text-muted);
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.25s;
+            border: 1px solid transparent;
+        }
+
+        .menu-item svg {
+            width: 20px;
+            height: 20px;
+            transition: stroke 0.25s;
+        }
+
+        .menu-item:hover, .menu-item.active {
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .menu-item.active {
+            background: var(--primary-glow);
+            border-color: rgba(99, 102, 241, 0.25);
+            color: #818cf8;
+        }
+
+        .menu-item.active svg {
+            stroke: #818cf8;
+        }
+
+        /* Main Content Styling */
+        .main-content {
+            margin-left: 260px;
+            flex-grow: 1;
+            padding: 2.5rem;
+            box-sizing: border-box;
+            min-height: 100vh;
+        }
+
+        /* Tab Pane visibility logic */
+        .tab-pane {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Shared Components */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .header-title h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+            background: linear-gradient(to right, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-title p {
+            color: var(--text-muted);
+            margin: 0.5rem 0 0 0;
+            font-size: 0.95rem;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        button {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        button.primary {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        button.primary:hover {
+            background: var(--primary-hover);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.45);
+        }
+
+        button.danger {
+            background: var(--rose);
+            border-color: var(--rose);
+        }
+
+        button.danger:hover {
+            box-shadow: 0 4px 15px rgba(244, 63, 94, 0.4);
+        }
+
+        /* ------------------ 대시보드 UI 컴포넌트 ------------------ */
+        /* KPI 카드 그리드 */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .kpi-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(15px);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            transition: all 0.25s;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .kpi-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .kpi-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0.25rem 0;
+            background: linear-gradient(to right, #fff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .kpi-footer {
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .trend-up { color: var(--emerald); }
+        .trend-down { color: var(--rose); }
+
+        /* 메인 차트 및 하단 컨테이너 */
+        .chart-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(15px);
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .chart-box-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-title h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        /* 시간 대 탭 버튼 그룹 */
+        .time-tabs {
+            display: flex;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 0.3rem;
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
+        }
+
+        .time-tab {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.4rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: block;
+        }
+
+        .time-tab:hover {
+            color: white;
+            transform: none;
+        }
+
+        .time-tab.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+        }
+
+        /* 하단 2분할 레이아웃 */
+        .bottom-layout {
+            display: grid;
+            grid-template-columns: 4fr 6fr;
+            gap: 1.5rem;
+        }
+
+        .bottom-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 1.75rem;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .bottom-card h3 {
+            margin: 0 0 1.5rem 0;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        /* ------------------ 재고 관리 UI 컴포넌트 ------------------ */
+        .table-container {
+            background: var(--card-bg);
+            border-radius: 18px;
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(15px);
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            background: rgba(0, 0, 0, 0.25);
+            padding: 1.1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        td {
+            padding: 1.1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 0.95rem;
+        }
+
+        tbody tr {
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        tbody tr:hover, tbody tr.selected {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        tbody tr.selected {
+            border-left: 4px solid var(--primary);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--emerald);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        /* Indicator 및 상태 표시 */
+        .manual-indicator {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--rose);
+            font-weight: 600;
+            font-size: 0.9rem;
+            background: rgba(244, 63, 94, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(244, 63, 94, 0.25);
+        }
+
+        .manual-indicator.active {
+            display: flex;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(244, 63, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal {
+            background: #141b2b;
+            border-radius: 20px;
+            border: 1px solid var(--card-border);
+            padding: 2.25rem;
+            width: 100%;
+            max-width: 420px;
+            transform: scale(0.93);
+            transition: transform 0.3s ease;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal h2 {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            color: white;
+            font-family: inherit;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* 알림(Toast) */
+        #toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--emerald);
+            color: white;
+            padding: 1rem 1.75rem;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+            transform: translateY(120px);
+            opacity: 0;
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 200;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        #toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        #toast.error {
+            background: var(--rose);
+        }
+
+        /* 기간 필터 스타일 추가 */
+        .date-filter-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: auto;
+            margin-right: 1.5rem;
+        }
+
+        .date-filter-group input[type="date"] {
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--card-border);
+            color: #fff;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            outline: none;
+            color-scheme: dark;
+            transition: all 0.2s;
+        }
+
+        .date-filter-group input[type="date"]:focus {
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .date-filter-group span {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .date-filter-group .btn-reset {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .date-filter-group .btn-reset:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        /* 부품 재고 관리 탭 흰색 바탕 오버라이드 스타일 */
+        #tabInventory {
+            background: #ffffff;
+            color: #1e293b;
+            margin: -2.5rem;
+            padding: 2.5rem;
+            min-height: 100vh;
+            box-sizing: border-box;
+            transition: background 0.3s ease;
+        }
+
+        #tabInventory .header-title h1 {
+            background: none;
+            -webkit-text-fill-color: initial;
+            color: #0f172a;
+        }
+
+        #tabInventory .header-title p {
+            color: #64748b;
+        }
+
+        #tabInventory button {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            color: #334155;
+        }
+
+        #tabInventory button:hover {
+            background: #f1f5f9;
+            color: #0f172a;
+            transform: translateY(-2px);
+        }
+
+        #tabInventory button.primary {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #ffffff;
+        }
+
+        #tabInventory button.primary:hover {
+            background: var(--primary-hover);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+        }
+
+        #tabInventory button.danger {
+            background: var(--rose);
+            border-color: var(--rose);
+            color: #ffffff;
+        }
+
+        #tabInventory button.danger:hover {
+            box-shadow: 0 4px 12px rgba(244, 63, 94, 0.25);
+        }
+
+        #tabInventory .table-container {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+        }
+
+        #tabInventory th {
+            background: #f8fafc;
+            color: #475569;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        #tabInventory td {
+            color: #334155;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        #tabInventory td:nth-child(2) {
+            color: #0f172a !important; /* 신품번 */
+        }
+
+        #tabInventory td:nth-child(3) {
+            color: #64748b !important; /* 구품번 */
+        }
+
+        #tabInventory tbody tr:hover, #tabInventory tbody tr.selected {
+            background: #f8fafc;
+        }
+
+        #tabInventory tbody tr.selected {
+            background: #f1f5f9;
+            border-left: 4px solid var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-layout">
+        
+        <!-- 사이드바 -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <div class="logo-icon">S</div>
+                <div class="logo-text">STMS2</div>
+            </div>
+            
+            <ul class="menu-list">
+                <li id="menuDashboard" class="menu-item active" onclick="switchTab('dashboard')">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    매출 대시보드
+                </li>
+                <li id="menuInventory" class="menu-item" onclick="switchTab('inventory')">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                    부품 재고 관리
+                </li>
+            </ul>
+        </aside>
+
+        <!-- 메인 콘텐츠 영역 -->
+        <main class="main-content">
+            
+            <!-- 탭 1: 매출 대시보드 -->
+            <section id="tabDashboard" class="tab-pane active">
+                <header>
+                    <div class="header-title">
+                        <h1>매출현황 KPI 대시보드</h1>
+                        <p>Key Sales Indicators & Dynamic Trend Analysis</p>
+                    </div>
+                    <div class="controls" id="dashboardAlerts" style="display: none;">
+                        <button class="danger" onclick="switchTab('inventory')" style="background: rgba(244, 63, 94, 0.1); border-color: rgba(244, 63, 94, 0.3); color: var(--rose);">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                            <span id="shortageCountText">재고미달 0건</span>
+                        </button>
+                    </div>
+                </header>
+
+                <!-- KPI 요약 카드 그리드 -->
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span>오늘 매출액</span>
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <div class="kpi-value" id="kpiToday">₩0</div>
+                        <div class="kpi-footer" id="kpiTodayTrend">
+                            <span class="trend-up">▲ 0.0%</span> <span style="color: var(--text-dark);">어제 대비</span>
+                        </div>
+                    </div>
+                    
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span>이번 주 매출액</span>
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <div class="kpi-value" id="kpiWeek">₩0</div>
+                        <div class="kpi-footer" id="kpiWeekTrend">
+                            <span class="trend-up">▲ 0.0%</span> <span style="color: var(--text-dark);">지난 주 대비</span>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span>이번 달 매출액</span>
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        </div>
+                        <div class="kpi-value" id="kpiMonth">₩0</div>
+                        <div class="kpi-footer" id="kpiMonthTrend">
+                            <span class="trend-up">▲ 0.0%</span> <span style="color: var(--text-dark);">지난 달 대비</span>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span>올해 누적 매출액</span>
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        </div>
+                        <div class="kpi-value" id="kpiYear">₩0</div>
+                        <div class="kpi-footer" id="kpiYearTrend">
+                            <span class="trend-up">▲ 0.0%</span> <span style="color: var(--text-dark);">작년 대비</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 메인 매출 추이 차트 박스 -->
+                <div class="chart-box">
+                    <div class="chart-box-header">
+                        <div class="chart-title">
+                            <h3>매출 추이 분석</h3>
+                        </div>
+                        
+                        <!-- 특정 기간 조회 필터 추가 -->
+                        <div class="date-filter-group">
+                            <input type="date" id="salesStartDate" onchange="applyDateFilter()">
+                            <span>~</span>
+                            <input type="date" id="salesEndDate" onchange="applyDateFilter()">
+                            <button class="btn-reset" onclick="resetDateFilter()">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 7.89H18v3z"></path></svg>
+                                초기화
+                            </button>
+                        </div>
+                        <div class="time-tabs">
+                            <button class="time-tab" onclick="changeSalesPeriod('daily', this)">일일</button>
+                            <button class="time-tab" onclick="changeSalesPeriod('weekly', this)">주간</button>
+                            <button class="time-tab active" onclick="changeSalesPeriod('monthly', this)">월간</button>
+                            <button class="time-tab" onclick="changeSalesPeriod('quarterly', this)">분기</button>
+                            <button class="time-tab" onclick="changeSalesPeriod('half-yearly', this)">반기</button>
+                            <button class="time-tab" onclick="changeSalesPeriod('yearly', this)">년간</button>
+                        </div>
+                    </div>
+                    <div style="height: 380px; width: 100%;">
+                        <canvas id="salesTrendChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 하단 2분할 그리드 -->
+                <div class="bottom-layout">
+                    <!-- 도넛 차트: 매출 비중 -->
+                    <div class="bottom-card">
+                        <h3>품목별 매출 비중 (Top 5)</h3>
+                        <div style="height: 300px; position: relative;">
+                            <canvas id="topItemsChart"></canvas>
+                        </div>
+                    </div>
+                    <!-- 테이블: 최근 매출 내역 -->
+                    <div class="bottom-card" style="display: flex; flex-direction: column;">
+                        <h3>실시간 최근 매출 내역</h3>
+                        <div style="flex-grow: 1; overflow-y: auto; max-height: 300px;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>날짜</th>
+                                        <th>품번</th>
+                                        <th>품명</th>
+                                        <th>수량</th>
+                                        <th>매출액</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentSalesBody">
+                                    <!-- Dynamic rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- 탭 2: 부품 재고 관리 -->
+            <section id="tabInventory" class="tab-pane">
+                <header>
+                    <div class="header-title">
+                        <h1>부품 재고 관리</h1>
+                        <p>Real-time Parts Inventory Status & Control</p>
+                    </div>
+                    
+                    <div class="controls">
+                        <div id="manualIndicator" class="manual-indicator">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            관리자 수동모드 활성
+                        </div>
+                        <button onclick="document.getElementById('fileUpload').click()">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                            납품명세서 업로드
+                        </button>
+                        <input type="file" id="fileUpload" style="display: none;" accept=".xlsx, .xls" onchange="uploadDelivery(event)">
+                        
+                        <button id="btnManual" onclick="toggleManual()">수동 편집 모드</button>
+                        <button onclick="openEditModal()" id="btnEdit" style="display: none;" class="primary">재고 수정</button>
+                    </div>
+                </header>
+
+                <div class="table-container">
+                    <table id="inventoryTable">
+                        <thead>
+                            <tr>
+                                <th>순번</th>
+                                <th>신품번</th>
+                                <th>구품번</th>
+                                <th>품명</th>
+                                <th>재고수량</th>
+                                <th>부족 기준</th>
+                                <th>공정진행</th>
+                                <th>입고수량</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventoryBody">
+                            <!-- Dynamic rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- 비밀번호 인증 모달 -->
+    <div id="pwModal" class="modal-overlay">
+        <div class="modal">
+            <h2>관리자 인증</h2>
+            <div class="form-group">
+                <label>비밀번호를 입력하세요</label>
+                <input type="password" id="pwInput" onkeypress="if(event.key === 'Enter') checkPassword()">
+            </div>
+            <div class="modal-actions">
+                <button onclick="closeModal('pwModal')">취소</button>
+                <button onclick="checkPassword()" class="primary">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 재고 개별 수정 모달 -->
+    <div id="editModal" class="modal-overlay">
+        <div class="modal">
+            <h2>재고 수정</h2>
+            <div class="form-group">
+                <label>품번</label>
+                <input type="text" id="editPart" readonly style="background: rgba(255,255,255,0.05); color: var(--text-muted); border-color: transparent;">
+            </div>
+            <div class="form-group">
+                <label>현재 재고</label>
+                <input type="text" id="editCurrentQty" readonly style="background: rgba(255,255,255,0.05); color: var(--text-muted); border-color: transparent;">
+            </div>
+            <div class="form-group">
+                <label>변경할 재고수량</label>
+                <input type="number" id="editNewQty">
+            </div>
+            <div class="form-group">
+                <label>안전재고 미달 기준</label>
+                <input type="number" id="editSafetyStock" placeholder="기본값 50">
+            </div>
+            <div class="form-group">
+                <label>수정 사유</label>
+                <input type="text" id="editReason">
+            </div>
+            <div class="modal-actions">
+                <button onclick="closeModal('editModal')">취소</button>
+                <button onclick="saveEdit()" class="primary">저장</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast">알림 메시지</div>
+
+    <script>
+        let inventoryData = [];
+        let manualMode = false;
+        let selectedItem = null;
+        
+        // Charts instances
+        let trendChartInstance = null;
+        let donutChartInstance = null;
+        let activePeriod = 'monthly';
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDashboard();
+            loadInventory();
+        });
+
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = isError ? 'error show' : 'show';
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Tab Switcher
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-pane').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
+            
+            if (tabId === 'dashboard') {
+                document.getElementById('tabDashboard').classList.add('active');
+                document.getElementById('menuDashboard').classList.add('active');
+                loadDashboard();
+            } else if (tabId === 'inventory') {
+                document.getElementById('tabInventory').classList.add('active');
+                document.getElementById('menuInventory').classList.add('active');
+                loadInventory();
+            }
+        }
+
+        // ------------------ 매출 대시보드 로직 ------------------
+        async function loadDashboard() {
+            try {
+                // 1. Load KPIs
+                const kpiRes = await fetch('/api/sales/kpi');
+                const kpiData = await kpiRes.json();
+                if (kpiData.status === 'success') {
+                    updateKpiCards(kpiData.kpis);
+                }
+
+                // 2. Load Trend (Default Monthly)
+                await fetchTrendData('monthly');
+
+                // 3. Load Top Items
+                const topRes = await fetch('/api/sales/top-items');
+                const topData = await topRes.json();
+                if (topData.status === 'success') {
+                    renderDonutChart(topData.labels, topData.data);
+                }
+
+                // 4. Load Recent Sales
+                const recentRes = await fetch('/api/sales/recent');
+                const recentData = await recentRes.json();
+                if (recentData.status === 'success') {
+                    renderRecentSales(recentData.data);
+                }
+            } catch (e) {
+                showToast('대시보드 데이터를 불러오는데 실패했습니다.', true);
+            }
+        }
+
+        function formatCurrency(val) {
+            return '₩' + intval(val).toLocaleString();
+        }
+
+        function intval(val) {
+            return parseInt(val) || 0;
+        }
+
+        function updateKpiCards(kpis) {
+            const keys = ['today', 'week', 'month', 'year'];
+            keys.forEach(key => {
+                const kpi = kpis[key];
+                const valueEl = document.getElementById(`kpi${key.charAt(0).toUpperCase() + key.slice(1)}`);
+                const trendEl = document.getElementById(`kpi${key.charAt(0).toUpperCase() + key.slice(1)}Trend`);
+                
+                valueEl.textContent = formatCurrency(kpi.value);
+                
+                let trendHtml = '';
+                if (kpi.growth > 0) {
+                    trendHtml = `<span class="trend-up">▲ ${kpi.growth}%</span>`;
+                } else if (kpi.growth < 0) {
+                    trendHtml = `<span class="trend-down">▼ ${Math.abs(kpi.growth)}%</span>`;
+                } else {
+                    trendHtml = `<span style="color: var(--text-muted)">- 0.0%</span>`;
+                }
+                
+                const compareLabel = key === 'today' ? '어제 대비' : key === 'week' ? '지난 주 대비' : key === 'month' ? '지난 달 대비' : '작년 대비';
+                trendEl.innerHTML = `${trendHtml} <span style="color: var(--text-dark); margin-left: 0.25rem;">${compareLabel}</span>`;
+            });
+        }
+
+        async function fetchTrendData(period) {
+            activePeriod = period || activePeriod;
+            const startDate = document.getElementById('salesStartDate').value;
+            const endDate = document.getElementById('salesEndDate').value;
+            
+            let url = `/api/sales/trend?period=${activePeriod}`;
+            if (startDate) url += `&start_date=${startDate}`;
+            if (endDate) url += `&end_date=${endDate}`;
+            
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+                if (data.status === 'success') {
+                    renderTrendChart(data.labels, data.data, activePeriod);
+                } else {
+                    showToast(data.message, true);
+                }
+            } catch (e) {
+                showToast('트렌드 데이터를 불러오는데 실패했습니다.', true);
+            }
+        }
+
+        function changeSalesPeriod(period, btn) {
+            document.querySelectorAll('.time-tab').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            fetchTrendData(period);
+        }
+
+        function applyDateFilter() {
+            fetchTrendData(activePeriod);
+        }
+
+        function resetDateFilter() {
+            document.getElementById('salesStartDate').value = '';
+            document.getElementById('salesEndDate').value = '';
+            fetchTrendData(activePeriod);
+            showToast('기간 필터가 초기화되었습니다.');
+        }
+
+        function renderTrendChart(labels, data, period) {
+            const ctx = document.getElementById('salesTrendChart').getContext('2d');
+            
+            if (trendChartInstance) {
+                trendChartInstance.destroy();
+            }
+
+            // Create gradient
+            const gradient = ctx.createLinearGradient(0, 0, 0, 350);
+            gradient.addColorStop(0, 'rgba(99, 102, 241, 0.45)');
+            gradient.addColorStop(1, 'rgba(99, 102, 241, 0)');
+
+            let displayPeriod = period === 'daily' ? '일일 매출' : period === 'weekly' ? '주간 매출' : period === 'monthly' ? '월간 매출' : period === 'quarterly' ? '분기 매출' : period === 'half-yearly' ? '반기 매출' : '년간 매출';
+
+            trendChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: displayPeriod,
+                        data: data,
+                        borderColor: '#818cf8',
+                        backgroundColor: gradient,
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.35,
+                        pointBackgroundColor: '#818cf8',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#818cf8',
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: 'rgba(255,255,255,0.04)' },
+                            ticks: { color: '#94a3b8', font: { family: 'Outfit' } }
+                        },
+                        y: {
+                            grid: { color: 'rgba(255,255,255,0.04)' },
+                            ticks: { 
+                                color: '#94a3b8', 
+                                font: { family: 'Outfit' },
+                                callback: function(value) {
+                                    return value >= 10000 ? (value/10000).toLocaleString() + '만' : value;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderDonutChart(labels, data) {
+            const ctx = document.getElementById('topItemsChart').getContext('2d');
+            
+            if (donutChartInstance) {
+                donutChartInstance.destroy();
+            }
+
+            const total = data.reduce((sum, val) => sum + val, 0);
+            const mappedLabels = labels.map((label, index) => {
+                const value = data[index];
+                const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : '0.0';
+                return `${label} (${percentage}%)`;
+            });
+
+            const sliceLabelsPlugin = {
+                id: 'sliceLabels',
+                afterDatasetsDraw(chart) {
+                    const { ctx } = chart;
+                    ctx.save();
+                    chart.data.datasets.forEach((dataset, i) => {
+                        const meta = chart.getDatasetMeta(i);
+                        const totalSum = dataset.data.reduce((sum, val) => sum + val, 0);
+                        meta.data.forEach((element, index) => {
+                            const value = dataset.data[index];
+                            const percentage = totalSum > 0 ? ((value / totalSum) * 100).toFixed(1) : '0.0';
+                            if (parseFloat(percentage) < 4) return; // 4% 미만은 그리지 않음 (겹침 방지)
+                            
+                            const { x, y } = element.tooltipPosition();
+                            
+                            // 그림자 효과를 주어 가독성을 더욱 높임
+                            ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
+                            ctx.shadowBlur = 4;
+                            ctx.shadowOffsetX = 0;
+                            ctx.shadowOffsetY = 1;
+                            
+                            ctx.fillStyle = '#ffffff';
+                            ctx.font = 'bold 11px Outfit, Noto Sans KR';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText(`${percentage}%`, x, y);
+                        });
+                    });
+                    ctx.restore();
+                }
+            };
+
+            donutChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: mappedLabels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            '#6366f1',
+                            '#10b981',
+                            '#f59e0b',
+                            '#ec4899',
+                            '#a855f7'
+                        ],
+                        borderWidth: 2,
+                        borderColor: '#1e293b'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#f8fafc',
+                                font: { size: 11 },
+                                boxWidth: 12,
+                                padding: 15
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const value = context.raw;
+                                    const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : '0.0';
+                                    const cleanLabel = context.label.split(' (')[0];
+                                    return ` ${cleanLabel}: ${formatCurrency(value)} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '65%'
+                },
+                plugins: [sliceLabelsPlugin]
+            });
+        }
+
+        function renderRecentSales(data) {
+            const tbody = document.getElementById('recentSalesBody');
+            tbody.innerHTML = '';
+            
+            data.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="color: var(--text-muted);">${row['날짜']}</td>
+                    <td style="font-weight: 500;">${row['품번']}</td>
+                    <td>${row['품명']}</td>
+                    <td style="text-align: center;">${row['수량']}</td>
+                    <td style="font-weight: 600; color: #818cf8;">${formatCurrency(row['매출액'])}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+
+        // ------------------ 부품 재고 관리 로직 ------------------
+        async function loadInventory() {
+            try {
+                const response = await fetch('/api/inventory');
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    inventoryData = data.data;
+                    renderInventoryTable();
+                } else {
+                    showToast(data.message, true);
+                }
+            } catch (e) {
+                showToast('서버 연결 오류', true);
+            }
+        }
+
+        function renderInventoryTable() {
+            const tbody = document.getElementById('inventoryBody');
+            tbody.innerHTML = '';
+            
+            let shortageCount = 0;
+
+            inventoryData.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.onclick = () => selectRow(tr, row);
+                
+                if (row['is_shortage']) shortageCount++;
+                const qtyHtml = row['is_shortage'] 
+                    ? `<span style="color: #ef4444;">${row['재고수량']} <span style="font-size: 0.75rem; background: #fee2e2; padding: 2px 6px; border-radius: 4px; margin-left: 4px; font-weight: bold; color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2);">재고 부족</span></span>`
+                    : `${row['재고수량']}`;
+
+                tr.innerHTML = `
+                    <td>${row['순번'] || ''}</td>
+                    <td style="font-weight: 600; color: #fff;">${row['신품번'] || ''}</td>
+                    <td style="color: var(--text-muted);">${row['구품번'] || ''}</td>
+                    <td>${row['품명'] || ''}</td>
+                    <td style="font-weight: 600; color: var(--primary);">${qtyHtml}</td>
+                    <td style="color: #64748b; font-size: 0.9em; font-weight: 500;">${row['안전재고기준']}</td>
+                    <td><span class="${row['공정진행'] ? 'status-badge' : ''}">${row['공정진행'] || ''}</span></td>
+                    <td>${row['입고수량'] || ''}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Update Dashboard Alert
+            const alertDiv = document.getElementById('dashboardAlerts');
+            if (alertDiv) {
+                if (shortageCount > 0) {
+                    alertDiv.style.display = 'flex';
+                    document.getElementById('shortageCountText').innerText = `재고미달 ${shortageCount}건`;
+                } else {
+                    alertDiv.style.display = 'none';
+                }
+            }
+
+            selectedItem = null;
+            updateEditButtonVisibility();
+        }
+
+        function selectRow(trElement, rowData) {
+            document.querySelectorAll('#inventoryBody tr').forEach(tr => tr.classList.remove('selected'));
+            trElement.classList.add('selected');
+            selectedItem = rowData;
+            updateEditButtonVisibility();
+        }
+
+        function updateEditButtonVisibility() {
+            const btnEdit = document.getElementById('btnEdit');
+            if (manualMode && selectedItem) {
+                btnEdit.style.display = 'block';
+            } else {
+                btnEdit.style.display = 'none';
+            }
+        }
+
+        async function uploadDelivery(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                showToast('업로드 중...');
+                const response = await fetch('/api/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    showToast(result.message);
+                    loadInventory();
+                    loadDashboard(); // 대시보드 바로 갱신
+                } else {
+                    showToast(result.message, true);
+                }
+            } catch (e) {
+                showToast('업로드 실패', true);
+            }
+            event.target.value = '';
+        }
+
+        function toggleManual() {
+            if (!manualMode) {
+                document.getElementById('pwModal').classList.add('active');
+                document.getElementById('pwInput').focus();
+            } else {
+                manualMode = false;
+                document.getElementById('manualIndicator').classList.remove('active');
+                document.getElementById('btnManual').textContent = '수동 편집 모드';
+                document.getElementById('btnManual').classList.remove('danger');
+                showToast('관리자 모드 종료');
+                updateEditButtonVisibility();
+            }
+        }
+
+        function checkPassword() {
+            const pw = document.getElementById('pwInput').value;
+            if (pw === 'admin1234') {
+                manualMode = true;
+                closeModal('pwModal');
+                document.getElementById('pwInput').value = '';
+                document.getElementById('manualIndicator').classList.add('active');
+                document.getElementById('btnManual').textContent = '수동 편집 모드 끄기';
+                document.getElementById('btnManual').classList.add('danger');
+                showToast('관리자 모드 활성화');
+                updateEditButtonVisibility();
+            } else {
+                showToast('비밀번호 불일치', true);
+            }
+        }
+
+        function openEditModal() {
+            if (!selectedItem) return;
+            document.getElementById('editPart').value = selectedItem['신품번'];
+            document.getElementById('editCurrentQty').value = selectedItem['재고수량'];
+            document.getElementById('editNewQty').value = selectedItem['재고수량'];
+            document.getElementById('editSafetyStock').value = selectedItem['안전재고기준'] || 50;
+            document.getElementById('editReason').value = '';
+            document.getElementById('editModal').classList.add('active');
+            document.getElementById('editNewQty').focus();
+        }
+
+        async function saveEdit() {
+            const part = document.getElementById('editPart').value;
+            const qty = document.getElementById('editNewQty').value;
+            const safety_stock = document.getElementById('editSafetyStock').value;
+            const reason = document.getElementById('editReason').value;
+
+            try {
+                const response = await fetch('/api/edit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ part, qty, reason, safety_stock })
+                });
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    showToast(result.message);
+                    closeModal('editModal');
+                    loadInventory();
+                } else {
+                    showToast(result.message, true);
+                }
+            } catch (e) {
+                showToast('수정 저장 실패', true);
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Close modal on background click
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    closeModal(overlay.id);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
