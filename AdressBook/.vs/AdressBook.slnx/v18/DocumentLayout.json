@@ -1,0 +1,119 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\AdressBook\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EC565839-61F4-4FB2-87AB-A3325C4E1925}|AdressBook.csproj|d:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\adressbook\\calculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{EC565839-61F4-4FB2-87AB-A3325C4E1925}|AdressBook.csproj|solutionrelative:calculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC565839-61F4-4FB2-87AB-A3325C4E1925}|AdressBook.csproj|d:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\adressbook\\findnumber.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{EC565839-61F4-4FB2-87AB-A3325C4E1925}|AdressBook.csproj|solutionrelative:findnumber.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC565839-61F4-4FB2-87AB-A3325C4E1925}|AdressBook.csproj|d:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\adressbook\\calculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC565839-61F4-4FB2-87AB-A3325C4E1925}|AdressBook.csproj|solutionrelative:calculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC565839-61F4-4FB2-87AB-A3325C4E1925}|AdressBook.csproj|d:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\adressbook\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC565839-61F4-4FB2-87AB-A3325C4E1925}|AdressBook.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC565839-61F4-4FB2-87AB-A3325C4E1925}|AdressBook.csproj|D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\AdressBook\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{EC565839-61F4-4FB2-87AB-A3325C4E1925}|AdressBook.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC565839-61F4-4FB2-87AB-A3325C4E1925}|AdressBook.csproj|D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\AdressBook\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC565839-61F4-4FB2-87AB-A3325C4E1925}|AdressBook.csproj|solutionrelative:form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Calculator.cs",
+              "DocumentMoniker": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\AdressBook\\Calculator.cs",
+              "RelativeDocumentMoniker": "Calculator.cs",
+              "ToolTip": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\AdressBook\\Calculator.cs",
+              "RelativeToolTip": "Calculator.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAQwBMAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-19T02:13:34.92Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FindNumber.cs [\uB514\uC790\uC778]",
+              "DocumentMoniker": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\AdressBook\\FindNumber.cs",
+              "RelativeDocumentMoniker": "FindNumber.cs",
+              "ToolTip": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\AdressBook\\FindNumber.cs [\uB514\uC790\uC778]",
+              "RelativeToolTip": "FindNumber.cs [\uB514\uC790\uC778]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-19T01:41:11.646Z",
+              "EditorCaption": " [\uB514\uC790\uC778]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Calculator.cs [\uB514\uC790\uC778]",
+              "DocumentMoniker": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\AdressBook\\Calculator.cs",
+              "RelativeDocumentMoniker": "Calculator.cs",
+              "ToolTip": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\AdressBook\\Calculator.cs [\uB514\uC790\uC778]",
+              "RelativeToolTip": "Calculator.cs [\uB514\uC790\uC778]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-19T01:40:29.075Z",
+              "EditorCaption": " [\uB514\uC790\uC778]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\AdressBook\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\AdressBook\\Form1.cs",
+              "RelativeToolTip": "Form1.cs",
+              "ViewState": "AgIAALAAAAAAAAAAAAAqwMgAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T00:51:47Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\AdressBook\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "Form1.Designer.cs",
+              "ToolTip": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\AdressBook\\Form1.Designer.cs",
+              "RelativeToolTip": "Form1.Designer.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAIwBMBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T01:35:37.721Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Form1.cs [\uB514\uC790\uC778]",
+              "DocumentMoniker": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\AdressBook\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\AdressBook\\Form1.cs [\uB514\uC790\uC778]",
+              "RelativeToolTip": "Form1.cs [\uB514\uC790\uC778]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T00:51:29.558Z",
+              "EditorCaption": " [\uB514\uC790\uC778]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
