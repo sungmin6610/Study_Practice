@@ -43,13 +43,17 @@
             this.dataView = new System.Windows.Forms.DataGridView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.테이블조작ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.유틸ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.계산기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.정보추가ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.정보수정ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.정보삭제ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.불러오기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.유틸ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.계산기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.숫자맞추기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.comboSearch = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.검색ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataView)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -168,7 +172,7 @@
             // dataView
             // 
             this.dataView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataView.Location = new System.Drawing.Point(437, 182);
+            this.dataView.Location = new System.Drawing.Point(437, 44);
             this.dataView.Name = "dataView";
             this.dataView.RowTemplate.Height = 23;
             this.dataView.Size = new System.Drawing.Size(702, 568);
@@ -193,10 +197,42 @@
             this.정보추가ToolStripMenuItem,
             this.정보수정ToolStripMenuItem,
             this.정보삭제ToolStripMenuItem,
-            this.불러오기ToolStripMenuItem});
+            this.불러오기ToolStripMenuItem,
+            this.검색ToolStripMenuItem});
             this.테이블조작ToolStripMenuItem.Name = "테이블조작ToolStripMenuItem";
             this.테이블조작ToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
             this.테이블조작ToolStripMenuItem.Text = "테이블조작";
+            // 
+            // 정보추가ToolStripMenuItem
+            // 
+            this.정보추가ToolStripMenuItem.Name = "정보추가ToolStripMenuItem";
+            this.정보추가ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.정보추가ToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.정보추가ToolStripMenuItem.Text = "정보추가";
+            this.정보추가ToolStripMenuItem.Click += new System.EventHandler(this.정보추가ToolStripMenuItem_Click);
+            // 
+            // 정보수정ToolStripMenuItem
+            // 
+            this.정보수정ToolStripMenuItem.Name = "정보수정ToolStripMenuItem";
+            this.정보수정ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.정보수정ToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.정보수정ToolStripMenuItem.Text = "정보수정";
+            this.정보수정ToolStripMenuItem.Click += new System.EventHandler(this.정보수정ToolStripMenuItem_Click);
+            // 
+            // 정보삭제ToolStripMenuItem
+            // 
+            this.정보삭제ToolStripMenuItem.Name = "정보삭제ToolStripMenuItem";
+            this.정보삭제ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.정보삭제ToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.정보삭제ToolStripMenuItem.Text = "정보삭제";
+            this.정보삭제ToolStripMenuItem.Click += new System.EventHandler(this.정보삭제ToolStripMenuItem_Click);
+            // 
+            // 불러오기ToolStripMenuItem
+            // 
+            this.불러오기ToolStripMenuItem.Name = "불러오기ToolStripMenuItem";
+            this.불러오기ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
+            this.불러오기ToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.불러오기ToolStripMenuItem.Text = "불러오기";
             // 
             // 유틸ToolStripMenuItem
             // 
@@ -210,53 +246,63 @@
             // 계산기ToolStripMenuItem
             // 
             this.계산기ToolStripMenuItem.Name = "계산기ToolStripMenuItem";
-            this.계산기ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.계산기ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.계산기ToolStripMenuItem.Text = "계산기";
             this.계산기ToolStripMenuItem.Click += new System.EventHandler(this.계산기ToolStripMenuItem_Click);
-            // 
-            // 정보추가ToolStripMenuItem
-            // 
-            this.정보추가ToolStripMenuItem.Name = "정보추가ToolStripMenuItem";
-            this.정보추가ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.정보추가ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.정보추가ToolStripMenuItem.Text = "정보추가";
-            this.정보추가ToolStripMenuItem.Click += new System.EventHandler(this.정보추가ToolStripMenuItem_Click);
-            // 
-            // 정보수정ToolStripMenuItem
-            // 
-            this.정보수정ToolStripMenuItem.Name = "정보수정ToolStripMenuItem";
-            this.정보수정ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.정보수정ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.정보수정ToolStripMenuItem.Text = "정보수정";
-            this.정보수정ToolStripMenuItem.Click += new System.EventHandler(this.정보수정ToolStripMenuItem_Click);
-            // 
-            // 정보삭제ToolStripMenuItem
-            // 
-            this.정보삭제ToolStripMenuItem.Name = "정보삭제ToolStripMenuItem";
-            this.정보삭제ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.정보삭제ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.정보삭제ToolStripMenuItem.Text = "정보삭제";
-            this.정보삭제ToolStripMenuItem.Click += new System.EventHandler(this.정보삭제ToolStripMenuItem_Click);
-            // 
-            // 불러오기ToolStripMenuItem
-            // 
-            this.불러오기ToolStripMenuItem.Name = "불러오기ToolStripMenuItem";
-            this.불러오기ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
-            this.불러오기ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.불러오기ToolStripMenuItem.Text = "불러오기";
             // 
             // 숫자맞추기ToolStripMenuItem
             // 
             this.숫자맞추기ToolStripMenuItem.Name = "숫자맞추기ToolStripMenuItem";
-            this.숫자맞추기ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.숫자맞추기ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.숫자맞추기ToolStripMenuItem.Text = "숫자맞추기";
             this.숫자맞추기ToolStripMenuItem.Click += new System.EventHandler(this.숫자맞추기ToolStripMenuItem_Click);
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(127, 43);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(147, 21);
+            this.textBox5.TabIndex = 15;
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            // 
+            // comboSearch
+            // 
+            this.comboSearch.FormattingEnabled = true;
+            this.comboSearch.Items.AddRange(new object[] {
+            "이름",
+            "주소",
+            "이메일"});
+            this.comboSearch.Location = new System.Drawing.Point(280, 44);
+            this.comboSearch.Name = "comboSearch";
+            this.comboSearch.Size = new System.Drawing.Size(121, 20);
+            this.comboSearch.TabIndex = 16;
+            this.comboSearch.SelectedIndexChanged += new System.EventHandler(this.comboSearch_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(48, 47);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 12);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "검색";
+            // 
+            // 검색ToolStripMenuItem
+            // 
+            this.검색ToolStripMenuItem.Name = "검색ToolStripMenuItem";
+            this.검색ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
+            this.검색ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.검색ToolStripMenuItem.Text = "검색";
+            this.검색ToolStripMenuItem.Click += new System.EventHandler(this.검색ToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1151, 762);
+            this.ClientSize = new System.Drawing.Size(1151, 622);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.comboSearch);
+            this.Controls.Add(this.textBox5);
             this.Controls.Add(this.dataView);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.btnDelete);
@@ -305,6 +351,10 @@
         private System.Windows.Forms.ToolStripMenuItem 유틸ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 계산기ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 숫자맞추기ToolStripMenuItem;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.ComboBox comboSearch;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ToolStripMenuItem 검색ToolStripMenuItem;
     }
 }
 

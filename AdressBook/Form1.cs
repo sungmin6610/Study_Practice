@@ -207,5 +207,55 @@ namespace AdressBook
             FindNumber fn = new FindNumber();
             fn.Show();
         }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnsearch_Click(object sender, EventArgs e)
+        {
+            string searchName = textBox5.Text.Trim();
+            using (MySqlConnection conn = new MySqlConnection(connStr))
+            {
+                conn.Open();
+                string sql = @"select * from contacts where name like @searchName";
+                MySqlDataAdapter result = new MySqlDataAdapter(sql, conn);
+                result.SelectCommand.Parameters.AddWithValue("@searchName", "%" + searchName + "%");
+                // searchName+"__" 김** 만으로 이름 검색 하고싶을때
+                DataTable dt = new DataTable();
+                result.Fill(dt);
+                dataView.DataSource = dt;
+
+            }
+        }
+
+        private void comboSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string search = textBox5.Text.Trim();
+            using (MySqlConnection conn = new MySqlConnection(connStr))
+            {
+                conn.Open();
+                string sql;
+                if (comboSearch.Text == "이름")
+                    sql = @"select * from contacts where name like @search";
+                else if (comboSearch.Text == "주소")
+                    sql = @"select * from contacts where address like @search";
+                else
+                    sql = @"select * from contacts where email like @search";
+
+                MySqlDataAdapter result = new MySqlDataAdapter(sql, conn);
+                result.SelectCommand.Parameters.AddWithValue("@search", "%" + search + "%");
+               
+                DataTable dt = new DataTable();
+                result.Fill(dt);
+                dataView.DataSource = dt;
+            }
+        }
+
+        private void 검색ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            comboSearch_SelectedIndexChanged(sender, e);
+        }
     }
 }

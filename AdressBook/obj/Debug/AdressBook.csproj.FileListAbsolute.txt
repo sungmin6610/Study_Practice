@@ -39,3 +39,5 @@ D:\2604340036 - 송성민\소프트웨어 공학\AdressBook\bin\Debug\System.Thr
 D:\2604340036 - 송성민\소프트웨어 공학\AdressBook\obj\Debug\AdressBook.csproj.Up2Date
 D:\2604340036 - 송성민\소프트웨어 공학\AdressBook\obj\Debug\AdressBook.exe
 D:\2604340036 - 송성민\소프트웨어 공학\AdressBook\obj\Debug\AdressBook.pdb
+D:\2604340036 - 송성민\소프트웨어 공학\AdressBook\obj\Debug\AdressBook.Calculator.resources
+D:\2604340036 - 송성민\소프트웨어 공학\AdressBook\obj\Debug\AdressBook.FindNumber.resources
