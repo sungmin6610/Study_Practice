@@ -1,0 +1,7 @@
+D:\2604340036_Hiteche_송성민\test\bin\Debug\test.exe.config
+D:\2604340036_Hiteche_송성민\test\bin\Debug\test.exe
+D:\2604340036_Hiteche_송성민\test\bin\Debug\test.pdb
+D:\2604340036_Hiteche_송성민\test\obj\Debug\test.csproj.AssemblyReference.cache
+D:\2604340036_Hiteche_송성민\test\obj\Debug\test.csproj.CoreCompileInputs.cache
+D:\2604340036_Hiteche_송성민\test\obj\Debug\test.exe
+D:\2604340036_Hiteche_송성민\test\obj\Debug\test.pdb

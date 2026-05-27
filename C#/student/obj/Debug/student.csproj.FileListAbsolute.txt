@@ -1,0 +1,7 @@
+D:\2604340036_Hiteche_송성민\student\bin\Debug\student.exe.config
+D:\2604340036_Hiteche_송성민\student\bin\Debug\student.exe
+D:\2604340036_Hiteche_송성민\student\bin\Debug\student.pdb
+D:\2604340036_Hiteche_송성민\student\obj\Debug\student.csproj.AssemblyReference.cache
+D:\2604340036_Hiteche_송성민\student\obj\Debug\student.csproj.CoreCompileInputs.cache
+D:\2604340036_Hiteche_송성민\student\obj\Debug\student.exe
+D:\2604340036_Hiteche_송성민\student\obj\Debug\student.pdb

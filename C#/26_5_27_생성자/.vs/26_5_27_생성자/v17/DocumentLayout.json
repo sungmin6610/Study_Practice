@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\2604340036_Hiteche_\uC1A1\uC131\uBBFC\\26_5_27_\uC0DD\uC131\uC790\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{20D947DF-E775-4E84-A629-02560D67021B}|26_5_27_\uC0DD\uC131\uC790.csproj|d:\\2604340036_hiteche_\uC1A1\uC131\uBBFC\\26_5_27_\uC0DD\uC131\uC790\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{20D947DF-E775-4E84-A629-02560D67021B}|26_5_27_\uC0DD\uC131\uC790.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\2604340036_Hiteche_\uC1A1\uC131\uBBFC\\26_5_27_\uC0DD\uC131\uC790\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\2604340036_Hiteche_\uC1A1\uC131\uBBFC\\26_5_27_\uC0DD\uC131\uC790\\Program.cs*",
+              "RelativeToolTip": "Program.cs*",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAIwCMAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-27T08:11:26.616Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

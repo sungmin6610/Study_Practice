@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\2604340036_Hiteche_\uC1A1\uC131\uBBFC\\Sum of 1~100\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C4916C76-7E5B-4290-B7A3-D7D2F2344EF9}|Sum of 1~100\\Sum of 1~100.csproj|d:\\2604340036_hiteche_\uC1A1\uC131\uBBFC\\sum of 1~100\\sum of 1~100\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C4916C76-7E5B-4290-B7A3-D7D2F2344EF9}|Sum of 1~100\\Sum of 1~100.csproj|solutionrelative:sum of 1~100\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\2604340036_Hiteche_\uC1A1\uC131\uBBFC\\Sum of 1~100\\Sum of 1~100\\Program.cs",
+              "RelativeDocumentMoniker": "Sum of 1~100\\Program.cs",
+              "ToolTip": "D:\\2604340036_Hiteche_\uC1A1\uC131\uBBFC\\Sum of 1~100\\Sum of 1~100\\Program.cs",
+              "RelativeToolTip": "Sum of 1~100\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvxUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-18T05:39:35.238Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

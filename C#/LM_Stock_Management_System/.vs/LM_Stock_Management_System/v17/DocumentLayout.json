@@ -1,0 +1,121 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\2604340036_Hiteche_SSM\\LM_Stock_Management_System\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1D5EAAE7-CDF6-436B-B376-D6DA6AD07A0D}|LM_Stock_Management_System.csproj|D:\\2604340036_Hiteche_SSM\\LM_Stock_Management_System\\Employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D5EAAE7-CDF6-436B-B376-D6DA6AD07A0D}|LM_Stock_Management_System.csproj|solutionrelative:Employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D5EAAE7-CDF6-436B-B376-D6DA6AD07A0D}|LM_Stock_Management_System.csproj|D:\\2604340036_Hiteche_SSM\\LM_Stock_Management_System\\Customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D5EAAE7-CDF6-436B-B376-D6DA6AD07A0D}|LM_Stock_Management_System.csproj|solutionrelative:Customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D5EAAE7-CDF6-436B-B376-D6DA6AD07A0D}|LM_Stock_Management_System.csproj|D:\\2604340036_Hiteche_SSM\\LM_Stock_Management_System\\Partner_Company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D5EAAE7-CDF6-436B-B376-D6DA6AD07A0D}|LM_Stock_Management_System.csproj|solutionrelative:Partner_Company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D5EAAE7-CDF6-436B-B376-D6DA6AD07A0D}|LM_Stock_Management_System.csproj|D:\\2604340036_Hiteche_SSM\\LM_Stock_Management_System\\Product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D5EAAE7-CDF6-436B-B376-D6DA6AD07A0D}|LM_Stock_Management_System.csproj|solutionrelative:Product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D5EAAE7-CDF6-436B-B376-D6DA6AD07A0D}|LM_Stock_Management_System.csproj|d:\\2604340036_hiteche_ssm\\lm_stock_management_system\\classdiagram1.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|",
+      "RelativeMoniker": "D:0:0:{1D5EAAE7-CDF6-436B-B376-D6DA6AD07A0D}|LM_Stock_Management_System.csproj|solutionrelative:classdiagram1.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D5EAAE7-CDF6-436B-B376-D6DA6AD07A0D}|LM_Stock_Management_System.csproj|d:\\2604340036_hiteche_ssm\\lm_stock_management_system\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D5EAAE7-CDF6-436B-B376-D6DA6AD07A0D}|LM_Stock_Management_System.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ClassDiagram1.cd",
+              "DocumentMoniker": "D:\\2604340036_Hiteche_SSM\\LM_Stock_Management_System\\ClassDiagram1.cd",
+              "RelativeDocumentMoniker": "ClassDiagram1.cd",
+              "ToolTip": "D:\\2604340036_Hiteche_SSM\\LM_Stock_Management_System\\ClassDiagram1.cd",
+              "RelativeToolTip": "ClassDiagram1.cd",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000463|",
+              "WhenOpened": "2026-05-20T08:14:44.125Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Partner_Company.cs",
+              "DocumentMoniker": "D:\\2604340036_Hiteche_SSM\\LM_Stock_Management_System\\Partner_Company.cs",
+              "RelativeDocumentMoniker": "Partner_Company.cs",
+              "ToolTip": "D:\\2604340036_Hiteche_SSM\\LM_Stock_Management_System\\Partner_Company.cs",
+              "RelativeToolTip": "Partner_Company.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAQwCYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T04:58:42.62Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Customer.cs",
+              "DocumentMoniker": "D:\\2604340036_Hiteche_SSM\\LM_Stock_Management_System\\Customer.cs",
+              "RelativeDocumentMoniker": "Customer.cs",
+              "ToolTip": "D:\\2604340036_Hiteche_SSM\\LM_Stock_Management_System\\Customer.cs",
+              "RelativeToolTip": "Customer.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAwCQAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T04:58:17.281Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Employee.cs",
+              "DocumentMoniker": "D:\\2604340036_Hiteche_SSM\\LM_Stock_Management_System\\Employee.cs",
+              "RelativeDocumentMoniker": "Employee.cs",
+              "ToolTip": "D:\\2604340036_Hiteche_SSM\\LM_Stock_Management_System\\Employee.cs",
+              "RelativeToolTip": "Employee.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T04:57:34.92Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Product.cs",
+              "DocumentMoniker": "D:\\2604340036_Hiteche_SSM\\LM_Stock_Management_System\\Product.cs",
+              "RelativeDocumentMoniker": "Product.cs",
+              "ToolTip": "D:\\2604340036_Hiteche_SSM\\LM_Stock_Management_System\\Product.cs",
+              "RelativeToolTip": "Product.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T04:55:41.826Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\2604340036_Hiteche_SSM\\LM_Stock_Management_System\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\2604340036_Hiteche_SSM\\LM_Stock_Management_System\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAAwCMAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T04:49:23.512Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

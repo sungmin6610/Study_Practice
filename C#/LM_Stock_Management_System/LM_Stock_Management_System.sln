@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LM_Stock_Management_System", "LM_Stock_Management_System.csproj", "{1D5EAAE7-CDF6-436B-B376-D6DA6AD07A0D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1D5EAAE7-CDF6-436B-B376-D6DA6AD07A0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D5EAAE7-CDF6-436B-B376-D6DA6AD07A0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D5EAAE7-CDF6-436B-B376-D6DA6AD07A0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D5EAAE7-CDF6-436B-B376-D6DA6AD07A0D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {635BC217-7670-4B83-83D2-C77E7F41D65D}
+	EndGlobalSection
+EndGlobal
