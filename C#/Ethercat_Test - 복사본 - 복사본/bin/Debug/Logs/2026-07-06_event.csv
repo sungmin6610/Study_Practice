@@ -1,0 +1,151 @@
+﻿시각,구분,메시지
+2026-07-06 14:50:55,STATE,PowerOff -> Idle
+2026-07-06 14:51:27,INFO,자동공정 시작
+2026-07-06 14:51:27,EVENT,CEID=1001 LotStart | LOT20260706145127
+2026-07-06 14:51:27,STATE,Idle -> Initializing
+2026-07-06 14:51:27,STATE,Initializing -> Homing
+2026-07-06 14:51:28,STATE,Homing -> Running
+2026-07-06 14:51:44,ALARM,[Step=Cham_DoorOpen] 이송 중 진공 상실
+2026-07-06 14:51:44,EVENT,CEID=3001 AlarmSet | 이송 중 진공 상실
+2026-07-06 14:51:44,STATE,Running -> Alarm
+2026-07-06 14:51:44,STATE,자동공정 알람정지: 이송 중 진공 상실
+2026-07-06 14:51:44,EVENT,CEID=1002 LotEnd | LOT20260706145127 Aborted
+2026-07-06 14:51:58,STATE,Alarm -> Pause
+2026-07-06 14:51:59,EVENT,CEID=3002 AlarmClear
+2026-07-06 14:51:59,STATE,Pause -> Idle
+2026-07-06 14:52:21,INFO,자동공정 시작
+2026-07-06 14:52:21,EVENT,CEID=1001 LotStart | LOT20260706145221
+2026-07-06 14:52:21,STATE,Idle -> Initializing
+2026-07-06 14:52:22,STATE,Initializing -> Homing
+2026-07-06 14:52:24,STATE,Homing -> Running
+2026-07-06 14:53:13,INFO,공정 시작 - Slot 1 / A (PRCoating)
+2026-07-06 14:53:20,INFO,공정 종료 - Slot 1 / A (PRCoating) 6.5s
+2026-07-06 14:53:51,INFO,공정 시작 - Slot 1 / B (Exposure)
+2026-07-06 14:54:00,INFO,공정 종료 - Slot 1 / B (Exposure) 8.8s
+2026-07-06 14:54:33,INFO,공정 시작 - Slot 1 / C (Develop)
+2026-07-06 14:54:36,STATE,Running -> Pause
+2026-07-06 14:54:37,STATE,Pause -> Idle
+2026-07-06 14:55:13,STATE,Idle -> Pause
+2026-07-06 14:55:13,STATE,Pause -> PowerOff
+2026-07-06 15:13:30.372,STATE,,PowerOff -> Idle
+2026-07-06 15:22:29.726,STATE,,PowerOff -> Idle
+2026-07-06 15:22:48.675,INFO,,자동공정 시작
+2026-07-06 15:22:48.679,INFO,,EVENT CEID=1001 LotStart | LOT20260706152248
+2026-07-06 15:22:48.742,STATE,,Idle -> Initializing
+2026-07-06 15:22:49.400,STATE,,Initializing -> Homing
+2026-07-06 15:22:49.841,STATE,,Homing -> Running
+2026-07-06 15:22:53.185,STATE,,Running -> Pause
+2026-07-06 15:22:54.560,STATE,,Pause -> Idle
+2026-07-06 15:23:00.457,INFO,,자동공정 시작
+2026-07-06 15:23:00.457,INFO,,EVENT CEID=1001 LotStart | LOT20260706152300
+2026-07-06 15:23:00.479,STATE,,Idle -> Initializing
+2026-07-06 15:23:01.155,STATE,,Initializing -> Homing
+2026-07-06 15:23:01.695,STATE,,Homing -> Running
+2026-07-06 15:23:50.489,INFO,,공정 시작 - Slot 1 / A (PRCoating)
+2026-07-06 15:23:56.985,INFO,,공정 종료 - Slot 1 / A (PRCoating) 6.5s
+2026-07-06 15:24:30.598,INFO,,공정 시작 - Slot 1 / B (Exposure)
+2026-07-06 15:24:39.356,INFO,,공정 종료 - Slot 1 / B (Exposure) 8.8s
+2026-07-06 15:25:16.051,INFO,,공정 시작 - Slot 1 / C (Develop)
+2026-07-06 15:25:22.514,INFO,,공정 종료 - Slot 1 / C (Develop) 6.5s
+2026-07-06 15:25:55.813,INFO,,Slot 1 FOUP B 안착 완료
+2026-07-06 15:25:55.813,INFO,,EVENT CEID=2001 WaferDone | slot=1
+2026-07-06 15:26:04.547,STATE,,Running -> Pause
+2026-07-06 15:26:05.452,STATE,,Pause -> Idle
+2026-07-06 15:26:22.217,STATE,,Idle -> Pause
+2026-07-06 15:26:22.231,STATE,,Pause -> PowerOff
+2026-07-06 15:28:46.464,STATE,,PowerOff -> Idle
+2026-07-06 15:29:12.690,STATE,,Idle -> Pause
+2026-07-06 15:29:12.706,STATE,,Pause -> PowerOff
+2026-07-06 15:41:24.031,STATE,,PowerOff -> Idle
+2026-07-06 15:41:52.729,INFO,,자동공정 시작
+2026-07-06 15:41:52.729,INFO,,EVENT CEID=1001 LotStart | LOT20260706154152
+2026-07-06 15:41:52.742,STATE,,Idle -> Initializing
+2026-07-06 15:41:53.403,STATE,,Initializing -> Homing
+2026-07-06 15:41:53.849,STATE,,Homing -> Running
+2026-07-06 15:42:35.969,INFO,,공정 시작 - Slot 1 / A (PRCoating)
+2026-07-06 15:42:42.445,INFO,,공정 종료 - Slot 1 / A (PRCoating) 6.5s
+2026-07-06 15:43:13.310,INFO,,공정 시작 - Slot 1 / B (Exposure)
+2026-07-06 15:43:18.075,STATE,,Running -> Pause
+2026-07-06 15:43:18.663,STATE,,Pause -> Idle
+2026-07-06 15:43:57.074,STATE,,Idle -> Pause
+2026-07-06 15:43:57.074,STATE,,Pause -> PowerOff
+2026-07-06 16:00:30.061,STATE,,PowerOff -> Idle
+2026-07-06 16:00:53.983,INFO,,자동공정 시작
+2026-07-06 16:00:53.983,INFO,,EVENT CEID=1001 LotStart | LOT20260706160053
+2026-07-06 16:00:54.088,STATE,,Idle -> Initializing
+2026-07-06 16:00:54.757,STATE,,Initializing -> Homing
+2026-07-06 16:00:55.197,STATE,,Homing -> Running
+2026-07-06 16:01:43.588,INFO,,공정 시작 - Slot 1 / A (PRCoating)
+2026-07-06 16:01:50.046,INFO,,공정 종료 - Slot 1 / A (PRCoating) 6.5s
+2026-07-06 16:02:07.087,INFO,,공정 시작 - Slot 1 / B (Exposure)
+2026-07-06 16:02:15.806,INFO,,공정 종료 - Slot 1 / B (Exposure) 8.7s
+2026-07-06 16:02:50.819,INFO,,공정 시작 - Slot 1 / C (Develop)
+2026-07-06 16:02:57.297,INFO,,공정 종료 - Slot 1 / C (Develop) 6.5s
+2026-07-06 16:03:38.785,INFO,,Slot 1 FOUP B 안착 완료
+2026-07-06 16:03:38.785,INFO,,EVENT CEID=2001 WaferDone | slot=1
+2026-07-06 16:04:14.962,INFO,,공정 시작 - Slot 2 / A (PRCoating)
+2026-07-06 16:04:21.468,INFO,,공정 종료 - Slot 2 / A (PRCoating) 6.5s
+2026-07-06 16:04:36.702,STATE,,Running -> Pause
+2026-07-06 16:04:38.908,STATE,,Pause -> Idle
+2026-07-06 16:06:04.126,STATE,,Idle -> Pause
+2026-07-06 16:06:04.142,STATE,,Pause -> PowerOff
+2026-07-06 17:12:39.336,STATE,,PowerOff -> Pause
+2026-07-06 17:12:39.336,STATE,,Pause -> PowerOff
+2026-07-06 19:57:23.997,STATE,,PowerOff -> Idle
+2026-07-06 19:58:03.158,INFO,,자동공정 시작
+2026-07-06 19:58:03.158,INFO,,EVENT CEID=1001 LotStart | LOT20260706195803
+2026-07-06 19:58:03.169,STATE,,Idle -> Initializing
+2026-07-06 19:58:03.839,STATE,,Initializing -> Homing
+2026-07-06 19:58:04.277,STATE,,Homing -> Running
+2026-07-06 19:58:38.658,INFO,,공정 시작 - Slot 1 / A (PRCoating)
+2026-07-06 19:58:45.208,INFO,,공정 종료 - Slot 1 / A (PRCoating) 6.6s
+2026-07-06 19:59:02.903,ALARM,Cham_WaitDoorClose2,챔버 A 도어 닫힘 타임아웃
+2026-07-06 19:59:02.903,INFO,,EVENT CEID=3001 AlarmSet | 챔버 A 도어 닫힘 타임아웃
+2026-07-06 19:59:02.903,STATE,,Running -> Alarm
+2026-07-06 19:59:02.903,STATE,,자동공정 알람정지: 챔버 A 도어 닫힘 타임아웃
+2026-07-06 19:59:02.903,INFO,,EVENT CEID=1002 LotEnd | LOT20260706195803 Aborted
+2026-07-06 19:59:08.962,INFO,,EVENT CEID=3002 AlarmClear
+2026-07-06 19:59:08.962,STATE,,Alarm -> Idle
+2026-07-06 20:05:42.609,INFO,,자동공정 시작
+2026-07-06 20:05:42.609,INFO,,EVENT CEID=1001 LotStart | LOT20260706200542
+2026-07-06 20:05:42.704,STATE,,Idle -> Initializing
+2026-07-06 20:05:43.371,STATE,,Initializing -> Homing
+2026-07-06 20:05:43.819,STATE,,Homing -> Running
+2026-07-06 20:05:46.286,STATE,,Running -> Pause
+2026-07-06 20:06:00.592,STATE,,Pause -> PowerOff
+2026-07-06 20:06:05.643,STATE,,PowerOff -> Idle
+2026-07-06 20:06:15.178,INFO,,자동공정 시작
+2026-07-06 20:06:15.178,INFO,,EVENT CEID=1001 LotStart | LOT20260706200615
+2026-07-06 20:06:15.194,STATE,,Idle -> Initializing
+2026-07-06 20:06:15.860,STATE,,Initializing -> Homing
+2026-07-06 20:06:16.304,STATE,,Homing -> Running
+2026-07-06 20:06:47.498,INFO,,공정 시작 - Slot 1 / A (PRCoating)
+2026-07-06 20:06:53.940,INFO,,공정 종료 - Slot 1 / A (PRCoating) 6.4s
+2026-07-06 20:07:15.876,INFO,,공정 시작 - Slot 1 / B (Exposure)
+2026-07-06 20:07:24.583,INFO,,공정 종료 - Slot 1 / B (Exposure) 8.7s
+2026-07-06 20:07:59.906,INFO,,공정 시작 - Slot 1 / C (Develop)
+2026-07-06 20:08:06.395,INFO,,공정 종료 - Slot 1 / C (Develop) 6.5s
+2026-07-06 20:08:36.261,INFO,,Slot 1 FOUP B 안착 완료
+2026-07-06 20:08:36.261,INFO,,EVENT CEID=2001 WaferDone | slot=1
+2026-07-06 20:09:35.220,INFO,,공정 시작 - Slot 2 / A (PRCoating)
+2026-07-06 20:09:41.680,INFO,,공정 종료 - Slot 2 / A (PRCoating) 6.5s
+2026-07-06 20:10:04.036,INFO,,공정 시작 - Slot 2 / B (Exposure)
+2026-07-06 20:10:12.730,INFO,,공정 종료 - Slot 2 / B (Exposure) 8.7s
+2026-07-06 20:10:40.502,INFO,,공정 시작 - Slot 2 / C (Develop)
+2026-07-06 20:10:46.990,INFO,,공정 종료 - Slot 2 / C (Develop) 6.5s
+2026-07-06 20:11:02.856,ALARM,Unload_MoveLR,이송 중 진공 상실
+2026-07-06 20:11:02.856,INFO,,EVENT CEID=3001 AlarmSet | 이송 중 진공 상실
+2026-07-06 20:11:02.856,STATE,,Running -> Alarm
+2026-07-06 20:11:02.856,STATE,,자동공정 알람정지: 이송 중 진공 상실
+2026-07-06 20:11:02.856,INFO,,EVENT CEID=1002 LotEnd | LOT20260706200615 Aborted
+2026-07-06 20:11:15.062,INFO,,EVENT CEID=3002 AlarmClear
+2026-07-06 20:11:15.062,STATE,,Alarm -> Idle
+2026-07-06 20:12:07.757,STATE,,Idle -> Pause
+2026-07-06 20:12:07.763,STATE,,Pause -> PowerOff
+2026-07-06 20:28:13.973,AUTH,,로그인 성공 - admin (Administrator)
+2026-07-06 20:28:16.376,AUTH,,비밀번호 변경 - admin (by admin)
+2026-07-06 20:30:18.829,AUTH,,로그인 성공 - admin (Administrator)
+2026-07-06 20:30:27.353,AUTH,,비밀번호 변경 - admin (by admin)
+2026-07-06 20:30:32.333,AUTH,,로그아웃 - admin
+2026-07-06 20:31:36.061,AUTH,,로그인 성공 - admin (Administrator)
+2026-07-06 20:32:13.145,AUTH,,로그아웃 - admin

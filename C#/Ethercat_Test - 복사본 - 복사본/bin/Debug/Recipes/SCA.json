@@ -1,0 +1,21 @@
+﻿{
+  "RecipeId": "SCA",
+  "Description": "표준 포토공정 레시피",
+  "Steps": [
+    {
+      "ChamberType": 0,
+      "ProcessName": "PR 도포",
+      "ProcessTimeMs": 6000
+    },
+    {
+      "ChamberType": 1,
+      "ProcessName": "노광",
+      "ProcessTimeMs": 8000
+    },
+    {
+      "ChamberType": 2,
+      "ProcessName": "현상",
+      "ProcessTimeMs": 6000
+    }
+  ]
+}

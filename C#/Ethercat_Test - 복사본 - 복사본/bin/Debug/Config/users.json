@@ -1,0 +1,23 @@
+﻿[
+  {
+    "Username": "admin",
+    "PasswordHash": "UPtrkCz8ArAhX8oJS/V0/EufS5nXC2tT0UmOuMsF2Co=",
+    "Salt": "QngvZKr/VrS494+QFz8txQ==",
+    "Role": 2,
+    "MustChangePassword": false
+  },
+  {
+    "Username": "operator",
+    "PasswordHash": "mkVFlyLbHRrjhWD/N3vuueA/jtqZvTConvpPPkDdrvc=",
+    "Salt": "kjFuB81pdx4/7kvxuQNaTA==",
+    "Role": 0,
+    "MustChangePassword": false
+  },
+  {
+    "Username": "engineer",
+    "PasswordHash": "t/fMNcfh32Fehoga5EQjppUAjc4z1di60BDEZALGnPQ=",
+    "Salt": "2aV6IEX+F0oVrYN16zBqRw==",
+    "Role": 1,
+    "MustChangePassword": false
+  }
+]

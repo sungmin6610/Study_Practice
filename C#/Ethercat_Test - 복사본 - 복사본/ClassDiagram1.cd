@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EtherCAT_Test.Alarm.AlarmManager" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAACAAAAAEAAAAAAAABAAAA=</HashCode>
+      <FileName>Alarm\AlarmManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.Auth.User" Collapsed="true">
+    <Position X="9.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQDAAAAAAAAAAAQAEQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Auth\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.Auth.UserManager" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAEiKAAAYICgQAlBAIAQAIAAAAIAIAgQAEAAAAAAAA=</HashCode>
+      <FileName>Auth\UserManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.Sequence.AutoSequence" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAgEAAgACAQhCAAgACEQEABAASEEEAAaBAEAgAAAAI=</HashCode>
+      <FileName>AutoSequence\AutoSequence.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.Chamber.Chamber" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEDCBQAASAAgAgBARAgAAAAABAAAAQAAAAQQAAA=</HashCode>
+      <FileName>ChamberManager\Chamber.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.Chamber.ChamberManager" Collapsed="true">
+    <Position X="5.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAQAAAAAAAAAAAAAAAAAAAACAAAIA=</HashCode>
+      <FileName>ChamberManager\ChamberManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ethercat_Test.ChangePasswordForm" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgBABAAAAAAAAAAAAAAAAAAABAAIAAAAAAAA=</HashCode>
+      <FileName>ChangePasswordForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ethercat_Test.Form1" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>/33r15Bazj3PHdv7p6O/x9/fGc+/+v5zyv9fZH179rg=</HashCode>
+      <FileName>Form1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ethercat_Test.LoginForm" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAEAAAAAAAAAAAAAAAAAACBAAAAAAAAAAA=</HashCode>
+      <FileName>LoginForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ethercat_Test.MimicPanel" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MimicPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ethercat_Test.Program" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.Common.Constants" Collapsed="true">
+    <Position X="2.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAgBAAAAQA=</HashCode>
+      <FileName>Common\Constants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.Common.IOMap" Collapsed="true">
+    <Position X="5.75" Y="6" Width="1.5" />
+    <NestedTypes>
+      <Class Name="EtherCAT_Test.Common.IOMap.Input" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Common\IOmap.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="EtherCAT_Test.Common.IOMap.Output" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Common\IOmap.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\IOmap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.Common.JsonUtil" Collapsed="true">
+    <Position X="11" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAABCAAAAABAAAAACBAAAAAAAADAAAAAAA=</HashCode>
+      <FileName>Common\JsonUtil.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.Common.PositionConfig" Collapsed="true">
+    <Position X="4" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAABAAAIAAACACAQAgAAAAAAIAAAAA=</HashCode>
+      <FileName>Common\Position.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.Common.Position" Collapsed="true">
+    <Position X="11" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAABAAAAAAACACAQAgQBAIAAIAAAAA=</HashCode>
+      <FileName>Common\Position.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.Equipment.E10StateTracker" Collapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAEAAAAABIgAAAgAAAAAAAAIAAAAAAAQABABAQAAAA=</HashCode>
+      <FileName>Equipment\E10StateTracker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.Equipment.EquipmentStateManager" Collapsed="true">
+    <Position X="9.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABQAABAAAAAAAQCAAAAAAAAAgAAAAAAEAAAA=</HashCode>
+      <FileName>Equipment\EquipmentStateManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.IO.IOManager" Collapsed="true">
+    <Position X="7.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAEAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>IO\IOManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.Logging.AlarmEntry" Collapsed="true">
+    <Position X="7.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAIAAAAQA=</HashCode>
+      <FileName>Logging\LogManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.Logging.LogManager" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAFggAIBAAAQAAgACBMEAACAAEXAESAwABCBEFAAQA=</HashCode>
+      <FileName>Logging\LogManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.Motion.MotionManager" Collapsed="true">
+    <Position X="2.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEEAAACIAAAAAAAgCCAAAEAAETIAIAAAAAAICAAEAAA=</HashCode>
+      <FileName>Motion\MotionManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.Process.Lot" Collapsed="true">
+    <Position X="4" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACIEAAAAAAAAIAAgAAAAAAAADAAAAAA=</HashCode>
+      <FileName>Process\Lot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.Process.RecipeStep" Collapsed="true">
+    <Position X="5.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAACAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Process\Recipe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.Process.Recipe" Collapsed="true">
+    <Position X="7.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Process\Recipe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.Process.RecipeManager" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAACAAIAAIAAAAAAIEABAAAAAAAIE=</HashCode>
+      <FileName>Process\Recipe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.Process.Wafer" Collapsed="true">
+    <Position X="2.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAABAAAAgg=</HashCode>
+      <FileName>Process\Wafer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.Process.WaferManager" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Process\WaferManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ethercat_Test.Properties.Resources" Collapsed="true">
+    <Position X="0.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ethercat_Test.Properties.Settings" Collapsed="true">
+    <Position X="9.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EtherCAT_Test.Robot.RobotManager" Collapsed="true">
+    <Position X="4" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAADAAEAAABEAAAAAUAAAAAAQAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Robot\RobotManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="EtherCAT_Test.Auth.AuthResult" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAgAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Auth\UserManager.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EtherCAT_Test.Auth.UserRole" Collapsed="true">
+    <Position X="2.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAEAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Auth\UserRole.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EtherCAT_Test.Common.EquipmentState" Collapsed="true">
+    <Position X="7.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAABAQAAAAAMBABAAAAAAAAAAAAAIAABAASAAAAA=</HashCode>
+      <FileName>Common\Enum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EtherCAT_Test.Common.ChamberType" Collapsed="true">
+    <Position X="4" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAEAAAA=</HashCode>
+      <FileName>Common\Enum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EtherCAT_Test.Common.ProcessType" Collapsed="true">
+    <Position X="0.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAABAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\Enum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EtherCAT_Test.Common.WaferState" Collapsed="true">
+    <Position X="5.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAMAAAAAAAACAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Common\Enum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EtherCAT_Test.Common.WaferLocation" Collapsed="true">
+    <Position X="4" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAIAAABAAAQAAAAAAABAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>Common\Enum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EtherCAT_Test.Common.AutoStep" Collapsed="true">
+    <Position X="2.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AWQFAIBIBxBCy4tITAgAFGITEIJMBQAGABUAATQwVAA=</HashCode>
+      <FileName>Common\Enum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EtherCAT_Test.Equipment.E10State" Collapsed="true">
+    <Position X="5.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAIAAAAAAAAAAAAAYAAABEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Equipment\E10StateTracker.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EtherCAT_Test.Process.LotState" Collapsed="true">
+    <Position X="9.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAMAAAAAAAAAAAAAAAAIAAAAAAAAAgA=</HashCode>
+      <FileName>Process\Lot.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,10 @@
+D:\2604340036_Hiteche_송성민\26_6_10_winform\bin\Debug\26_6_10_winform.exe.config
+D:\2604340036_Hiteche_송성민\26_6_10_winform\bin\Debug\26_6_10_winform.exe
+D:\2604340036_Hiteche_송성민\26_6_10_winform\bin\Debug\26_6_10_winform.pdb
+D:\2604340036_Hiteche_송성민\26_6_10_winform\obj\Debug\26_6_10_winform.csproj.AssemblyReference.cache
+D:\2604340036_Hiteche_송성민\26_6_10_winform\obj\Debug\_26_6_10_winform.Form1.resources
+D:\2604340036_Hiteche_송성민\26_6_10_winform\obj\Debug\_26_6_10_winform.Properties.Resources.resources
+D:\2604340036_Hiteche_송성민\26_6_10_winform\obj\Debug\26_6_10_winform.csproj.GenerateResource.cache
+D:\2604340036_Hiteche_송성민\26_6_10_winform\obj\Debug\26_6_10_winform.csproj.CoreCompileInputs.cache
+D:\2604340036_Hiteche_송성민\26_6_10_winform\obj\Debug\26_6_10_winform.exe
+D:\2604340036_Hiteche_송성민\26_6_10_winform\obj\Debug\26_6_10_winform.pdb

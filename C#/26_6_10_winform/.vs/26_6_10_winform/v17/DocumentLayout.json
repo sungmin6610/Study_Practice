@@ -1,0 +1,70 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\2604340036_Hiteche_\uC1A1\uC131\uBBFC\\26_6_10_winform\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C3B6C490-6FE1-420A-BE7E-6EF5F4B1DDE0}|26_6_10_winform.csproj|d:\\2604340036_hiteche_\uC1A1\uC131\uBBFC\\26_6_10_winform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C3B6C490-6FE1-420A-BE7E-6EF5F4B1DDE0}|26_6_10_winform.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3B6C490-6FE1-420A-BE7E-6EF5F4B1DDE0}|26_6_10_winform.csproj|d:\\2604340036_hiteche_\uC1A1\uC131\uBBFC\\26_6_10_winform\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3B6C490-6FE1-420A-BE7E-6EF5F4B1DDE0}|26_6_10_winform.csproj|solutionrelative:form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3B6C490-6FE1-420A-BE7E-6EF5F4B1DDE0}|26_6_10_winform.csproj|d:\\2604340036_hiteche_\uC1A1\uC131\uBBFC\\26_6_10_winform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3B6C490-6FE1-420A-BE7E-6EF5F4B1DDE0}|26_6_10_winform.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "D:\\2604340036_Hiteche_\uC1A1\uC131\uBBFC\\26_6_10_winform\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "D:\\2604340036_Hiteche_\uC1A1\uC131\uBBFC\\26_6_10_winform\\Form1.cs",
+              "RelativeToolTip": "Form1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-10T06:21:04.71Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "D:\\2604340036_Hiteche_\uC1A1\uC131\uBBFC\\26_6_10_winform\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "Form1.Designer.cs",
+              "ToolTip": "D:\\2604340036_Hiteche_\uC1A1\uC131\uBBFC\\26_6_10_winform\\Form1.Designer.cs",
+              "RelativeToolTip": "Form1.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-10T06:20:42.106Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs [\uB514\uC790\uC778]",
+              "DocumentMoniker": "D:\\2604340036_Hiteche_\uC1A1\uC131\uBBFC\\26_6_10_winform\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "D:\\2604340036_Hiteche_\uC1A1\uC131\uBBFC\\26_6_10_winform\\Form1.cs [\uB514\uC790\uC778]",
+              "RelativeToolTip": "Form1.cs [\uB514\uC790\uC778]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-10T06:19:54.906Z",
+              "EditorCaption": " [\uB514\uC790\uC778]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

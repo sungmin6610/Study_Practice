@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "26_6_10_재귀메서드", "26_6_10_재귀메서드.csproj", "{591122D1-C497-4FCC-B84B-7F36C9E6396E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{591122D1-C497-4FCC-B84B-7F36C9E6396E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{591122D1-C497-4FCC-B84B-7F36C9E6396E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{591122D1-C497-4FCC-B84B-7F36C9E6396E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{591122D1-C497-4FCC-B84B-7F36C9E6396E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {01B2CAD0-C2E4-4FE8-B68D-407F0A4AB422}
+	EndGlobalSection
+EndGlobal
