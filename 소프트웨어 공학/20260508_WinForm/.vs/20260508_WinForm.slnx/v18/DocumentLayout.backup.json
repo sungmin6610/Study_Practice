@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\user\\Desktop\\Software-Engineering\\C#\\20260508_WinForm\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BB5DEBCB-217B-07BC-6F50-5F27AE2E84C7}|20260508_WinForm.csproj|c:\\users\\user\\desktop\\software-engineering\\c#\\20260508_winform\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB5DEBCB-217B-07BC-6F50-5F27AE2E84C7}|20260508_WinForm.csproj|solutionrelative:form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB5DEBCB-217B-07BC-6F50-5F27AE2E84C7}|20260508_WinForm.csproj|c:\\users\\user\\desktop\\software-engineering\\c#\\20260508_winform\\form2.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB5DEBCB-217B-07BC-6F50-5F27AE2E84C7}|20260508_WinForm.csproj|solutionrelative:form2.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form2.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Software-Engineering\\C#\\20260508_WinForm\\Form2.Designer.cs",
+              "RelativeDocumentMoniker": "Form2.Designer.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\Software-Engineering\\C#\\20260508_WinForm\\Form2.Designer.cs",
+              "RelativeToolTip": "Form2.Designer.cs",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAIwC4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-08T02:09:18.694Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form2.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Software-Engineering\\C#\\20260508_WinForm\\Form2.cs",
+              "RelativeDocumentMoniker": "Form2.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\Software-Engineering\\C#\\20260508_WinForm\\Form2.cs",
+              "RelativeToolTip": "Form2.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAASwCgAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-08T01:45:52.835Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

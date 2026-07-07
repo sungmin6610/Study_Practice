@@ -1,0 +1,72 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\Csharp_Friday_project\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{41ED53E8-0370-440B-A520-30F5D3593DE7}|Friday_project\\Friday_project.csproj|d:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\csharp_friday_project\\friday_project\\functionex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41ED53E8-0370-440B-A520-30F5D3593DE7}|Friday_project\\Friday_project.csproj|solutionrelative:friday_project\\functionex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|Friday_project||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{41ED53E8-0370-440B-A520-30F5D3593DE7}|Friday_project\\Friday_project.csproj|D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\Csharp_Friday_project\\friday_project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41ED53E8-0370-440B-A520-30F5D3593DE7}|Friday_project\\Friday_project.csproj|solutionrelative:friday_project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{41ED53E8-0370-440B-A520-30F5D3593DE7}|Friday_project\\Friday_project.csproj|d:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\csharp_friday_project\\friday_project\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Friday_project",
+              "DocumentMoniker": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\Csharp_Friday_project\\Friday_project\\Friday_project.csproj",
+              "RelativeDocumentMoniker": "Friday_project\\Friday_project.csproj",
+              "ToolTip": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\Csharp_Friday_project\\Friday_project\\Friday_project.csproj",
+              "RelativeToolTip": "Friday_project\\Friday_project.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-03-20T01:44:13.51Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FunctionEx.cs",
+              "DocumentMoniker": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\Csharp_Friday_project\\Friday_project\\FunctionEx.cs",
+              "RelativeDocumentMoniker": "Friday_project\\FunctionEx.cs",
+              "ToolTip": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\Csharp_Friday_project\\Friday_project\\FunctionEx.cs",
+              "RelativeToolTip": "Friday_project\\FunctionEx.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-20T01:27:44.56Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\Csharp_Friday_project\\Friday_project\\Program.cs",
+              "RelativeDocumentMoniker": "Friday_project\\Program.cs",
+              "ToolTip": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\\uC18C\uD504\uD2B8\uC6E8\uC5B4 \uACF5\uD559\\Csharp_Friday_project\\Friday_project\\Program.cs",
+              "RelativeToolTip": "Friday_project\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-20T00:29:14.507Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

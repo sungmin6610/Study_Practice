@@ -1,0 +1,74 @@
+<D드라이브의 data 폴더>
+
+■ chap04
+iris
+
+■ chap05
+cars
+iris
+BostonHousing
+
+■ chap06
+mtcars
+iris
+BostonHousing
+state_x77
+state_division
+airquality
+
+■ chap07
+iris
+mtcars
+airquality
+emp
+dept
+국가코드
+무역국가
+
+■ chap08
+seoul_temp
+crimeRatesByState2005
+GNI2014
+prestige
+
+■ chap09
+seoul_201512
+wind
+subway_line_1_8_20231231
+seoul_subway_address_2023
+국립공원_야영장
+병원현황
+
+■ chap10
+movie_review
+chipotle
+bread_basket
+반기문_국회_연설문
+shopping_qna
+
+■ chap11
+ind_ttest
+paired_ttest
+mw_test
+wilcoxon_test
+prestige
+
+■ chap12
+iris
+PimaIndiansDiabetes
+prestige
+liver
+
+■ chap13
+dept
+emp
+create_empdb
+subway_line_1_8_20231231
+seoul_201712
+
+■ chap14
+seoul_201512
+seoul_201606
+seoul_201612
+seoul_201706
+seoul_201712

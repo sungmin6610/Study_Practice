@@ -1,0 +1,7 @@
+C:\Users\user\Desktop\2604340036 - 송성민\소프트웨어 공학\Friday_project\Friday_project\obj\Debug\Friday_project.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\2604340036 - 송성민\소프트웨어 공학\Friday_project\Friday_project\obj\Debug\Friday_project.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\2604340036 - 송성민\소프트웨어 공학\Friday_project\Friday_project\bin\Debug\Friday_project.exe.config
+C:\Users\user\Desktop\2604340036 - 송성민\소프트웨어 공학\Friday_project\Friday_project\bin\Debug\Friday_project.exe
+C:\Users\user\Desktop\2604340036 - 송성민\소프트웨어 공학\Friday_project\Friday_project\bin\Debug\Friday_project.pdb
+C:\Users\user\Desktop\2604340036 - 송성민\소프트웨어 공학\Friday_project\Friday_project\obj\Debug\Friday_project.exe
+C:\Users\user\Desktop\2604340036 - 송성민\소프트웨어 공학\Friday_project\Friday_project\obj\Debug\Friday_project.pdb
