@@ -1,0 +1,7 @@
+D:\2604340036_Hiteche_송성민\LM_Stock_Management_System\obj\Debug\LM_Stock_Management_System.csproj.AssemblyReference.cache
+D:\2604340036_Hiteche_송성민\LM_Stock_Management_System\obj\Debug\LM_Stock_Management_System.csproj.CoreCompileInputs.cache
+D:\2604340036_Hiteche_송성민\LM_Stock_Management_System\bin\Debug\LM_Stock_Management_System.exe.config
+D:\2604340036_Hiteche_송성민\LM_Stock_Management_System\bin\Debug\LM_Stock_Management_System.exe
+D:\2604340036_Hiteche_송성민\LM_Stock_Management_System\bin\Debug\LM_Stock_Management_System.pdb
+D:\2604340036_Hiteche_송성민\LM_Stock_Management_System\obj\Debug\LM_Stock_Management_System.exe
+D:\2604340036_Hiteche_송성민\LM_Stock_Management_System\obj\Debug\LM_Stock_Management_System.pdb

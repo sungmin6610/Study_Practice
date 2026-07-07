@@ -12,15 +12,15 @@ namespace LM_Stock_Management_System
         {
             Employee employee1 = new Employee
             {
-                employee_id = "001",
-                employee_name = "송성민",
-                employee_phone = "010-9999-9999",
+                id = "001",
+                name = "송성민",
+                phone = "010-9999-9999",
                 employee_rank = "사원",
                 employee_birth = "01-03-13",
-                employee_gender = "남성",
-                employee_Resident_number = "010101-010101",
-                employee_account = "110-481-097869",
-                employee_address = "경기 화성시 동탄구",
+                gender = "남성",
+                Resident_number = "010101-010101",
+                account = "110-481-097869",
+                address = "경기 화성시 동탄구",
                 employee_job = "없음",
                 employee_status = "퇴근"
             };
@@ -33,14 +33,14 @@ namespace LM_Stock_Management_System
 
             Customer customer1 = new Customer
             {
-                customer_id = "C-001",
-                customer_name = "서준원",
-                customer_phone = "010-1111-1111",
-                customer_account = "123-45-67890123",
-                customer_address = "경기 화성시 동탄구",
-                customer_gender = "남성",
+                id = "C-001",
+                name = "서준원",
+                phone = "010-1111-1111",
+                account = "123-45-67890123",
+                address = "경기 화성시 동탄구",
+                gender = "남성",
                 customer_point = 20,
-                customer_Resident_number = "000202-020202"
+                Resident_number = "000202-020202"
             };
 
             customer1.Buy_Product("홈런볼", 10);

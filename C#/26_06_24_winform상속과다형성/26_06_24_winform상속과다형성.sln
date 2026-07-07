@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "26_06_24_winform상속과다형성", "26_06_24_winform상속과다형성.csproj", "{DE1B5E3E-3F45-4E9E-9108-E36FB8DDCBC9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE1B5E3E-3F45-4E9E-9108-E36FB8DDCBC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE1B5E3E-3F45-4E9E-9108-E36FB8DDCBC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE1B5E3E-3F45-4E9E-9108-E36FB8DDCBC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE1B5E3E-3F45-4E9E-9108-E36FB8DDCBC9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7A98CFA4-1A35-4605-9DEF-1907B5A60746}
+	EndGlobalSection
+EndGlobal
