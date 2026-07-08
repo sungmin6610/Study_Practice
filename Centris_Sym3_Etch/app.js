@@ -842,6 +842,7 @@ document.addEventListener('DOMContentLoaded', () => {
       logHistory.push({
         timestamp: getSimulatedTimestamp(totalTimeElapsed),
         equipment_id: EQ_ID,
+        wafer_id: elLotWafer.textContent,
         rf_source_power: Math.round(telemetry.rfSource),
         rf_bias_power: Math.round(telemetry.rfBias),
         pressure: parseFloat(telemetry.pressure.toFixed(2)),
@@ -856,8 +857,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Check for faults
       if (telemetry.status === "FAULT" && !logMessages.some(m => m.msg.includes("CRITICAL FAULT"))) {
-        logMessages.push({msg: `CRITICAL FAULT DETECTED! INTERRUPTING SIMULATION...`, type: 'fault'});
-        break; 
+        logMessages.push({msg: `CRITICAL FAULT DETECTED! (Continuing simulation to collect abnormal data...)`, type: 'fault'});
+        // break; // Removed to allow data collection
       }
 
       // Check step advancement
@@ -882,10 +883,10 @@ document.addEventListener('DOMContentLoaded', () => {
     updateUI();
 
     // End condition handling
-    if (telemetry.status === "FAULT") {
-      stopSimulation();
-      return;
-    }
+    // if (telemetry.status === "FAULT") {
+    //   stopSimulation();
+    //   return;
+    // }
 
     if (logHistory.length >= MAX_DATA_POINTS || currentStepIndex >= RECIPE_STEPS.length) {
       telemetry.status = "COMPLETE";
@@ -1311,10 +1312,10 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     
-    let csvContent = "timestamp,equipment_id,rf_source_power,rf_bias_power,pressure,cl2_flow,hbr_flow,etch_rate,etch_depth,oes_intensity,status,result\n";
+    let csvContent = "timestamp,equipment_id,wafer_id,rf_source_power,rf_bias_power,pressure,cl2_flow,hbr_flow,etch_rate,etch_depth,oes_intensity,status,result\n";
     
     logHistory.forEach(row => {
-      csvContent += `${row.timestamp},${row.equipment_id},${row.rf_source_power},${row.rf_bias_power},${row.pressure},${row.cl2_flow},${row.hbr_flow},${row.etch_rate},${row.etch_depth},${row.oes_intensity},${row.status},${row.result}\n`;
+      csvContent += `${row.timestamp},${row.equipment_id},"${row.wafer_id}",${row.rf_source_power},${row.rf_bias_power},${row.pressure},${row.cl2_flow},${row.hbr_flow},${row.etch_rate},${row.etch_depth},${row.oes_intensity},${row.status},${row.result}\n`;
     });
 
     const now = new Date();

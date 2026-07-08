@@ -184,12 +184,6 @@ body {
   gap: 15px;
 }
 
-@media (max-width: 1200px) {
-  .main-content {
-    grid-template-columns: 1fr;
-  }
-}
-
 .panel {
   background-color: var(--bg-panel);
   border: 1px solid var(--border-color);
