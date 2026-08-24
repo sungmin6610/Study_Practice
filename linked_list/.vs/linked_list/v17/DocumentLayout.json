@@ -1,10 +1,10 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\2604340036_\uC1A1\uC131\uBBFC\\linked_list\\",
+  "WorkspaceRootPath": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\github.file\\linked_list\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1BDA4328-AA22-494B-B132-D3C22CCF068B}|linked_list.vcxproj|D:\\2604340036_\uC1A1\uC131\uBBFC\\linked_list\\linked_list.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1BDA4328-AA22-494B-B132-D3C22CCF068B}|linked_list.vcxproj|solutionrelative:linked_list.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\2604340036 - \uC1A1\uC131\uBBFC\\github.file\\linked_list\\linked_list.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:linked_list.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -20,14 +20,12 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "linked_list.c",
-              "DocumentMoniker": "D:\\2604340036_\uC1A1\uC131\uBBFC\\linked_list\\linked_list.c",
+              "DocumentMoniker": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\github.file\\linked_list\\linked_list.c",
               "RelativeDocumentMoniker": "linked_list.c",
-              "ToolTip": "D:\\2604340036_\uC1A1\uC131\uBBFC\\linked_list\\linked_list.c",
+              "ToolTip": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\github.file\\linked_list\\linked_list.c",
               "RelativeToolTip": "linked_list.c",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAAAFIAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
-              "WhenOpened": "2026-06-16T04:10:54.18Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-16T04:10:54.18Z"
             }
           ]
         }
