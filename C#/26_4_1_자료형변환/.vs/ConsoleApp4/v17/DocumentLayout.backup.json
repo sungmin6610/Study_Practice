@@ -1,10 +1,10 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\2604340036_Hiteche_\uC1A1\uC131\uBBFC\\ConsoleApp4\\",
+  "WorkspaceRootPath": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\github.file\\C#\\26_4_1_\uC790\uB8CC\uD615\uBCC0\uD658\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1AF74CF4-A331-4AF6-BC5F-583C41D5BA02}|ConsoleApp4.csproj|d:\\2604340036_hiteche_\uC1A1\uC131\uBBFC\\consoleapp4\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1AF74CF4-A331-4AF6-BC5F-583C41D5BA02}|ConsoleApp4.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\2604340036 - \uC1A1\uC131\uBBFC\\github.file\\C#\\26_4_1_\uC790\uB8CC\uD615\uBCC0\uD658\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,17 +14,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "D:\\2604340036_Hiteche_\uC1A1\uC131\uBBFC\\ConsoleApp4\\Program.cs",
+              "DocumentMoniker": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\github.file\\C#\\26_4_1_\uC790\uB8CC\uD615\uBCC0\uD658\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "D:\\2604340036_Hiteche_\uC1A1\uC131\uBBFC\\ConsoleApp4\\Program.cs",
+              "ToolTip": "D:\\2604340036 - \uC1A1\uC131\uBBFC\\github.file\\C#\\26_4_1_\uC790\uB8CC\uD615\uBCC0\uD658\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAxwB0AAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-01T04:13:31.796Z",
               "EditorCaption": ""

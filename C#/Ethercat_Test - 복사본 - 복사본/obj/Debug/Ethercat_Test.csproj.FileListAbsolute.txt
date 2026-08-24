@@ -34,3 +34,15 @@ D:\2604340036_Hiteche_송성민\Ethercat_Test - 복사본 - 복사본\obj\Debug\
 D:\2604340036_Hiteche_송성민\Ethercat_Test - 복사본 - 복사본\obj\Debug\Ethercat.A9EC92A9.Up2Date
 D:\2604340036_Hiteche_송성민\Ethercat_Test - 복사본 - 복사본\obj\Debug\Ethercat_Test.exe
 D:\2604340036_Hiteche_송성민\Ethercat_Test - 복사본 - 복사본\obj\Debug\Ethercat_Test.pdb
+D:\2604340036 - 송성민\github.file\C#\Ethercat_Test - 복사본 - 복사본\bin\Debug\Ethercat_Test.exe.config
+D:\2604340036 - 송성민\github.file\C#\Ethercat_Test - 복사본 - 복사본\bin\Debug\Ethercat_Test.exe
+D:\2604340036 - 송성민\github.file\C#\Ethercat_Test - 복사본 - 복사본\bin\Debug\Ethercat_Test.pdb
+D:\2604340036 - 송성민\github.file\C#\Ethercat_Test - 복사본 - 복사본\obj\Debug\Ethercat_Test.csproj.AssemblyReference.cache
+D:\2604340036 - 송성민\github.file\C#\Ethercat_Test - 복사본 - 복사본\obj\Debug\Ethercat_Test.exe.config
+D:\2604340036 - 송성민\github.file\C#\Ethercat_Test - 복사본 - 복사본\obj\Debug\Ethercat_Test.Form1.resources
+D:\2604340036 - 송성민\github.file\C#\Ethercat_Test - 복사본 - 복사본\obj\Debug\Ethercat_Test.Properties.Resources.resources
+D:\2604340036 - 송성민\github.file\C#\Ethercat_Test - 복사본 - 복사본\obj\Debug\Ethercat_Test.csproj.GenerateResource.cache
+D:\2604340036 - 송성민\github.file\C#\Ethercat_Test - 복사본 - 복사본\obj\Debug\Ethercat_Test.csproj.CoreCompileInputs.cache
+D:\2604340036 - 송성민\github.file\C#\Ethercat_Test - 복사본 - 복사본\obj\Debug\Ethercat.A9EC92A9.Up2Date
+D:\2604340036 - 송성민\github.file\C#\Ethercat_Test - 복사본 - 복사본\obj\Debug\Ethercat_Test.exe
+D:\2604340036 - 송성민\github.file\C#\Ethercat_Test - 복사본 - 복사본\obj\Debug\Ethercat_Test.pdb

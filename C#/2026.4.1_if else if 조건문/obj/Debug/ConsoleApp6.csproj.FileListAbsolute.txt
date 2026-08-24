@@ -1,7 +1,0 @@
-D:\2604340036_Hiteche_송성민\ConsoleApp6\bin\Debug\ConsoleApp6.exe.config
-D:\2604340036_Hiteche_송성민\ConsoleApp6\bin\Debug\ConsoleApp6.exe
-D:\2604340036_Hiteche_송성민\ConsoleApp6\bin\Debug\ConsoleApp6.pdb
-D:\2604340036_Hiteche_송성민\ConsoleApp6\obj\Debug\ConsoleApp6.csproj.AssemblyReference.cache
-D:\2604340036_Hiteche_송성민\ConsoleApp6\obj\Debug\ConsoleApp6.csproj.CoreCompileInputs.cache
-D:\2604340036_Hiteche_송성민\ConsoleApp6\obj\Debug\ConsoleApp6.exe
-D:\2604340036_Hiteche_송성민\ConsoleApp6\obj\Debug\ConsoleApp6.pdb

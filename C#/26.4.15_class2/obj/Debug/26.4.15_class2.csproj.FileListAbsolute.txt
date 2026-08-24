@@ -1,7 +1,0 @@
-D:\2604340036_Hiteche_송성민\26.4.15_class2\bin\Debug\26.4.15_class2.exe.config
-D:\2604340036_Hiteche_송성민\26.4.15_class2\bin\Debug\26.4.15_class2.exe
-D:\2604340036_Hiteche_송성민\26.4.15_class2\bin\Debug\26.4.15_class2.pdb
-D:\2604340036_Hiteche_송성민\26.4.15_class2\obj\Debug\26.4.15_class2.csproj.AssemblyReference.cache
-D:\2604340036_Hiteche_송성민\26.4.15_class2\obj\Debug\26.4.15_class2.csproj.CoreCompileInputs.cache
-D:\2604340036_Hiteche_송성민\26.4.15_class2\obj\Debug\26.4.15_class2.exe
-D:\2604340036_Hiteche_송성민\26.4.15_class2\obj\Debug\26.4.15_class2.pdb

@@ -1,7 +1,0 @@
-D:\2604340036_Hiteche_송성민\2026_04_08_coffeeshop2\bin\Debug\2026_04_08_coffeeshop2.exe.config
-D:\2604340036_Hiteche_송성민\2026_04_08_coffeeshop2\bin\Debug\2026_04_08_coffeeshop2.exe
-D:\2604340036_Hiteche_송성민\2026_04_08_coffeeshop2\bin\Debug\2026_04_08_coffeeshop2.pdb
-D:\2604340036_Hiteche_송성민\2026_04_08_coffeeshop2\obj\Debug\2026_04_08_coffeeshop2.csproj.AssemblyReference.cache
-D:\2604340036_Hiteche_송성민\2026_04_08_coffeeshop2\obj\Debug\2026_04_08_coffeeshop2.csproj.CoreCompileInputs.cache
-D:\2604340036_Hiteche_송성민\2026_04_08_coffeeshop2\obj\Debug\2026_04_08_coffeeshop2.exe
-D:\2604340036_Hiteche_송성민\2026_04_08_coffeeshop2\obj\Debug\2026_04_08_coffeeshop2.pdb
