@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(& \"C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022\\\\Community\\\\MSBuild\\\\Current\\\\Bin\\\\MSBuild.exe\" \"D:\\\\2604340036_Hiteche_�ۼ���\\\\Ethercat_Test - ���纻\\\\Ethercat_Test.csproj\" /nologo /v:minimal /t:Build 2>&1)",
+      "PowerShell(& \"C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022\\\\Community\\\\MSBuild\\\\Current\\\\Bin\\\\MSBuild.exe\" \"D:\\\\2604340036_Hiteche_�ۼ���\\\\Ethercat_Test - ���纻\\\\Ethercat_Test.csproj\" /nologo /v:minimal /t:Rebuild 2>&1)",
+      "Bash(cd \"/d/2604340036_Hiteche_송성민/Ethercat_Test - 복사본\")",
+      "Bash(date +%Y%m%d_%H%M%S)",
+      "Bash(mkdir -p backup/__TRACKED_VAR__)",
+      "Bash(cp AutoSequence/AutoSequence.cs backup/__TRACKED_VAR__/AutoSequence.cs)",
+      "Bash(cp Form1.cs backup/__TRACKED_VAR__/Form1.cs)",
+      "PowerShell(Get-Process -Name \"Ethercat_Test\" -ErrorAction SilentlyContinue)",
+      "PowerShell(Stop-Process -Force)",
+      "PowerShell(\"stopped running instances \\(if any\\)\")",
+      "Bash(xargs wc -l)"
+    ]
+  }
+}
