@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <!-- 모바일 화면 비율 유지, 핀치줌 방지, 더블탭 줌 방지 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>지렁이 게임 (Snake Game) - Premium FX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="game-container">
+            <h1 class="game-title">
+                SNAKE GAME <span>by Sungmin Song</span>
+            </h1>
+            <div class="score-board">SCORE <span id="score">0</span></div>
+            
+            <div class="canvas-wrapper">
+                <canvas id="gameCanvas" width="400" height="400"></canvas>
+            </div>
+            
+            <!-- 가상 방향키 패드 (모바일용) -->
+            <div class="dpad-container">
+                <button class="dpad-btn up" id="btn-up">▲</button>
+                <button class="dpad-btn left" id="btn-left">◀</button>
+                <button class="dpad-btn down" id="btn-down">▼</button>
+                <button class="dpad-btn right" id="btn-right">▶</button>
+            </div>
+        </div>
+        
+        <!-- 우측 아이템 가이드 -->
+        <div class="legend">
+            <h3>아이템 가이드</h3>
+            <div class="legend-item">
+                <div class="legend-icon normal-icon"></div>
+                <div class="legend-text">
+                    <strong style="color: #ff4757;">일반 사과 (70%)</strong>
+                    <span>점수 +1, 길이 +1</span>
+                </div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-icon golden-icon"></div>
+                <div class="legend-text">
+                    <strong style="color: #f1c40f;">황금 사과 (20%)</strong>
+                    <span>점수 +3, 길이 +1</span>
+                </div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-icon potion-icon"></div>
+                <div class="legend-text">
+                    <strong style="color: #9b59b6;">뚱뚱이 물약 (10%)</strong>
+                    <span style="color:#ff7675;">점수 +1, 길이 +2 (패널티)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

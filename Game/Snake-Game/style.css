@@ -1,0 +1,208 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 기본은 화면 중앙 정렬 */
+    min-height: 100vh;
+    margin: 0;
+    background-color: #1a1a1a; 
+    font-family: 'Outfit', sans-serif;
+    color: #eeeeee;
+    /* 모바일에서 세로 스크롤을 허용하되 가로 스크롤 방지 */
+    overflow-x: hidden;
+    overflow-y: auto;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.main-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap; /* 창이 좁을 때 범례가 아래로 내려가도록 유연한 레이아웃 */
+    width: 100%;
+    max-width: 900px;
+    padding: 40px 20px; /* 상하좌우 여유로운 패딩 */
+    box-sizing: border-box;
+}
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+}
+.game-title {
+    margin: 0 0 15px 0;
+    font-size: 32px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    text-align: center;
+    color: white;
+    letter-spacing: 1px;
+}
+.game-title span {
+    font-size: 16px;
+    font-weight: 400;
+    color: #aaa;
+    letter-spacing: normal;
+    display: block; /* 모바일 환경을 고려하여 줄바꿈 적용 가능하게 함 */
+}
+.score-board {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    color: #2ed573; 
+    text-shadow: 0 0 15px rgba(46, 213, 115, 0.4);
+}
+.canvas-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+canvas {
+    background-color: #121212; 
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255,255,255,0.05);
+    border-radius: 12px;
+    max-width: 100%; /* 모바일 화면 폭을 넘어가지 않도록 반응형 처리 */
+    height: auto;    /* 가로폭에 맞춰 세로 폭도 자동 조절됨 */
+    touch-action: none; /* 캔버스 자체 터치 확대 및 스크롤 방지 */
+}
+
+/* 모바일 가상 방향키 패드 (D-pad) */
+.dpad-container {
+    display: none; /* 데스크탑 기본 환경에서는 숨김 처리 */
+    grid-template-columns: repeat(3, 65px);
+    grid-template-rows: repeat(2, 60px);
+    gap: 12px;
+    margin-top: 30px;
+    justify-content: center;
+    touch-action: none; /* 패드에서 터치 스크롤 방지 */
+}
+.dpad-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 14px;
+    color: white;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+    -webkit-tap-highlight-color: transparent; /* 터치 시 파란색 하이라이트 제거 */
+    outline: none;
+    transition: background 0.1s, transform 0.1s;
+    user-select: none;
+}
+.dpad-btn:active {
+    background: rgba(46, 213, 115, 0.4); /* 눌렀을 때 초록색 피드백 */
+    transform: scale(0.92);
+}
+.up { grid-column: 2; grid-row: 1; }
+.left { grid-column: 1; grid-row: 2; }
+.down { grid-column: 2; grid-row: 2; }
+.right { grid-column: 3; grid-row: 2; }
+
+
+/* 아이템 범례(가이드) UI 디자인 */
+.legend {
+    background: #1e1e1e;
+    padding: 25px;
+    border-radius: 16px;
+    border: 1px solid #333;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    min-width: 200px;
+}
+.legend h3 {
+    margin-top: 0;
+    color: #fff;
+    font-size: 22px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+    gap: 15px;
+}
+.legend-item:last-child {
+    margin-bottom: 0;
+}
+.legend-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.normal-icon { background: #ff4757; }
+.golden-icon { background: #f1c40f; box-shadow: 0 0 12px #f1c40f; }
+.potion-icon { 
+    background: #9b59b6; 
+    border-radius: 4px;
+    clip-path: polygon(30% 0%, 70% 0%, 70% 30%, 100% 100%, 0% 100%, 30% 30%);
+}
+.legend-text strong {
+    font-size: 16px;
+    display: block;
+    margin-bottom: 4px;
+}
+.legend-text span {
+    font-size: 14px;
+    color: #aaa;
+}
+
+/* 미디어 쿼리: 모바일 등 좁은 화면 최적화 */
+@media (max-width: 768px) {
+    body {
+        align-items: flex-start; /* 모바일에서 위아래 콘텐츠가 잘리지 않고 위에서부터 스크롤되도록 */
+    }
+    .main-wrapper {
+        gap: 20px;
+        align-items: flex-start;
+        padding: 20px 15px 40px 15px; /* 컴팩트한 패딩, 하단 스크롤 여백 추가 */
+    }
+    .game-title {
+        font-size: 26px;
+        margin-bottom: 10px;
+    }
+    .score-board {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+    .dpad-container {
+        display: grid; /* 모바일 화면에서는 패드 노출 */
+        margin-top: 20px; /* 기존보다 더 빽빽하게 (30->20) */
+        grid-template-columns: repeat(3, 55px);
+        grid-template-rows: repeat(2, 50px);
+        gap: 8px;
+    }
+    .dpad-btn {
+        font-size: 20px;
+        border-radius: 10px;
+    }
+    .legend {
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 5px;
+        padding: 18px; /* 모바일 전용 콤팩트 패딩 */
+    }
+    .legend h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+        padding-bottom: 8px;
+    }
+    .legend-item {
+        margin-bottom: 12px;
+        gap: 12px;
+    }
+    .legend-text strong {
+        font-size: 15px;
+    }
+    .legend-text span {
+        font-size: 13px;
+    }
+}

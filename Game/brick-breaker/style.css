@@ -1,0 +1,121 @@
+/*
+ * style.css
+ * 게임의 외관(디자인, 레이아웃, 배경색 등)을 꾸미는 스타일시트입니다.
+ */
+
+/* 전역 변수(디자인 토큰)들을 설정합니다. 자주 쓰는 색상들을 한 곳에 모아 관리하여 통일감을 줍니다. */
+:root {
+    --bg-color: #0b0f19;                            /* 전체 어두운 배경색 */
+    --container-bg: rgba(24, 17, 17, 0.75);         /* 반투명한 카드 배경색 (붉은 유리 느낌) */
+    --border-color: rgba(255, 255, 255, 0.08);      /* 아주 흐릿한 흰색 테두리선 */
+    --glow-color: rgba(239, 68, 68, 0.15);          /* 은은하게 빛나는 빨간색 네온 빛 */
+    --accent-color: #ef4444;                        /* 포인트가 되는 강조 빨간색 */
+}
+
+/* 화면 전체(body)의 디자인을 설정합니다. */
+body {
+    margin: 0;                                      /* 기본 브라우저 여백 제거 */
+    padding: 0;
+    display: flex;                                  /* 유연한 레이아웃(Flexbox)을 사용합니다. */
+    flex-direction: column;                         /* 위에서 아래 방향으로 요소를 배치합니다. */
+    justify-content: center;                        /* 세로 방향 정중앙에 정렬합니다. */
+    align-items: center;                            /* 가로 방향 정중앙에 정렬합니다. */
+    min-height: 100vh;                              /* 화면 높이를 브라우저 뷰포트 전체 크기로 설정합니다. */
+    
+    /* 중앙에서 바깥쪽으로 퍼져나가는 멋진 붉은 계열 그라데이션 배경을 만듭니다. */
+    background: radial-gradient(circle at center, #3f1010 0%, #0b0f19 100%);
+    
+    /* 영어는 Outfit 글꼴을 사용하고, 한글 등 기본 글꼴은 시스템 기본 폰트를 쓰도록 지정합니다. */
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #f3f4f6;                                 /* 기본 글자색은 아주 밝은 회색/흰색 */
+    overflow: hidden;                               /* 게임 화면 밖으로 스크롤바가 생기지 않도록 설정합니다. */
+}
+
+/* 게임 캔버스와 제목을 감싸는 전체 유리가 가미된 카드 형태의 프레임 상자입니다. */
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;                                  /* 안쪽 여백 32px */
+    background: var(--container-bg);                /* 아까 설정한 반투명 색상 */
+    
+    /* 배경을 흐리게 처리하는 필터 효과입니다. 맥북의 유리창 같은 세련된 디자인(Glassmorphism)을 구현합니다. */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    
+    border: 1px solid var(--border-color);          /* 희미한 테두리선 */
+    border-radius: 24px;                            /* 모서리를 둥글게 만들어 부드러운 느낌을 줍니다. */
+    
+    /* 상자 뒤에 입체감을 주는 그림자 효과와 함께 네온 글로우 효과를 겹쳐서 적용합니다. */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                0 0 40px var(--glow-color);
+                
+    /* 마우스 오버 시 일어날 부드러운 애니메이션 변화 시간(0.3초)을 미리 예약합니다. */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 95%; /* 모바일에서 꽉 차게 약간 더 넓힘 */
+    max-width: 800px;
+    box-sizing: border-box;
+}
+
+/* 마우스 커서를 카드 위에 올렸을 때 살짝 뜨고 네온이 더 밝아지게 만드는 마이크로 애니메이션입니다. */
+.game-container:hover {
+    transform: translateY(-2px);                    /* 위로 2픽셀 살짝 띄웁니다. */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6),
+                0 0 50px rgba(239, 68, 68, 0.35);   /* 네온 빛 빨간색을 더 밝게 만듭니다. */
+}
+
+/* 게임 타이틀 (h1 태그) 스타일입니다. */
+h1 {
+    font-size: 2.5rem;                              /* 크기 40px */
+    font-weight: 800;                               /* 가장 두꺼운 글씨체 */
+    margin: 0 0 1.5rem 0;                           /* 아래쪽 여백만 주고 나머지는 0 */
+    
+    /* 텍스트 자체에 그라데이션 채색 효과를 주기 위해 백그라운드 클리핑을 활용합니다. */
+    background: linear-gradient(135deg, #fca5a5 0%, #ef4444 50%, #b91c1c 100%);
+    -webkit-background-clip: text;                  /* 글꼴 텍스트 모양에만 배경이 적용되게 제한 */
+    -webkit-text-fill-color: transparent;           /* 원래 글씨 속 색상은 지워서 아래 그라데이션이 비치게 함 */
+    
+    letter-spacing: -0.025em;                       /* 자간을 좁혀서 단단한 느낌을 줍니다. */
+    text-shadow: 0 2px 10px rgba(239, 68, 68, 0.3);  /* 텍스트 뒷면에 붉은 네온 글로우 */
+}
+
+/* 실제 캔버스 도화지 스타일입니다. */
+canvas {
+    display: block;
+    width: 100%; /* 컨테이너 너비에 맞춰 축소/확대 */
+    height: auto; /* 고유 비율(4:3) 유지 */
+    aspect-ratio: 4 / 3; /* 명시적으로 4:3 비율 설정 */
+    max-height: 75vh; /* 세로가 짧은 폰에서도 화면 밖으로 나가지 않도록 제한 */
+    object-fit: contain; /* 비율을 유지하면서 주어진 영역 안에 딱 맞게 조정 */
+    touch-action: none; /* 모바일에서 터치 시 화면 스크롤/줌 방지 */
+    
+    border-radius: 12px;                            /* 캔버스 모서리도 둥글게 깎아줍니다. */
+    
+    /* 어두운 캔버스의 입체감을 주기 위해 안쪽과 바깥쪽 그림자를 세팅합니다. */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    background-color: #000000;                      /* 캔버스 자체의 물리적 배경은 검은색 */
+}
+
+/* 스마트폰 미디어 쿼리 추가: 작은 화면에서는 여백을 줄이고 화면을 최대한 활용합니다. */
+@media (max-width: 600px) {
+    .game-container {
+        width: 100%;
+        padding: 1rem; /* 여백 축소 */
+        border-radius: 0;
+        border: none;
+    }
+    
+    h1 {
+        font-size: 2rem; /* 제목 크기 약간 축소 */
+        margin-bottom: 1rem;
+    }
+}
+
+/* 하단의 안내 조작 문구 디자인입니다. */
+.footer {
+    margin-top: 1.5rem;                             /* 위 여백 24px */
+    font-size: 0.875rem;                            /* 14px 크기 */
+    color: #9ca3af;                                 /* 차분한 회색 */
+    letter-spacing: 0.05em;                         /* 글자 사이를 넓혀서 읽기 쉽게 만듭니다. */
+}

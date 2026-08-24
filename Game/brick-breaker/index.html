@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <!-- 웹 페이지가 모바일 기기에서도 화면 크기에 맞춰 잘 보이도록 설정합니다. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brick Breaker Game</title>
+    
+    <!-- 구글 폰트에서 'Outfit'이라는 이쁜 영문 글꼴을 불러옵니다. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- 외부 스타일시트(CSS) 파일을 연결합니다. 디자인 설정을 담당합니다. -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 게임 전체 화면을 감싸는 컨테이너 상자입니다. -->
+    <div class="game-container">
+        <!-- 게임의 대제목입니다. CSS를 통해 이쁜 그라데이션 글씨 효과를 줍니다. -->
+        <h1>BREAK BREAKER <span style="font-size: 0.5em; font-weight: 600;">by Sungmin Song</span></h1>
+        
+        <!-- 실제로 게임 화면(공, 패들, 벽돌 등)이 그려질 캔버스 도화지입니다. -->
+        <!-- 가로 800픽셀, 세로 600픽셀 크기이며, 자바스크립트에서 이 ID(gameCanvas)를 사용해 접근합니다. -->
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        
+        <!-- 화면 맨 아래에 표시될 간단한 조작 가이드 안내 문구입니다. -->
+        <div class="footer">PRESS ANY KEY TO START</div>
+    </div>
+
+    <!-- 외부 자바스크립트(JS) 파일을 가져옵니다. 게임의 모든 논리와 움직임을 담당합니다. -->
+    <!-- defer 속성은 HTML 구조가 모두 화면에 그려진(파싱된) 후에 자바스크립트를 실행하라는 뜻입니다. -->
+    <script src="game.js" defer></script>
+</body>
+</html>
