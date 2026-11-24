@@ -1,0 +1,15 @@
+AI비전실무_02강_응용실습
+
+1. Edge-Loc, Center, Scratch 
+-> 60개로 자르지 말고 있는 데이터 모두 사용해서 모델 학습시켜보기
+
+2. Edge-Loc, Center, Scratch, Random 
+-> Random을 추가해서 4개 클래스 분류 모델 학습시켜보기
+
+3. Edge-Loc, Center, Scratch, none
+-> none의 샘플 수를 늘려가면서 비교해보기
+-> none이 180일 때, 300일 때
+-> none이 늘어나면 모델이 none의 특징을 더 잘 학습할까?
+
+4. 선택사항
+-> 본인의 생각대로 구성을 해보기

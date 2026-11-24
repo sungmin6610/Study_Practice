@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>AI Vision 05 | Mission 05 시드를 고정하고 실험 모델 만들기</title><style>
+:root{--ink:#202a36;--muted:#627084;--line:#e2e8ee;--paper:#fff;--soft:#f5f8fb;--accent:#28668b;--code:#18222e}
+*{box-sizing:border-box}body{margin:0;background:#eef2f5;color:var(--ink);font:16px/1.75 system-ui,-apple-system,'Malgun Gothic','Apple SD Gothic Neo',sans-serif}main{max-width:860px;margin:32px auto;padding:45px 54px 64px;background:var(--paper);border:1px solid var(--line);border-radius:16px}header{padding-bottom:25px;border-bottom:2px solid #253b4d;margin-bottom:32px}.eyebrow{font-size:12px;font-weight:750;letter-spacing:.12em;color:var(--accent)}h1{font-size:29px;line-height:1.35;margin:10px 0 10px}h2{font-size:21px;line-height:1.4;margin:36px 0 14px}p{margin:10px 0}ul{padding-left:23px}li{margin:5px 0}.muted{color:var(--muted)}.goals{padding:16px 22px;background:var(--soft);border-left:3px solid var(--accent);border-radius:6px}.goals strong{display:block;margin-bottom:5px}table{width:100%;border-collapse:collapse;margin:15px 0 22px;font-size:14px}th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}th{background:var(--soft);font-weight:700}code{font-family:Consolas,'Courier New',monospace;font-size:.92em;background:#eef2f6;padding:1px 4px;border-radius:4px}.codebar{display:flex;justify-content:space-between;align-items:center;background:#263545;color:#e7f0f8;padding:9px 15px;border-radius:9px 9px 0 0;font-size:12px}.codebar button{border:1px solid #7891a8;background:transparent;color:white;border-radius:5px;padding:5px 12px;cursor:pointer;font:inherit}.codebar button:hover{background:#40566a}pre{margin:0 0 20px;padding:18px 20px;background:var(--code);color:#e9f0f7;border-radius:0 0 9px 9px;overflow:auto;line-height:1.7;font-size:14px}pre code{background:none;padding:0;color:inherit}.cm{color:#94ad9a}.str{color:#f7c58e}.num{color:#b3d6fa}.diagram{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:19px 0}.diagram>div{border:1px solid var(--line);border-radius:9px;padding:15px}.diagram strong{display:block;margin-bottom:8px}.diagram svg{display:block;width:100%;height:155px;background:#f5f7f9;border-radius:5px}.diagram p{font-size:13px;color:var(--muted);margin-bottom:0}.question{margin:13px 0;padding:15px 17px;background:var(--soft);border:1px solid var(--line);border-radius:8px}.question b{color:var(--accent)}.question p{margin:5px 0 0}.note{padding:13px 17px;border-left:3px solid #8ea9bb;background:var(--soft);border-radius:5px;font-size:14px}footer{margin-top:38px;border-top:1px solid var(--line);padding-top:15px;font-size:12px;color:var(--muted)}@media(max-width:680px){body{background:#fff}main{border:0;border-radius:0;padding:24px 20px;margin:0}h1{font-size:25px}h2{font-size:20px}.diagram{grid-template-columns:1fr}table{font-size:13px}th,td{padding:9px 7px}}
+
+.codebar button:focus-visible{outline:2px solid #fff;outline-offset:2px}.steps{padding:14px 18px;border-radius:8px;background:var(--soft);border:1px solid var(--line)}.steps ol{margin:4px 0;padding-left:22px}.mini{font-size:14px;color:var(--muted)}
+
+.flow{max-width:540px;margin:18px auto 22px;text-align:center}.flowbox{padding:12px 18px;border:1px solid var(--line);border-radius:8px;background:var(--soft);font-weight:650}.flowbox small{display:block;font-size:12px;font-weight:400;color:var(--muted)}.flowbox.accentbox{background:#e9f4fa;border:2px solid #6295b2;color:#174f72}.arrow{height:23px;line-height:23px;color:var(--accent);font-size:19px}.mini-diag{min-height:150px;padding:5px 0;font-size:12px}.mini-out{border:2px solid #62839c;border-radius:8px;padding:10px;background:#f3f8fb;font-weight:700}.mini-in{border:1px solid #88afc9;background:#e7f3fb;padding:10px;margin:8px 0;border-radius:6px}.mini-leaf{font-weight:500;background:#fff;border:1px solid #d5e2e9;padding:7px;margin-top:7px;border-radius:5px}.diagram>div{min-width:0}.question p{margin-top:5px}
+</style></head><body><main><header><div class="eyebrow">AI VISION LAB · 05 / STUDENT WORKBOOK</div><h1>Mission 05. 시드를 고정하고 실험 모델 만들기</h1><p class="muted">이미지 데이터 증강과 재현 가능한 실험</p><div class="goals"><strong>학습 목표</strong><ul><li>같은 CNN 코드로 학습해도 결과가 달라질 수 있는 이유를 설명할 수 있다.</li><li>난수 시드를 설정하고, 훈련·검증 데이터 분할과 학습 조건을 통제할 수 있다.</li><li>회전 각도를 전달받아 CNN 모델을 새로 생성하는 함수를 작성할 수 있다.</li></ul></div></header>
+<section><h2>1. 같은 코드인데 왜 결과가 달라질까?</h2><p>Mission 04에서는 회전 증강 CNN을 학습하고 기존 CNN과 정확도를 비교했다. 그런데 <strong>같은 코드를 다시 실행해도 결과가 조금씩 달라질 수 있다.</strong> CNN 학습 과정에 무작위로 결정되는 요소가 있기 때문이다.</p><table><thead><tr><th>무작위 요소</th><th>어디에서 사용될까?</th></tr></thead><tbody><tr><td>초기 가중치</td><td>새 CNN을 생성할 때 가중치의 시작값이 정해짐</td></tr><tr><td>데이터 셔플</td><td>학습 이미지의 순서를 섞음</td></tr><tr><td>무작위 회전</td><td>학습 중 이미지마다 회전 각도가 결정됨</td></tr></tbody></table><div class="diagram"><div><strong>실험 A</strong><div class="mini-diag"><div class="mini-out">시드 42<div class="mini-in">초기값 · 셔플 · 회전 난수</div></div><p>회전 범위: ±15°</p></div></div><div><strong>실험 B</strong><div class="mini-diag"><div class="mini-out">시드 42<div class="mini-in">초기값 · 셔플 · 회전 난수</div></div><p>회전 범위: ±45°</p></div></div></div><p>두 실험이 가능한 한 같은 조건에서 시작하도록 하고, <strong>회전 범위만</strong> 바꾸면 그 차이를 해석하기 쉬워진다. 이를 <strong>실험 조건 통제</strong>라고 한다.</p></section>
+<section><h2>2. 난수 시드(Random Seed) 이해하기</h2><p>컴퓨터의 난수는 일정한 알고리즘으로 생성하는 의사난수인 경우가 많다. 시드는 난수 생성을 시작할 기준값이다. Keras에서는 한 줄로 Python, NumPy, TensorFlow의 주요 난수 시드를 설정할 수 있다.</p><div class="codebar"><span>PYTHON · 난수 시드 설정</span><button onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code>SEED = 42
+keras.utils.set_random_seed(SEED)</code></pre><p><code>42</code>는 특별한 성능을 가진 숫자가 아니다. <strong>같은 조건으로 비교하기 위해 실험들에서 동일한 값을 사용한다</strong>는 것이 중요하다.</p><div class="note">시드를 고정해도 모든 실행 환경에서 결과가 완전히 같아지는 것은 아니다. GPU 연산, 라이브러리 버전, 실행 환경에 따라 차이가 날 수 있다. 이번 실습의 목적은 무작위 조건을 최대한 통제하는 방법을 배우는 것이다.</div><h3>시드를 한 번만 설정하면 안 될까?</h3><p>실험을 연속 실행하면 난수 생성 상태가 진행된다. 따라서 실험마다 새 모델을 만들기 직전 시드를 다시 설정하자.</p>
+<p>여기서 <strong>“실험을 연속 실행한다”</strong>는 말은 예를 들어 <strong>±15° 모델을 생성·학습하고, 이어서 ±45° 모델을 생성·학습하고, 다시 ±90° 모델을 생성·학습</strong>하는 과정을 뜻한다.</p>
+<p><code>SEED = 42</code>에 저장된 숫자가 변하는 것은 아니다. 난수 생성기는 <strong>42를 출발점으로 난수를 순서대로 만들어 낸다.</strong> 모델 가중치를 초기화하거나 이미지를 무작위로 회전할 때 난수가 사용되면, 생성 상태가 다음 위치로 진행된다.</p>
+<div class="flow"><div class="flowbox">시드 설정: 42<small>난수 생성의 시작점 지정</small></div><div class="arrow">↓</div><div class="flowbox">난수 ① → 난수 ② → 난수 ③ → …<small>사용할수록 다음 순서로 진행</small></div><div class="arrow">↓</div><div class="flowbox accentbox">시드를 다시 42로 설정<small>난수 생성의 출발점으로 다시 시작</small></div></div>
+<p>따라서 시드를 맨 처음 한 번만 설정한 채 네 모델을 차례대로 만들면, 각 모델의 가중치 초기화에 서로 다른 난수 상태가 사용될 수 있다. <strong>회전 범위 외의 조건을 최대한 맞추기 위해 새 모델을 만들 때마다 시드를 다시 설정한다.</strong></p>
+<div class="codebar"><span>PYTHON · 시드 재설정 위치 확인</span><button onclick="copyCode(this)" type="button">코드 복사</button></div>
+<pre><code>for degree in [0, 15, 45, 90]:
+    keras.utils.set_random_seed(SEED)  # 매 실험 시작 시 다시 설정
+    model_exp = create_cnn_model(degree)  # 새 모델 생성
+    # 이후 학습 진행</code></pre>
+<p>이번 워크북의 <code>create_cnn_model()</code> 안에도 시드 설정이 들어 있으므로, 그 함수를 호출하면 모델 초기화 직전에 시드가 다시 설정된다. 위 코드는 <strong>언제 시드를 다시 설정하는지</strong> 보여주는 예시다.</p>
+<div class="note">시드를 다시 설정한다는 것은 모든 회전 이미지가 똑같아진다는 뜻이 아니다. 회전 범위가 달라지면 생성되는 각도의 범위도 달라진다. 또한 실제 학습 결과의 완전한 일치는 실행 환경에 따라 보장되지 않는다.</div></section>
+<section><h2>3. 훈련·검증 데이터가 겹치지 않게 나누기</h2><p>4강에서 <code>image_dataset_from_directory()</code>로 훈련 데이터와 검증 데이터를 분리했던 설정을 기억해보자. 이번에는 <code>subset="both"</code>를 사용하여 두 데이터셋을 <strong>하나의 호출</strong>로 만든다.</p>
+<h3>왜 데이터셋 생성 함수를 따로 만들까?</h3>
+<p>회전 각도별로 CNN을 새로 학습하려면, 매번 <strong>같은 훈련·검증 데이터와 동일한 셔플 설정</strong>을 사용하는 것이 중요하다. 데이터셋 생성 코드를 매번 복사하면 시드나 분할 비율을 실수로 다르게 설정할 수 있다.</p>
+<p>그래서 데이터셋을 만드는 코드를 <code>create_experiment_datasets()</code>라는 함수로 묶는다. 함수는 호출할 때마다 동일한 <strong>설정</strong>으로 훈련용·검증용 데이터셋을 다시 만들고, 두 결과를 반환한다.</p>
+<div class="flow"><div class="flowbox">create_experiment_datasets()<small>동일한 설정으로 호출</small></div><div class="arrow">↓</div><div class="flowbox accentbox">train_exp + val_exp<small>훈련 80% · 검증 20%</small></div></div>
+<p>단, <strong>함수로 만들었다는 이유만으로 무작위 순서가 자동 고정되지는 않는다.</strong> 코드에서 <code>seed=SEED</code>를 지정하고, 실험마다 같은 조건으로 생성해야 재현 가능성을 높일 수 있다.</p><div class="codebar"><span>PYTHON · 실험용 데이터셋 생성 함수</span><button onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code>def create_experiment_datasets():
+    train_exp, val_exp = keras.utils.image_dataset_from_directory(
+        TRAIN_DIR,
+        validation_split=0.2,
+        subset="both",  # 훈련/검증 세트를 동시에 생성
+        seed=SEED,
+        shuffle=True,
+        image_size=(IMG_SIZE, IMG_SIZE),
+        batch_size=BATCH_SIZE
+    )
+    return train_exp, val_exp</code></pre><table><thead><tr><th>설정</th><th>의미</th></tr></thead><tbody><tr><td><code>validation_split=0.2</code></td><td>훈련 폴더 이미지를 약 8:2로 나눔</td></tr><tr><td><code>subset="both"</code></td><td>훈련용과 검증용 데이터셋을 함께 반환</td></tr><tr><td><code>seed=SEED</code></td><td>파일 섞기 및 분할에 사용할 시드 지정</td></tr><tr><td><code>shuffle=True</code></td><td>이미지를 섞어 데이터셋 구성</td></tr></tbody></table><p>기존 4강 코드처럼 <code>subset="training"</code>과 <code>subset="validation"</code>으로 각각 호출해도 되지만, 이 경우 경로·시드·셔플·분할 비율을 같은 값으로 맞춰야 한다.</p><div class="note"><strong>주의:</strong> 훈련 데이터에만 <code>shuffle=False</code>를 설정하고 검증 데이터는 <code>shuffle=True</code>로 두면 두 호출의 분할 대상이 어긋날 수 있다. 또한 서로 다른 파일에 같은 이미지가 복사되어 있다면 파일 단위 분할만으로 중복 이미지는 제거되지 않는다.</div></section>
+<section><h2>4. 회전 각도를 받는 CNN 생성 함수 작성하기</h2><p>회전 각도를 바꾸어 실험할 때마다 CNN 코드를 복사하면 실수하기 쉽다. 모델 생성 과정을 함수로 묶고, <strong>회전 각도만 전달인자로 받도록</strong> 만들어보자.</p><div class="flow"><div class="flowbox">create_cnn_model(45)<small>회전 각도 45를 함수에 전달</small></div><div class="arrow">↓</div><div class="flowbox accentbox">RandomRotation(factor=45/360)<small>나머지 CNN 구조는 동일하게 유지</small></div><div class="arrow">↓</div><div class="flowbox">새 CNN 모델 반환<small>아직 학습된 모델은 아님</small></div></div><p><strong>코드 작성 미션</strong>: 4강 CNN 코드의 Conv2D, MaxPooling2D, Flatten, Dense 부분을 그대로 재사용한다. 아래 함수에서 증강 레이어 다음 부분을 직접 완성하자.</p><div class="codebar"><span>PYTHON · 회전 각도를 받는 CNN 생성 함수 (직접 완성)</span><button onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code>def create_cnn_model(rotation_degree=0):
+    # 모델 초기화 전에 난수 시드 고정
+    keras.utils.set_random_seed(SEED)
+
+    model = keras.Sequential([
+        keras.Input(shape=(IMG_SIZE, IMG_SIZE, 3)),
+        layers.RandomRotation(
+            factor=rotation_degree / 360,
+            fill_mode="constant",
+            fill_value=0.0,
+            interpolation="nearest"
+        ),
+        layers.Rescaling(1./255),
+
+        # 여기에 4강에서 사용한 CNN 레이어를 추가하자.
+        # Conv2D → MaxPooling2D → Conv2D →
+        # MaxPooling2D → Flatten → Dense → Dense
+    ])
+
+    model.compile(
+        optimizer="adam",
+        loss="sparse_categorical_crossentropy",
+        metrics=["accuracy"]
+    )
+    return model</code></pre><p><code>rotation_degree=0</code>이면 회전 범위가 0이므로 이미지가 회전하지 않는다. 이 모델에도 RandomRotation 레이어가 있지만 회전 효과는 없는 상태다.</p><p><strong>왜 함수 안에 시드 설정을 넣었을까?</strong> 이 함수를 호출할 때마다 모델의 초기화 조건을 가능한 한 동일하게 시작하기 위해서다. 동일한 모델 구조, 동일한 학습 조건을 사용하고 회전 범위만 바꿀 수 있다.</p></section>
+<section><h2>5. 모델을 생성하고 구조 확인하기</h2><p>함수를 완성했다면 모델을 하나 생성해보자. 아직 <code>fit()</code>은 실행하지 않는다.</p><div class="codebar"><span>PYTHON · ±45° 모델 생성 및 구조 확인</span><button onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code>model_exp = create_cnn_model(45)
+model_exp.summary()</code></pre><div class="steps"><strong>확인할 내용</strong><ol><li><code>summary()</code>에서 <code>RandomRotation</code> 레이어를 찾는다.</li><li>4강 CNN과 Conv2D, MaxPooling2D, Dense 등의 순서가 같은지 확인한다.</li><li><code>create_cnn_model(15)</code>로 바꿔 호출해도 모델 구조가 같은지 확인한다.</li></ol></div><p class="note">함수에서 새 모델을 만들기 때문에 이미 학습한 <code>model_aug</code>나 4강 모델에 이어서 학습하는 것이 아니다. <strong>각 회전 범위를 처음부터 학습시키기 위한 준비</strong>이다.</p></section>
+<section><h2>6. 코드 이해 및 실험 설계 활동</h2><div class="question"><b>Q5.1.</b><p>같은 CNN을 두 번 학습해도 정확도가 달라질 수 있는 이유를 위 표에서 두 가지 찾아 작성하시오.</p></div><div class="question"><b>Q5.2.</b><p><code>keras.utils.set_random_seed(SEED)</code>를 모델 생성 함수 안에서 실행하는 이유는 무엇인가? 각 실험 시작 시 한 번씩 실행하도록 해도 되는가?</p></div><div class="question"><b>Q5.3.</b><p><code>create_experiment_datasets()</code>에서 훈련 데이터와 검증 데이터를 겹치지 않게 나누는 데 관여하는 설정을 찾아 쓰시오. <code>subset="both"</code>가 반환하는 값은 몇 개인가?</p></div><div class="question"><b>Q5.4.</b><p>±15°, ±45°, ±90° 회전을 적용하려면 <code>create_cnn_model()</code>에 각각 어떤 값을 전달해야 하는가? 모델 내부에서는 그 값을 어떻게 변환하는가?</p></div><div class="question"><b>Q5.5.</b><p>회전 각도의 효과를 비교할 때 회전 범위 외에 동일하게 유지해야 할 조건을 세 가지 이상 작성하시오.</p></div><div class="question"><b>Q5.6.</b><p>이번 미션에서 <code>create_cnn_model(45)</code>를 실행한 직후의 모델은 학습이 끝난 상태인가? 실제로 학습하려면 어떤 메서드를 사용해야 하는가?</p></div></section><footer>AI Vision Lab · Mission 05 · 학생용 워크북</footer></main><script>function copyCode(button){const code=button.closest('.codebar').nextElementSibling.innerText;const reset=()=>button.textContent='코드 복사';const fallback=()=>{const ta=document.createElement('textarea');ta.value=code;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');button.textContent='복사 완료'}catch(e){button.textContent='복사 불가'}ta.remove();setTimeout(reset,1500)};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(code).then(()=>{button.textContent='복사 완료';setTimeout(reset,1500)}).catch(fallback)}else{fallback()}}</script></body></html>

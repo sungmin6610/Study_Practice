@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>AI비전실무 6~7강 · 미션03 나만의 특성 설계와 검증</title><style>
+:root{--ink:#243342;--sub:#566679;--line:#dbe3ea;--accent:#277c82;--accent-dark:#185960;--paper:#fff;--muted:#f3f7f8;--code:#152431;--coral:#b45c38}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#e9eff2;color:var(--ink);font-family:'Pretendard','Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:15px;line-height:1.82;word-break:keep-all}
+.page{max-width:940px;min-height:100vh;margin:24px auto 50px;background:var(--paper);box-shadow:0 12px 48px #24334219;padding:0 60px 76px}.hero{margin:0 -60px;padding:68px 60px 52px;color:#f8fcfc;background:linear-gradient(120deg,#133e4b,#286e78 78%,#3b8d8d)}.eyebrow{font-size:12px;letter-spacing:2.1px;font-weight:700;opacity:.83}.hero-number{font-size:13px;letter-spacing:2.5px;margin-top:44px;font-weight:800;color:#bfe4db}.hero h1{font-size:42px;line-height:1.32;font-weight:800;letter-spacing:-1.4px;margin:8px 0 18px}.lead{font-size:17px;opacity:.9;margin-bottom:30px}.meta{display:flex;gap:9px;flex-wrap:wrap}.meta span{font-size:12px;border:1px solid #ffffff66;border-radius:20px;padding:5px 12px}
+.toc{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:28px 0 42px;padding:12px 16px;border:1px solid var(--line);border-radius:10px;font-size:12px}.toc a{padding:2px 7px;text-decoration:none;color:var(--accent-dark)}.toc a:hover{text-decoration:underline}
+section{padding:25px 0 22px;border-bottom:1px solid var(--line)}h2{font-size:24px;line-height:1.42;letter-spacing:-.6px;color:#183944;margin:16px 0 20px;break-after:avoid}h3{font-size:17px;line-height:1.5;margin:32px 0 13px;break-after:avoid}p{margin:13px 0}ul,ol{padding-left:25px;margin:13px 0}li{margin:5px 0}strong,b{font-weight:750}code{font-family:'D2Coding','Cascadia Code','Consolas',monospace;word-break:break-word;font-size:.9em;background:#eef3f6;border-radius:4px;padding:1px 4px}
+.activity{margin-top:30px}.activity-kicker{letter-spacing:2px;color:var(--accent);font-size:12px;font-weight:800;margin-top:5px}.activity>h2{margin-top:4px}
+.callout{border-left:4px solid #91afb3;background:#f2f7f7;border-radius:0 9px 9px 0;padding:15px 18px;margin:22px 0}.callout p{margin:3px 0 0}.callout.feature{border-color:var(--accent);background:#eaf6f4}.callout.guide{border-color:#be9d60;background:#fbf7ed}.required{display:inline-block;background:#e5f2ed;color:#23735b;font-size:11px;line-height:1.6;padding:2px 8px;border-radius:20px;font-weight:800;vertical-align:middle;white-space:nowrap}
+.table-scroll{max-width:100%;overflow-x:auto;margin:18px 0 25px}table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.6}thead{background:#e9f0f2}th,td{padding:11px 12px;border-bottom:1px solid #dce5e9;text-align:left;vertical-align:top}th{font-weight:750;color:#294651}tbody tr:nth-child(even){background:#f8fafb}
+.code-wrap{border-radius:9px;overflow:hidden;margin:19px 0 18px;background:var(--code);break-inside:avoid-page}.code-label{color:#b9d0d4;border-bottom:1px solid #ffffff22;display:flex;align-items:center;gap:8px;padding:7px 14px;font:12px system-ui,sans-serif}.dot{height:7px;width:7px;background:#6db4a8;border-radius:50%}.copy-code{margin-left:auto;font-size:11px;color:#d4e8e6;border:1px solid #6e8a91;background:transparent;border-radius:4px;padding:4px 9px;cursor:pointer}.copy-code:hover{background:#ffffff1a}pre{margin:0;padding:17px 19px;overflow-x:auto;color:#eaf1f3;font-size:12.5px;line-height:1.64;tab-size:4}pre code{font-size:inherit;color:inherit;padding:0;background:transparent;border-radius:0;white-space:pre;word-break:normal}
+.explain{background:#f5f8fa;border-radius:8px;padding:12px 18px;margin:18px 0}.explain ul{margin:4px 0}.question{margin:12px 0;padding:12px 16px;background:#fafbfc;border:1px solid #e2e8ec;border-radius:8px;break-inside:avoid}.question.is-required{border-left:4px solid #469d82;background:#f4faf7}.qhead{display:flex;align-items:center;gap:9px;margin-bottom:3px}.qhead strong{color:#216f77;font-size:14px}.qtext{font-size:14px}.qtext ul{margin:5px 0 0}.formula{background:#f2f6f7;padding:16px 20px;text-align:center;border:1px solid var(--line);font-weight:750;border-radius:7px;margin:16px 0}.check{display:flex;align-items:baseline;gap:9px;margin:9px 0;break-inside:avoid}.check input{accent-color:#277c82}.check span{flex:1}
+@media(max-width:720px){body{background:white;font-size:14px}.page{margin:0;box-shadow:none;padding:0 22px 45px}.hero{margin:0 -22px;padding:50px 22px 40px}.hero h1{font-size:33px}h2{font-size:21px}pre{font-size:11px}.toc{gap:6px}.meta{gap:6px}}
+@page{size:A4;margin:15mm 13mm 16mm 13mm}
+@media print{html{scroll-behavior:auto}body{background:white;font-size:10pt;line-height:1.58;-webkit-print-color-adjust:exact;print-color-adjust:exact}.page{margin:0;max-width:100%;padding:0;box-shadow:none}.hero{margin:0 0 12mm;padding:16mm 12mm;background:#17515c!important}.hero h1{font-size:27pt}.hero-number{margin-top:13mm}.lead{font-size:12pt}.meta span{font-size:8pt}.no-print,.copy-code{display:none!important}section{padding:5mm 0 3mm}h2{font-size:17pt}h3{font-size:12pt}p,li{orphans:3;widows:3}.code-wrap{break-inside:avoid-page}pre{font-size:8.4pt;padding:11px 13px;white-space:pre-wrap;overflow:visible;overflow-wrap:anywhere}table{font-size:9pt}th,td{padding:7px 8px}.question{padding:8px 11px;margin:8px 0;break-inside:avoid}.qtext{font-size:9.5pt}.callout{break-inside:avoid}.table-scroll{overflow:visible}.activity{break-before:page}.activity h2{margin-top:0}}
+
+@media print{section.activity{break-before:auto} section.activity>h2{break-before:page} .copy-code{display:none!important}}
+h4{font-size:15px;line-height:1.5;color:#236775;margin:28px 0 10px;break-after:avoid;}
+@media print{h4{font-size:11pt}.check input{appearance:auto}}
+
+/* Mission 03: clearer content hierarchy without trimming the original workbook text */
+section h3 {margin-top:36px; margin-bottom:14px;}
+section h3:first-of-type {margin-top:26px;}
+.topic-body {padding-left:16px; margin:0 0 38px;}
+.topic-body > :first-child {margin-top:0;}
+.topic-body > :last-child {margin-bottom:0;}
+.topic-body .question, .topic-body .code-wrap, .topic-body .table-scroll {max-width:100%;}
+.report-part-body {padding-left:14px; margin:0 0 26px;}
+.report-part-body > :first-child {margin-top:0;}
+.report-part-body > :last-child {margin-bottom:0;}
+#activity-d h4 {margin:30px 0 12px;}
+.formula-equation {font-size:17px;line-height:1.65;white-space:normal;word-break:keep-all;}
+@media(max-width:720px){.topic-body{padding-left:10px;margin-bottom:30px}.report-part-body{padding-left:10px}.formula-equation{font-size:15px}}
+@media print{.topic-body{padding-left:3mm;margin-bottom:7mm}.report-part-body{padding-left:3mm;margin-bottom:5mm}.formula-equation{font-size:11pt;break-inside:avoid}section h3{margin-top:7mm}}
+</style></head><body><main class="page"><header class="hero"><div class="eyebrow">AI VISION LAB · 6–7강 통합 프로젝트</div><div class="hero-number">MISSION 03</div><h1>나만의 특성을 설계하고<br/>검증하기</h1><p class="lead">가설을 세우고, 직접 설계하고, 실험으로 확인하기</p><div class="meta"><span>권장 학습 시간 · 약 5시간</span><span>실습 환경 · Google Colab</span><span>데이터 · LSWMD_labeled.pkl / wafer_features.pkl</span></div></header><nav class="toc no-print"><strong>바로 이동</strong><a href="#intro">학습 목표</a><a href="#concept">특성 설계</a><a href="#activity-a">활동 A</a><a href="#activity-b">활동 B</a><a href="#activity-c">활동 C</a><a href="#activity-d">활동 D</a><a href="#wrapup">결과 정리</a></nav><section id="intro"><h2>이번 미션에서 해결할 문제</h2>
+<p>지금까지 우리는 웨이퍼맵에서 두 가지 특성을 추출했습니다.</p>
+<ul>
+<li><strong>defect_ratio:</strong> 웨이퍼 전체의 불량률</li>
+<li><strong>edge_ratio:</strong> 웨이퍼 가장자리 영역의 불량률</li>
+</ul>
+<p>미션 02에서는 불량률만 사용한 모델 A와 가장자리 불량률을 추가한 모델 B를 학습하고 성능을 비교했습니다.</p>
+<p>이 실험을 통해 사람이 직접 설계한 특성이 불량 패턴을 구분하는 데 도움이 될 수도 있고, 예상과 달리 성능을 개선하지 못할 수도 있다는 점을 확인했습니다.</p>
+<p>그렇다면 여러분이 직접 새로운 특성을 설계한다면 어떨까요?</p>
+<p>이번 미션에서는 <strong>자신이 선택한 특성을 구현하고, 분류 모델에 추가하여 그 효과를 검증</strong>합니다.</p>
+<p>단순히 성능이 높은 모델을 만드는 것이 목표는 아닙니다. 어떤 특성이 유용할 것이라는 가설을 세우고, 실험을 통해 그 가설을 확인하는 것이 더 중요합니다.</p>
+<p>이번 미션을 완료하면 다음을 할 수 있습니다.</p>
+<ul>
+<li>불량 패턴을 구분하는 데 도움이 될 특성을 제안할 수 있습니다.</li>
+<li>웨이퍼맵 배열에서 새로운 특성을 계산하는 함수를 구현할 수 있습니다.</li>
+<li>기존 특성에 새로운 특성을 추가하여 분류 모델을 학습할 수 있습니다.</li>
+<li>동일한 조건에서 특성 추가 전후의 성능을 비교할 수 있습니다.</li>
+<li>실험 결과를 해석하고 그 과정과 결론을 보고서로 작성할 수 있습니다.</li>
+</ul>
+<p>이번 미션은 6~7강 특성공학 프로젝트의 마지막 단계이며, <strong>중간고사 대체 보고서 작성까지 포함</strong>합니다.</p>
+<div class="callout guide"><strong>질문과 보고서 안내</strong><p>워크북의 모든 질문에 답할 필요는 없습니다. <strong>[필수 기록]</strong> 질문을 중심으로 실험 결과와 분석 내용을 보고서에 정리하세요.</p></div></section><section id="concept"><h2>알아두기. 좋은 특성이란 무엇일까?</h2>
+<h3>1. 특성이 많으면 모델 성능이 좋아질까?</h3><div class="topic-body">
+<p>우리는 이미 두 가지 특성을 추출했습니다.</p>
+<p>그렇다면 여기에 새로운 특성을 계속 추가하면 분류 성능도 계속 좋아질까요?</p>
+<p>반드시 그렇지는 않습니다.</p>
+<p>어떤 특성은 불량 유형을 구분하는 데 중요한 정보를 제공하지만, 어떤 특성은 기존 특성과 비슷한 정보를 나타내거나 분류에 별 도움이 되지 않을 수 있습니다.</p>
+<p>예를 들어 다음 두 특성을 생각해 봅시다.</p>
+<ul>
+<li>전체 불량 칩의 개수</li>
+<li>전체 유효 칩 중 불량 칩의 비율</li>
+</ul>
+<p>웨이퍼맵의 크기와 유효 칩 수가 같다면 두 특성은 매우 비슷한 정보를 제공할 것입니다.</p>
+<p>반면 다음 두 특성은 서로 다른 정보를 제공할 가능성이 있습니다.</p>
+<ul>
+<li>전체 불량률</li>
+<li>불량이 위쪽과 아래쪽 중 어느 곳에 집중되어 있는지를 나타내는 값</li>
+</ul>
+<p>두 웨이퍼의 전체 불량률이 같더라도 불량의 위치는 다를 수 있기 때문입니다.</p>
+<p>따라서 새로운 특성을 설계할 때는 다음 질문을 생각해 보아야 합니다.</p>
+<p><strong>"이 특성은 기존 특성에 없는 어떤 정보를 제공하는가?"</strong></p>
+</div><h3>2. 특성 설계에는 도메인 지식이 필요하다</h3><div class="topic-body">
+<p>웨이퍼맵의 불량 유형을 다시 떠올려 봅시다.</p>
+<table>
+<thead>
+<tr>
+<th>불량 유형</th>
+<th>주요 패턴 특징</th>
+<th>생각해 볼 특성</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Center</td>
+<td>중심 부근에 불량 집중</td>
+<td>중앙 영역 불량률</td>
+</tr>
+<tr>
+<td>Edge-Ring</td>
+<td>가장자리를 따라 불량 분포</td>
+<td>가장자리 불량률</td>
+</tr>
+<tr>
+<td>Edge-Loc</td>
+<td>가장자리의 일부 영역에 불량 집중</td>
+<td>영역별 불량률 차이</td>
+</tr>
+<tr>
+<td>Loc</td>
+<td>특정 영역에 불량 집중</td>
+<td>불량 중심 좌표, 연결 영역 크기</td>
+</tr>
+<tr>
+<td>Scratch</td>
+<td>선 형태로 불량 분포</td>
+<td>불량의 방향성, 길게 연결된 영역</td>
+</tr>
+<tr>
+<td>Random</td>
+<td>여러 위치에 불량 분산</td>
+<td>불량의 분산 정도</td>
+</tr>
+<tr>
+<td>Donut</td>
+<td>고리 모양의 불량 분포</td>
+<td>중심에서의 거리별 불량률</td>
+</tr>
+<tr>
+<td>Near-full</td>
+<td>웨이퍼 대부분에 불량 발생</td>
+<td>전체 불량률</td>
+</tr>
+</tbody>
+</table>
+<p>위 표는 특성 설계를 위한 아이디어입니다. 특정 특성이 실제로 해당 유형을 잘 구분한다는 뜻은 아닙니다.</p>
+<p>예를 들어 Scratch는 선 형태의 불량 패턴이지만, 단순히 불량의 방향성을 계산했다고 해서 모든 Scratch를 구분할 수 있는 것은 아닙니다.</p>
+<p><strong>도메인 지식은 좋은 특성을 생각해 내는 출발점이며, 실제 유용성은 실험으로 검증해야 합니다.</strong></p>
+</div></section><section class="activity" id="activity-a"><h2>활동 A. 나만의 특성 설계하기</h2>
+<h3>1. 기존 실험 결과 다시 살펴보기</h3><div class="topic-body">
+<p>미션 02에서 모델 B는 다음 두 특성을 사용했습니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">X_B = df[['defect_ratio', 'edge_ratio']]
+</code></pre></div>
+<p>그런데 이 두 특성만으로 구분하기 어려운 불량 유형도 있었을 것입니다.</p>
+<p>미션 02의 혼동행렬과 클래스별 성능을 다시 살펴보세요.</p>
+<div class="question is-required"><div class="qhead"><strong>Q1.</strong><span class="required">필수 기록</span></div><div class="qtext">모델 B에서 상대적으로 구분하기 어려웠던 불량 유형은 무엇인가요? 혼동행렬이나 Recall, F1-score를 근거로 설명해 보세요.</div></div>
+<div class="question"><div class="qhead"><strong>Q2.</strong></div><div class="qtext">기존의 <code>defect_ratio</code>와 <code>edge_ratio</code>만으로 해당 불량 유형을 구분하기 어려운 이유는 무엇이라고 생각하나요?</div></div>
+<p>예를 들어 불량이 한쪽에 집중된 Loc 패턴과 불량이 선 형태로 이어지는 Scratch 패턴은 전체 불량률이나 가장자리 불량률이 비슷할 수도 있습니다.</p>
+<p>그러나 불량 칩들이 공간적으로 분포하는 모습은 다릅니다.</p>
+<p>이러한 차이를 숫자로 표현할 수 있다면 새로운 특성이 될 수 있습니다.</p>
+</div><h3>2. 새로운 특성 후보 살펴보기</h3><div class="topic-body">
+<p>다음은 웨이퍼맵에서 만들 수 있는 특성의 예시입니다.</p>
+<table>
+<thead>
+<tr>
+<th>특성</th>
+<th>의미</th>
+<th>구현 난이도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>상하 불량률 차이</td>
+<td>위쪽과 아래쪽의 불량률 차이</td>
+<td>쉬움</td>
+</tr>
+<tr>
+<td>좌우 불량률 차이</td>
+<td>왼쪽과 오른쪽의 불량률 차이</td>
+<td>쉬움</td>
+</tr>
+<tr>
+<td>중앙 영역 불량률</td>
+<td>웨이퍼 중심 부근의 불량률</td>
+<td>보통</td>
+</tr>
+<tr>
+<td>불량 중심 좌표</td>
+<td>불량 칩들이 집중된 평균 위치</td>
+<td>보통</td>
+</tr>
+<tr>
+<td>불량 분포의 퍼짐 정도</td>
+<td>불량 칩들이 얼마나 넓게 분산되어 있는가</td>
+<td>보통</td>
+</tr>
+<tr>
+<td>최대 연결 불량 영역</td>
+<td>서로 연결된 불량 칩들의 최대 영역 크기</td>
+<td>어려움</td>
+</tr>
+<tr>
+<td>불량 분포의 방향성</td>
+<td>불량이 특정 방향으로 길게 분포하는 정도</td>
+<td>어려움</td>
+</tr>
+</tbody>
+</table>
+<p>위의 후보 중 하나를 선택해도 되고, 새로운 특성을 직접 제안해도 됩니다.</p>
+<p>단, 이번 실습에서는 <strong>새로운 특성 하나를 완성하는 것</strong>을 우선 목표로 합니다.</p>
+<p>여러 특성을 추가하는 것보다 자신이 선택한 특성이 어떤 의미를 가지며, 실제로 어떤 영향을 주었는지 이해하는 것이 중요합니다.</p>
+</div><h3>3. 특성 설계서 작성하기</h3><div class="topic-body">
+<p>코드를 작성하기 전에 자신의 아이디어를 먼저 정리해 보세요.</p>
+<div class="question is-required"><div class="qhead"><strong>Q3.</strong><span class="required">필수 기록</span></div><div class="qtext">나만의 특성 설계서</div></div>
+<p>다음 항목을 작성하세요.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>작성 내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>특성 이름</td>
+<td>새롭게 만들 특성의 이름</td>
+</tr>
+<tr>
+<td>특성이 나타내는 정보</td>
+<td>어떤 공간적·수치적 특징을 표현하는가?</td>
+</tr>
+<tr>
+<td>대상 불량 유형</td>
+<td>어떤 불량 유형을 구분하는 데 도움이 될 것으로 예상하는가?</td>
+</tr>
+<tr>
+<td>선택한 이유</td>
+<td>기존 특성으로 표현하기 어려운 어떤 정보를 추가하는가?</td>
+</tr>
+<tr>
+<td>계산 방법</td>
+<td>웨이퍼맵 배열에서 어떤 값을 계산할 것인가?</td>
+</tr>
+</tbody>
+</table>
+<p>마지막으로 자신의 예상 결과를 한 문장으로 작성해 보세요.</p>
+<p><strong>가설:</strong> "__________ 특성을 추가하면 __________ 불량 유형의 분류 성능이 개선될 것이다."</p>
+<p>이 가설이 반드시 맞을 필요는 없습니다.</p>
+<p>실험 결과를 확인한 후 자신의 예상이 맞았는지 검토하면 됩니다.</p>
+</div></section><section class="activity" id="activity-b"><h2>활동 B. 새로운 특성을 구현하기</h2>
+<h3>1. 실습 데이터 준비하기</h3><div class="topic-body">
+<p>미션 01에서 사용했던 <code>LSWMD_labeled.pkl</code> 파일과 <code>wafer_features.pkl</code> 파일을 모두 사용합니다.</p>
+<ul>
+<li><code>LSWMD_labeled.pkl</code>: 원본 웨이퍼맵 배열이 저장된 데이터</li>
+<li><code>wafer_features.pkl</code>: 미션 01에서 추출한 두 특성이 저장된 데이터</li>
+</ul>
+<p>새로운 특성을 계산하려면 원본 웨이퍼맵 배열이 필요합니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+from google.colab import drive
+drive.mount('/content/drive')
+
+data_path = '/content/drive/MyDrive/'
+
+original_df = pd.read_pickle(
+    data_path + 'LSWMD_labeled.pkl'
+)
+
+feature_df = pd.read_pickle(
+    data_path + 'wafer_features.pkl'
+)
+
+print("원본 데이터:", original_df.shape)
+print("특성 데이터:", feature_df.shape)
+
+display(feature_df.head())
+</code></pre></div>
+<p>두 파일은 미션 01에서 동일한 데이터와 행 순서를 이용해 생성했습니다.</p>
+<p>새로운 특성을 추가할 때도 각 웨이퍼맵과 불량 유형의 대응 관계가 유지되어야 합니다.</p>
+<p>다음 코드는 두 데이터의 행 개수와 라벨 순서를 확인합니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">same_length = len(original_df) == len(feature_df)
+
+same_labels = (
+    original_df['failureType_clean']
+    .reset_index(drop=True)
+    .equals(
+        feature_df['failureType_clean']
+        .reset_index(drop=True)
+    )
+)
+
+print("행 개수 일치:", same_length)
+print("라벨 순서 일치:", same_labels)
+
+if not (same_length and same_labels):
+    raise ValueError(
+        "두 파일의 데이터 순서를 확인하세요."
+    )
+</code></pre></div>
+<p>두 결과가 모두 <code>True</code>인 경우에만 다음 단계로 진행하세요.</p>
+<p>이 검사는 데이터가 올바르게 연결되었는지 확인하는 기본 점검입니다. 라벨 순서가 같더라도 모든 원본 배열의 대응 관계까지 완전히 검증하는 것은 아니므로, 미션 01에서 저장한 파일을 그대로 사용하는 것이 중요합니다.</p>
+</div><h3>2. 특성 추출 함수 예제 살펴보기</h3><div class="topic-body">
+<p>이번에는 <strong>상하 불량률 차이</strong>를 계산하는 함수를 예제로 살펴보겠습니다.</p>
+<p>웨이퍼맵의 위쪽과 아래쪽에서 각각 불량률을 계산한 뒤 두 값의 차이를 구하는 방식입니다.</p>
+<div aria-label="상하 불량률 차이 = 상단 불량률 - 하단 불량률" class="formula formula-equation" role="math">상하 불량률 차이 = 상단 불량률 − 하단 불량률</div>
+
+<p>예를 들어 상단 불량률이 0.30이고 하단 불량률이 0.10이라면 특성값은 0.20입니다.</p>
+<p>반대로 하단 불량률이 더 높다면 음수가 나옵니다.</p>
+<ul>
+<li>양수: 위쪽의 불량률이 더 높음</li>
+<li>0에 가까움: 위쪽과 아래쪽의 불량률이 비슷함</li>
+<li>음수: 아래쪽의 불량률이 더 높음</li>
+</ul>
+<p>다음 코드를 읽고 실행해 보세요.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">def top_bottom_difference(wafer_map):
+    wafer_map = np.asarray(wafer_map)
+
+    h = wafer_map.shape[0]
+    mid = h // 2
+
+    # 웨이퍼맵을 위쪽과 아래쪽으로 분리
+    top = wafer_map[:mid, :]
+    bottom = wafer_map[mid:, :]
+
+    # 유효 칩 개수
+    top_valid = np.sum(top != 0)
+    bottom_valid = np.sum(bottom != 0)
+
+    # 불량 칩 개수
+    top_defect = np.sum(top == 2)
+    bottom_defect = np.sum(bottom == 2)
+
+    # 각 영역의 불량률
+    top_ratio = (
+        top_defect / top_valid
+        if top_valid &gt; 0 else 0.0
+    )
+
+    bottom_ratio = (
+        bottom_defect / bottom_valid
+        if bottom_valid &gt; 0 else 0.0
+    )
+
+    return top_ratio - bottom_ratio
+</code></pre></div>
+<p>이 함수는 미션 01에서 사용했던 <code>defect_ratio()</code>와 비슷한 계산을 수행합니다.</p>
+<p>차이점은 웨이퍼맵 전체가 아니라 두 영역을 나누어 계산한다는 것입니다.</p>
+<div class="question"><div class="qhead"><strong>Q4.</strong></div><div class="qtext"><code>wafer_map[:mid, :]</code>와 <code>wafer_map[mid:, :]</code>는 각각 배열의 어느 부분을 선택하나요?</div></div>
+<div class="question"><div class="qhead"><strong>Q5.</strong></div><div class="qtext"><code>top_ratio - bottom_ratio</code> 대신 <code>abs(top_ratio - bottom_ratio)</code>를 사용하면 특성의 의미가 어떻게 달라질까요?</div></div>
+<p>두 계산 방식 중 어느 것이 더 유용할지는 구분하려는 패턴에 따라 달라질 수 있습니다.</p>
+<p>예를 들어 단순히 상하 불균형의 크기를 표현하려면 절댓값이 유용하지만, 불량이 어느 방향에 집중되었는지까지 표현하려면 부호를 유지하는 편이 좋을 수 있습니다.</p>
+</div><h3>3. 나만의 특성 함수 만들기</h3><div class="topic-body">
+<p>이제 자신이 선택한 특성을 구현해 보세요.</p>
+<p><strong>특성은 자유롭게 선택할 수 있습니다.</strong> 활동 A의 '새로운 특성 후보 살펴보기'에서 제시한 특성 중 하나를 선택해도 되고, 자신만의 새로운 특성을 직접 제안해도 됩니다.</p>
+<p>다음은 특성을 구현할 수 있는 방법의 예시입니다. <strong>반드시 아래 방법 중 하나를 선택해야 하는 것은 아닙니다.</strong></p>
+<ul>
+<li>제공된 <code>top_bottom_difference()</code> 함수를 그대로 사용합니다.</li>
+<li>예제 함수를 수정하여 좌우 불량률 차이 등의 특성을 만듭니다.</li>
+<li>미션 01의 <code>edge_defect_ratio()</code>를 참고하여 중앙 영역 불량률을 계산합니다.</li>
+<li>새로운 계산 방법을 직접 설계하여 함수를 만듭니다.</li>
+</ul>
+<p>예제 함수를 선택해도 괜찮습니다. 다만 특성을 선택한 이유와 그 특성이 가지는 의미를 설명할 수 있어야 합니다.</p>
+<p><strong>실습 시 주의할 점</strong></p>
+<ol>
+<li>입력은 하나의 웨이퍼맵 배열이어야 합니다.</li>
+<li>결과는 모델의 입력에 사용할 수 있는 숫자값이어야 합니다.</li>
+<li>유효하지 않은 칩 영역을 계산에 적절히 반영해야 합니다.</li>
+<li>0으로 나누는 상황이나 불량 칩이 없는 경우를 고려해야 합니다.</li>
+<li>모든 웨이퍼맵에 동일한 계산 기준을 적용해야 합니다.</li>
+</ol>
+<p>다음은 예제 함수를 개인 특성으로 선택한 경우의 코드입니다.</p>
+<p>다른 특성을 구현했다면 함수 이름을 자신이 만든 함수로 변경하세요.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python"># 사용할 특성 추출 함수를 지정
+my_feature_function = top_bottom_difference
+
+# 원본 웨이퍼맵에서 개인 특성 추출
+my_feature_values = (
+    original_df['waferMap']
+    .apply(my_feature_function)
+)
+
+# 특성 데이터프레임에 새로운 열 추가
+feature_df['my_feature'] = (
+    my_feature_values.to_numpy()
+)
+
+display(feature_df.head())
+</code></pre></div>
+<p><code>my_feature</code>는 모델 학습에 사용할 새로운 열의 이름입니다.</p>
+<p>학생마다 서로 다른 특성을 선택하더라도 이후 모델 학습 코드에서는 동일한 열 이름을 사용할 수 있도록 했습니다.</p>
+</div><h3>4. 특성값이 올바르게 계산되었는지 확인하기</h3><div class="topic-body">
+<p>새로운 함수를 만들었다면 결과를 확인해야 합니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">print("특성값 범위:")
+print(feature_df['my_feature'].min())
+print(feature_df['my_feature'].max())
+
+print("\n특성값 요약:")
+display(
+    feature_df['my_feature'].describe()
+)
+
+print(
+    "유한한 숫자로 계산되었는가?",
+    np.isfinite(
+        feature_df['my_feature'].to_numpy()
+    ).all()
+)
+</code></pre></div>
+<p>특성값의 예상 범위는 계산 방법에 따라 달라집니다.</p>
+<p>예를 들어 상하 불량률 차이는 -1에서 1 사이의 값이지만, 불량 칩의 개수를 직접 계산한 특성이라면 훨씬 큰 값이 나올 수도 있습니다.</p>
+<p>특성의 계산 방법에 따라 예상 가능한 값의 범위를 먼저 생각해 보세요.</p>
+<div class="question"><div class="qhead"><strong>Q6.</strong></div><div class="qtext">자신이 만든 특성의 값은 어떤 범위에 있어야 할까요? 실제 계산 결과가 예상 범위에 들어 있는지 확인해 보세요.</div></div>
+</div><h3>5. 특성값의 분포 확인하기</h3><div class="topic-body">
+<p>모델에 특성을 입력하기 전에 불량 유형에 따라 특성값이 어떻게 나타나는지 살펴보겠습니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">plt.figure(figsize=(11, 5))
+
+sns.boxplot(
+    data=feature_df,
+    x='failureType_clean',
+    y='my_feature'
+)
+
+plt.xticks(rotation=30)
+plt.title('My Feature by Failure Type')
+plt.xlabel('Failure Type')
+plt.ylabel('My Feature')
+plt.show()
+</code></pre></div>
+<p>이 그래프는 각 불량 유형에서 새로운 특성의 값이 어떻게 분포하는지 보여줍니다.</p>
+<p>특정 유형에서 값이 높거나 낮게 나타난다면 해당 유형을 구분하는 데 도움이 될 가능성이 있습니다.</p>
+<p>반대로 여러 유형에서 비슷한 분포가 나타나면 새로운 특성만으로는 구분하기 어려울 수도 있습니다.</p>
+<div class="question is-required"><div class="qhead"><strong>Q7.</strong><span class="required">필수 기록</span></div><div class="qtext">자신이 만든 특성의 분포를 확인해 보세요.</div></div>
+<ul>
+<li>어떤 불량 유형에서 특징적인 값이 나타났나요?</li>
+<li>처음 예상했던 불량 유형에서 실제로 차이가 나타났나요?</li>
+<li>서로 비슷한 값의 분포를 보이는 불량 유형은 무엇인가요?</li>
+</ul>
+<p>그래프를 근거로 자신의 특성이 어떤 정보를 표현하는지 설명해 보세요.</p>
+</div></section><section class="activity" id="activity-c"><h2>활동 C. 나만의 특성으로 모델 성능 비교하기</h2>
+<h3>1. 비교 실험 설계</h3><div class="topic-body">
+<p>이번에는 두 모델을 비교합니다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>모델 B</th>
+<th>모델 C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>입력 특성</td>
+<td>defect_ratio, edge_ratio</td>
+<td>defect_ratio, edge_ratio, my_feature</td>
+</tr>
+<tr>
+<td>분류 알고리즘</td>
+<td>RandomForest</td>
+<td>RandomForest</td>
+</tr>
+<tr>
+<td>학습·테스트 데이터</td>
+<td>동일</td>
+<td>동일</td>
+</tr>
+<tr>
+<td>난수 시드</td>
+<td>42</td>
+<td>42</td>
+</tr>
+<tr>
+<td>평가 지표</td>
+<td>Accuracy, Macro F1</td>
+<td>Accuracy, Macro F1</td>
+</tr>
+</tbody>
+</table>
+<p>모델 B는 미션 02에서 사용한 모델입니다.</p>
+<p>모델 C는 여기에 자신이 설계한 특성을 하나 더 추가한 모델입니다.</p>
+<p><strong>이번 실험에서 변경하는 조건은 개인 특성의 추가 여부입니다.</strong></p>
+<p>미션 02와 같은 데이터, 같은 분할 방법, 같은 모델 설정을 사용하여 성능을 비교하겠습니다.</p>
+</div><h3>2. 데이터 분할과 모델 학습</h3><div class="topic-body">
+<p>미션 02에서 사용했던 코드를 다시 활용합니다.</p>
+<p>다음 코드를 실행하면 동일한 데이터 순서와 시드를 기준으로 학습·테스트 데이터 분할을 다시 생성할 수 있습니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, f1_score
+
+RANDOM_STATE = 42
+
+y = feature_df['failureType_clean']
+
+train_idx, test_idx = train_test_split(
+    np.arange(len(feature_df)),
+    test_size=0.2,
+    random_state=RANDOM_STATE,
+    stratify=y
+)
+
+y_train = y.iloc[train_idx]
+y_test = y.iloc[test_idx]
+</code></pre></div>
+<p>이 코드는 미션 02와 동일한 데이터와 행 순서를 사용한다는 전제에서 같은 분할 결과를 재현합니다.</p>
+<p>그다음 모델 B와 모델 C의 입력 특성을 준비합니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">X_B = feature_df[
+    ['defect_ratio', 'edge_ratio']
+]
+
+X_C = feature_df[
+    ['defect_ratio', 'edge_ratio', 'my_feature']
+]
+
+X_B_train = X_B.iloc[train_idx]
+X_B_test = X_B.iloc[test_idx]
+
+X_C_train = X_C.iloc[train_idx]
+X_C_test = X_C.iloc[test_idx]
+</code></pre></div>
+<p>이번에는 모델을 학습하고 평가하는 과정을 함수로 만들어 보겠습니다.</p>
+<p>동일한 학습 코드를 반복하는 대신, 입력 특성만 바꾸어 사용할 수 있습니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">def train_and_evaluate(X_train, X_test, y_train, y_test):
+    model = RandomForestClassifier(
+        n_estimators=100,
+        random_state=RANDOM_STATE,
+        n_jobs=-1
+    )
+
+    model.fit(X_train, y_train)
+
+    predictions = model.predict(X_test)
+
+    accuracy = accuracy_score(
+        y_test, predictions
+    )
+
+    macro_f1 = f1_score(
+        y_test,
+        predictions,
+        average='macro'
+    )
+
+    return model, predictions, accuracy, macro_f1
+</code></pre></div>
+<p>이 함수는 네 가지 값을 반환합니다.</p>
+<ul>
+<li>학습이 완료된 모델</li>
+<li>테스트 데이터의 예측 결과</li>
+<li>Accuracy</li>
+<li>Macro F1-score</li>
+</ul>
+<p>이제 함수 하나로 두 모델을 각각 학습하고 평가합니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">model_B, pred_B, acc_B, f1_B = train_and_evaluate(
+    X_B_train, X_B_test, y_train, y_test
+)
+
+model_C, pred_C, acc_C, f1_C = train_and_evaluate(
+    X_C_train, X_C_test, y_train, y_test
+)
+
+print(f"모델 B: Accuracy={acc_B:.4f}, Macro F1={f1_B:.4f}")
+print(f"모델 C: Accuracy={acc_C:.4f}, Macro F1={f1_C:.4f}")
+</code></pre></div>
+<div class="question"><div class="qhead"><strong>Q8.</strong></div><div class="qtext"><code>train_and_evaluate()</code> 함수를 사용하면 동일한 코드를 반복 작성하는 것과 비교해 어떤 장점이 있을까요?</div></div>
+<div class="question"><div class="qhead"><strong>Q9.</strong></div><div class="qtext">모델 B와 C는 입력 데이터의 열 개수가 다릅니다. 그런데 학습 데이터의 행 개수와 테스트 데이터의 행 개수는 같아야 하는 이유는 무엇인가요?</div></div>
+</div><h3>3. 성능 비교 결과 확인하기</h3><div class="topic-body">
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">results_BC = pd.DataFrame({
+    'Model': [
+        'B: Existing Features',
+        'C: + My Feature'
+    ],
+    'Accuracy': [acc_B, acc_C],
+    'Macro F1': [f1_B, f1_C]
+})
+
+display(results_BC.round(4))
+
+print(f"Accuracy 변화: {acc_C - acc_B:+.4f}")
+print(f"Macro F1 변화: {f1_C - f1_B:+.4f}")
+</code></pre></div>
+<p>결과표를 확인해 보세요.</p>
+<p>새로운 특성을 추가한 모델 C의 성능이 더 높아졌나요?</p>
+<p>혹은 거의 변화가 없거나 성능이 낮아졌나요?</p>
+<p>이번에는 결과가 예상과 다르게 나타나더라도 새로운 특성을 계속 변경하면서 높은 점수를 찾을 필요는 없습니다.</p>
+<p>우선 자신이 설계한 특성의 효과를 분석하는 데 집중하세요.</p>
+<div class="question is-required"><div class="qhead"><strong>Q10.</strong><span class="required">필수 기록</span></div><div class="qtext">모델 B와 모델 C의 Accuracy와 Macro F1-score를 비교해 보세요.</div></div>
+<ul>
+<li>두 지표는 각각 얼마나 변화했나요?</li>
+<li>처음 세운 가설과 일치하는 결과가 나왔나요?</li>
+<li>예상과 다른 결과가 나왔다면 어떤 이유를 생각할 수 있나요?</li>
+</ul>
+</div><h3>4. 클래스별 분류 결과 비교하기</h3><div class="topic-body">
+<p>전체 성능이 개선되지 않았더라도 특정 불량 유형에서는 개선이 나타났을 수 있습니다.</p>
+<p>반대로 전체 성능이 좋아졌더라도 일부 클래스의 성능은 낮아졌을 수 있습니다.</p>
+<p>이번에는 클래스별 Recall을 비교해 보겠습니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">from sklearn.metrics import recall_score
+
+labels = sorted(y.unique())
+
+recall_B = recall_score(
+    y_test, pred_B,
+    labels=labels,
+    average=None,
+    zero_division=0
+)
+
+recall_C = recall_score(
+    y_test, pred_C,
+    labels=labels,
+    average=None,
+    zero_division=0
+)
+
+recall_comparison = pd.DataFrame({
+    'Failure Type': labels,
+    'Recall B': recall_B,
+    'Recall C': recall_C,
+    'Difference': recall_C - recall_B
+})
+
+display(
+    recall_comparison.sort_values(
+        'Difference',
+        ascending=False
+    ).round(4)
+)
+</code></pre></div>
+<p><code>Difference</code>가 양수이면 모델 C에서 해당 클래스의 Recall이 개선된 것입니다.</p>
+<p>음수이면 Recall이 낮아졌다는 의미입니다.</p>
+<p>다음 코드를 실행하면 클래스별 변화를 그래프로 확인할 수 있습니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">plt.figure(figsize=(10, 5))
+
+sns.barplot(
+    data=recall_comparison,
+    x='Failure Type',
+    y='Difference'
+)
+
+plt.axhline(0, color='black', linewidth=1)
+plt.xticks(rotation=30)
+plt.title('Recall Change After Adding My Feature')
+plt.ylabel('Recall C - Recall B')
+plt.show()
+</code></pre></div>
+<div class="question is-required"><div class="qhead"><strong>Q11.</strong><span class="required">필수 기록</span></div><div class="qtext">자신이 개선하려고 했던 불량 유형의 Recall은 어떻게 변화했나요?</div></div>
+<p>처음 세운 가설과 실제 결과를 비교해 보세요.</p>
+</div><h3>5. 혼동행렬로 결과 확인하기</h3><div class="topic-body">
+<p>특정 클래스의 Recall 변화가 나타났다면, 해당 유형이 어떤 유형과 혼동되었는지도 확인해 보세요.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+
+fig, axes = plt.subplots(1, 2, figsize=(16, 6))
+
+for ax, pred, title in zip(
+    axes,
+    [pred_B, pred_C],
+    ['Model B', 'Model C']
+):
+    cm = confusion_matrix(
+        y_test,
+        pred,
+        labels=labels,
+        normalize='true'
+    )
+
+    disp = ConfusionMatrixDisplay(
+        confusion_matrix=cm,
+        display_labels=labels
+    )
+
+    disp.plot(
+        ax=ax,
+        cmap='Blues',
+        values_format='.2f',
+        colorbar=False
+    )
+
+    ax.set_title(title)
+    ax.tick_params(axis='x', rotation=45)
+
+plt.tight_layout()
+plt.show()
+</code></pre></div>
+<div class="question"><div class="qhead"><strong>Q12.</strong></div><div class="qtext">모델 C에서 오분류가 줄어든 유형이 있나요? 반대로 오분류가 증가한 유형도 있나요?</div></div>
+</div><h3>6. 실험 결과에 대한 결론 내리기</h3><div class="topic-body">
+<p>이제 개인 실험을 마무리할 차례입니다.</p>
+<div class="question is-required"><div class="qhead"><strong>Q13.</strong><span class="required">필수 기록</span></div><div class="qtext">나만의 특성공학 실험 결론</div></div>
+<p>다음 내용을 포함하여 실험 결과를 정리해 보세요.</p>
+<ol>
+<li>어떤 특성을 선택했으며, 그 이유는 무엇인가요?</li>
+<li>새 특성을 어떤 방법으로 계산했나요?</li>
+<li>특성을 추가한 후 전체 분류 성능은 어떻게 변화했나요?</li>
+<li>개선을 기대했던 불량 유형에서 실제로 변화가 나타났나요?</li>
+<li>이번 실험을 통해 무엇을 알게 되었나요?</li>
+</ol>
+<p>특성을 추가했는데 성능이 개선되지 않았다면 그것도 의미 있는 실험 결과입니다.</p>
+<p>가설이 맞지 않았다는 사실을 확인하는 것도 실험의 중요한 과정입니다.</p>
+<p>다만 그 결과가 나타난 이유를 단정하기보다는, 데이터의 특성과 모델의 분류 결과를 근거로 가능한 원인을 추론해 보세요.</p>
+</div></section><section class="activity" id="activity-d"><h2>활동 D. 중간고사 대체 보고서 작성하기</h2>
+<p>이번 활동에서는 지금까지 진행한 실습 내용을 하나의 보고서로 정리합니다.</p>
+<p>보고서는 단순히 실행한 코드를 모두 모아 놓는 문서가 아닙니다.</p>
+<p><strong>어떤 문제를 해결하려 했고, 어떤 실험을 했으며, 어떤 결과를 얻었는지 설명하는 문서</strong>입니다.</p>
+<p>코드 전체를 보고서에 붙여 넣을 필요는 없습니다. 중요한 코드 일부, 표, 그래프, 분석 내용을 중심으로 작성해 보세요.</p>
+<h3>1. 보고서 구성</h3><div class="topic-body">
+<p><strong>보고서 제목: 웨이퍼맵 불량 패턴 분류 실험과 특성공학</strong></p>
+<p>다음 구성을 참고하여 작성하세요.</p>
+<h4>Part 1. 웨이퍼맵 데이터와 CNN 분류</h4><div class="report-part-body">
+<p><strong>4강에서 진행한 CNN 분류 실습</strong>을 중심으로 정리합니다.</p>
+<ul>
+<li>웨이퍼맵 데이터의 특징과 분류하려는 불량 유형</li>
+<li>CNN을 이용한 분류 실험</li>
+<li>모델의 성능 평가 결과</li>
+<li>오분류 사례와 그 원인에 대한 분석</li>
+</ul>
+<p>4강 실습에서 저장한 결과표, 학습 그래프, 혼동행렬 등을 활용해도 됩니다.</p>
+<p><strong>작성할 때 생각해 볼 질문</strong></p>
+<p>CNN은 어떤 데이터를 입력받아 무엇을 예측했나요?</p>
+<p>어떤 불량 유형을 상대적으로 잘 분류했고, 어떤 유형을 어려워했나요?</p>
+</div><h4>Part 2. 데이터 증강 실험</h4><div class="report-part-body">
+<p>5강에서 수행한 데이터 증강 실험을 정리합니다.</p>
+<ul>
+<li>데이터 증강을 적용한 이유</li>
+<li>적용한 증강 방법</li>
+<li>증강 전후 모델의 성능</li>
+<li>실험 결과에 대한 해석</li>
+<li>도메인 지식과 데이터 증강의 관계</li>
+</ul>
+<p>특히 모델 성능이 예상과 다르게 나타났다면 그 이유를 분석해 보세요.</p>
+<p>데이터 증강이 반드시 성능을 향상시키는 것은 아닙니다.</p>
+<p>이번에 배운 실험 조건 통제의 관점에서 기존 증강 실험의 한계를 생각해 보아도 좋습니다.</p>
+</div><h4>Part 3. 공통 특성공학 실험</h4><div class="report-part-body">
+<p>미션 01과 미션 02의 결과를 활용합니다.</p>
+<ul>
+<li>웨이퍼맵에서 추출한 공통 특성</li>
+<li>특성의 계산 방법과 의미</li>
+<li>기준 모델 A와 비교 모델 B의 실험 조건</li>
+<li>특성 추가 전후의 성능 비교</li>
+<li>혼동행렬 및 클래스별 분류 결과 분석</li>
+</ul>
+<p><strong>핵심 질문</strong></p>
+<p>가장자리 불량률을 추가한 것이 실제로 분류 성능에 도움이 되었나요?</p>
+</div><h4>Part 4. 개인 특성공학 실험</h4><div class="report-part-body">
+<p>이번 미션에서 직접 수행한 개인 실험입니다.</p>
+<ul>
+<li>새로운 특성의 이름과 선택 이유</li>
+<li>특성 설계 가설</li>
+<li>특성 추출 방법과 구현 코드</li>
+<li>새 특성의 분포 및 특징</li>
+<li>모델 B와 모델 C의 성능 비교</li>
+<li>가설과 실험 결과의 비교</li>
+<li>결과에 대한 해석</li>
+</ul>
+<p>개인 실험에서는 <strong>특성 설계의 타당성과 결과 해석</strong>이 중요합니다.</p>
+<p>새로운 특성이 분류 성능을 향상시키지 못했더라도 불이익이 있는 것은 아닙니다.</p>
+<p>자신이 어떤 가설을 세웠고, 어떤 실험을 통해 무엇을 확인했는지 설명해 보세요.</p>
+</div><h4>Part 5. 종합 결론</h4><div class="report-part-body">
+<p>지금까지의 실험을 종합하여 자신의 생각을 정리합니다.</p>
+<p>다음 질문을 참고하세요.</p>
+<ul>
+<li>CNN과 특성 기반 분류 모델은 어떤 차이가 있나요?</li>
+<li>데이터 증강과 특성공학은 각각 어떤 목적으로 사용하나요?</li>
+<li>도메인 지식은 이번 실습에서 어떤 역할을 했나요?</li>
+<li>실험 조건을 동일하게 유지하는 것이 왜 중요한가요?</li>
+<li>앞으로 분류 성능을 개선한다면 어떤 방법을 시도하고 싶은가요?</li>
+</ul>
+<p>모든 질문에 개별적으로 답할 필요는 없습니다.</p>
+<p>가장 중요하다고 생각한 내용을 연결하여 하나의 결론으로 작성해 보세요.</p>
+</div></div><h3>2. 보고서 작성 시 유의 사항</h3><div class="topic-body">
+<p><strong>① 모든 워크북 질문에 답할 필요는 없습니다.</strong></p>
+<p>워크북의 질문은 실습 과정에서 코드를 이해하고 결과를 해석하기 위한 학습 활동입니다.</p>
+<p>보고서에는 각 미션의 <strong>[필수 기록]</strong> 질문을 중심으로 필요한 내용을 정리하세요.</p>
+<p>질문에 대한 답변을 그대로 나열하기보다 보고서의 흐름에 맞게 재구성해도 됩니다.</p>
+<p><strong>② 실험 결과는 실제 출력값을 사용하세요.</strong></p>
+<p>모델의 정확도나 F1-score가 높지 않아도 괜찮습니다.</p>
+<p>결과를 임의로 수정하거나 여러 실험 중 좋은 결과만 선택하여 기록하지 마세요.</p>
+<p><strong>③ 결과에 대한 자신의 해석을 포함하세요.</strong></p>
+<p>예를 들어 다음 두 문장을 비교해 보세요.</p>
+<ul>
+<li>"새로운 특성을 추가하자 정확도가 0.02 상승했다."</li>
+<li>"새로운 특성을 추가하자 정확도가 0.02 상승했다. 특히 Edge-Loc의 Recall이 높아졌으며, 이는 추가한 특성이 가장자리 일부에 집중된 불량 분포를 표현하는 데 도움이 되었을 가능성을 보여준다."</li>
+</ul>
+<p>두 번째 문장은 실험 결과를 구체적인 분석과 연결합니다.</p>
+<p>다만 실험 결과만으로 성능 변화의 원인을 완전히 증명한 것은 아니므로, 추론과 확인된 사실을 구분하여 작성하세요.</p>
+<p><strong>④ 표와 그래프를 적극적으로 활용하세요.</strong></p>
+<p>실험 결과를 설명하는 데 필요한 표와 그래프를 포함하면 좋습니다.</p>
+<p>단, 그래프를 넣는 것에서 끝내지 말고 <strong>그래프가 무엇을 보여주는지</strong> 설명하세요.</p>
+<p><strong>⑤ 기존 실습 결과를 재사용해도 됩니다.</strong></p>
+<p>Part 1과 Part 2는 이미 수행한 실습 내용을 정리하는 영역입니다.</p>
+<p>모델을 처음부터 다시 학습할 필요는 없습니다. 이전 실습에서 저장한 결과를 활용하세요.</p>
+</div></section><section id="wrapup"><h2>미션 03 결과 정리</h2>
+<p>이번 미션에서는 직접 설계한 특성을 모델에 추가하고 기존 모델과 비교했습니다.</p>
+<table>
+<thead>
+<tr>
+<th>실험</th>
+<th>입력 특성</th>
+<th>목적</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>모델 A</td>
+<td>defect_ratio</td>
+<td>기준 모델</td>
+</tr>
+<tr>
+<td>모델 B</td>
+<td>defect_ratio, edge_ratio</td>
+<td>공통 특성 추가 효과 확인</td>
+</tr>
+<tr>
+<td>모델 C</td>
+<td>defect_ratio, edge_ratio, my_feature</td>
+<td>개인 특성 추가 효과 확인</td>
+</tr>
+</tbody>
+</table>
+<p>모델 C의 성능이 가장 높았을 수도 있고, 모델 B보다 낮았을 수도 있습니다.</p>
+<p>중요한 것은 어떤 결과가 나왔는지보다 <strong>그 결과를 통해 무엇을 알게 되었는가</strong>입니다.</p>
+<h3>완료 확인</h3><div class="topic-body">
+<ul>
+<li class="check"><input type="checkbox"/><span>기존 모델의 오분류 결과를 확인했다.</span></li>
+<li class="check"><input type="checkbox"/><span>새로운 특성의 이름과 선택 이유를 작성했다.</span></li>
+<li class="check"><input type="checkbox"/><span>특성의 효과에 대한 가설을 세웠다.</span></li>
+<li class="check"><input type="checkbox"/><span>새로운 특성을 계산하는 함수를 구현했다.</span></li>
+<li class="check"><input type="checkbox"/><span>특성값의 범위와 분포를 확인했다.</span></li>
+<li class="check"><input type="checkbox"/><span>기존 모델 B와 개인 모델 C를 동일한 조건에서 비교했다.</span></li>
+<li class="check"><input type="checkbox"/><span>정확도와 Macro F1-score의 변화를 분석했다.</span></li>
+<li class="check"><input type="checkbox"/><span>클래스별 분류 성능 변화를 확인했다.</span></li>
+<li class="check"><input type="checkbox"/><span>개인 실험의 결론을 작성했다.</span></li>
+<li class="check"><input type="checkbox"/><span>기존 실습 결과를 포함한 중간고사 대체 보고서를 완성했다.</span></li>
+</ul>
+</div><h3>보고서에 반드시 포함할 내용</h3><div class="topic-body">
+<p>앞선 미션을 포함하여 다음 내용을 확인하세요.</p>
+<ol>
+<li>기존 CNN 분류 결과와 오분류 분석</li>
+<li>데이터 증강 실험 결과와 해석</li>
+<li>공통 특성공학 실험의 성능 비교</li>
+<li>개인 특성의 설계 이유와 구현 방법</li>
+<li>개인 특성 추가 전후의 성능 비교</li>
+<li>실험 결과에 대한 종합 결론</li>
+</ol>
+</div><h3>마지막으로 생각해 보기</h3><div class="topic-body">
+<p>이번 프로젝트에서는 같은 웨이퍼맵 데이터를 여러 방법으로 분석했습니다.</p>
+<p>CNN은 이미지에서 특징을 학습했고, 특성공학에서는 사람이 직접 의미 있는 정보를 추출했습니다.</p>
+<p>우리는 모델을 학습시키는 것뿐 아니라, <strong>왜 이런 결과가 나타났는지 질문하고 실험으로 확인하는 과정</strong>도 경험했습니다.</p>
+<p>실제 산업 현장에서 AI 모델을 활용할 때도 중요한 것은 단순히 높은 정확도만 얻는 것이 아닙니다.</p>
+<p>데이터의 특성을 이해하고, 실험 조건을 통제하고, 결과를 신뢰할 수 있는지 검토해야 합니다.</p>
+<p><strong>좋은 AI 모델을 만드는 과정은 좋은 질문을 만드는 것에서 시작됩니다.</strong></p>
+</div></section></main><script>async function copyCode(btn){const text=btn.closest('.code-wrap').querySelector('pre code').innerText;try{await navigator.clipboard.writeText(text)}catch(e){const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()}const original=btn.textContent;btn.textContent='복사 완료';setTimeout(()=>btn.textContent=original,1300)}</script></body></html>

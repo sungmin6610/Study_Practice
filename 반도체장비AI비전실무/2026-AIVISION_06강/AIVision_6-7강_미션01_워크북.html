@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>AI비전실무 6강 · 미션01 웨이퍼맵 특성공학</title><style>
+:root{--ink:#243342;--sub:#566679;--line:#dbe3ea;--accent:#277c82;--accent-dark:#185960;--paper:#fff;--muted:#f3f7f8;--code:#152431;--coral:#b45c38}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#e9eff2;color:var(--ink);font-family:'Pretendard','Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:15px;line-height:1.82;word-break:keep-all}
+.page{max-width:940px;min-height:100vh;margin:24px auto 50px;background:var(--paper);box-shadow:0 12px 48px #24334219;padding:0 60px 76px}.hero{margin:0 -60px;padding:68px 60px 52px;color:#f8fcfc;background:linear-gradient(120deg,#133e4b,#286e78 78%,#3b8d8d)}.eyebrow{font-size:12px;letter-spacing:2.1px;font-weight:700;opacity:.83}.hero-number{font-size:13px;letter-spacing:2.5px;margin-top:44px;font-weight:800;color:#bfe4db}.hero h1{font-size:42px;line-height:1.32;font-weight:800;letter-spacing:-1.4px;margin:8px 0 18px}.lead{font-size:17px;opacity:.9;margin-bottom:30px}.meta{display:flex;gap:9px;flex-wrap:wrap}.meta span{font-size:12px;border:1px solid #ffffff66;border-radius:20px;padding:5px 12px}
+.toc{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:28px 0 42px;padding:12px 16px;border:1px solid var(--line);border-radius:10px;font-size:12px}.toc a{padding:2px 7px;text-decoration:none;color:var(--accent-dark)}.toc a:hover{text-decoration:underline}
+section{padding:25px 0 22px;border-bottom:1px solid var(--line)}h2{font-size:24px;line-height:1.42;letter-spacing:-.6px;color:#183944;margin:16px 0 20px;break-after:avoid}h3{font-size:17px;line-height:1.5;margin:32px 0 13px;break-after:avoid}p{margin:13px 0}ul,ol{padding-left:25px;margin:13px 0}li{margin:5px 0}strong,b{font-weight:750}code{font-family:'D2Coding','Cascadia Code','Consolas',monospace;word-break:break-word;font-size:.9em;background:#eef3f6;border-radius:4px;padding:1px 4px}
+.activity{margin-top:30px}.activity-kicker{letter-spacing:2px;color:var(--accent);font-size:12px;font-weight:800;margin-top:5px}.activity>h2{margin-top:4px}
+.callout{border-left:4px solid #91afb3;background:#f2f7f7;border-radius:0 9px 9px 0;padding:15px 18px;margin:22px 0}.callout p{margin:3px 0 0}.callout.feature{border-color:var(--accent);background:#eaf6f4}.callout.guide{border-color:#be9d60;background:#fbf7ed}.required{display:inline-block;background:#e5f2ed;color:#23735b;font-size:11px;line-height:1.6;padding:2px 8px;border-radius:20px;font-weight:800;vertical-align:middle;white-space:nowrap}
+.table-scroll{max-width:100%;overflow-x:auto;margin:18px 0 25px}table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.6}thead{background:#e9f0f2}th,td{padding:11px 12px;border-bottom:1px solid #dce5e9;text-align:left;vertical-align:top}th{font-weight:750;color:#294651}tbody tr:nth-child(even){background:#f8fafb}
+.code-wrap{border-radius:9px;overflow:hidden;margin:19px 0 18px;background:var(--code);break-inside:avoid-page}.code-label{color:#b9d0d4;border-bottom:1px solid #ffffff22;display:flex;align-items:center;gap:8px;padding:7px 14px;font:12px system-ui,sans-serif}.dot{height:7px;width:7px;background:#6db4a8;border-radius:50%}.copy-code{margin-left:auto;font-size:11px;color:#d4e8e6;border:1px solid #6e8a91;background:transparent;border-radius:4px;padding:4px 9px;cursor:pointer}.copy-code:hover{background:#ffffff1a}pre{margin:0;padding:17px 19px;overflow-x:auto;color:#eaf1f3;font-size:12.5px;line-height:1.64;tab-size:4}pre code{font-size:inherit;color:inherit;padding:0;background:transparent;border-radius:0;white-space:pre;word-break:normal}
+.explain{background:#f5f8fa;border-radius:8px;padding:12px 18px;margin:18px 0}.explain ul{margin:4px 0}.question{margin:12px 0;padding:12px 16px;background:#fafbfc;border:1px solid #e2e8ec;border-radius:8px;break-inside:avoid}.question.is-required{border-left:4px solid #469d82;background:#f4faf7}.qhead{display:flex;align-items:center;gap:9px;margin-bottom:3px}.qhead strong{color:#216f77;font-size:14px}.qtext{font-size:14px}.qtext ul{margin:5px 0 0}.formula{background:#f2f6f7;padding:16px 20px;text-align:center;border:1px solid var(--line);font-weight:750;border-radius:7px;margin:16px 0}.check{display:flex;align-items:baseline;gap:9px;margin:9px 0;break-inside:avoid}.check input{accent-color:#277c82}.check span{flex:1}
+@media(max-width:720px){body{background:white;font-size:14px}.page{margin:0;box-shadow:none;padding:0 22px 45px}.hero{margin:0 -22px;padding:50px 22px 40px}.hero h1{font-size:33px}h2{font-size:21px}pre{font-size:11px}.toc{gap:6px}.meta{gap:6px}}
+@page{size:A4;margin:15mm 13mm 16mm 13mm}
+@media print{html{scroll-behavior:auto}body{background:white;font-size:10pt;line-height:1.58;-webkit-print-color-adjust:exact;print-color-adjust:exact}.page{margin:0;max-width:100%;padding:0;box-shadow:none}.hero{margin:0 0 12mm;padding:16mm 12mm;background:#17515c!important}.hero h1{font-size:27pt}.hero-number{margin-top:13mm}.lead{font-size:12pt}.meta span{font-size:8pt}.no-print,.copy-code{display:none!important}section{padding:5mm 0 3mm}h2{font-size:17pt}h3{font-size:12pt}p,li{orphans:3;widows:3}.code-wrap{break-inside:avoid-page}pre{font-size:8.4pt;padding:11px 13px;white-space:pre-wrap;overflow:visible;overflow-wrap:anywhere}table{font-size:9pt}th,td{padding:7px 8px}.question{padding:8px 11px;margin:8px 0;break-inside:avoid}.qtext{font-size:9.5pt}.callout{break-inside:avoid}.table-scroll{overflow:visible}.activity{break-before:page}.activity h2{margin-top:0}}
+</style></head><body><main class="page"><header class="hero"><div class="eyebrow">AI VISION LAB · 6–7강 통합 프로젝트</div><div class="hero-number">MISSION 01</div><h1>웨이퍼맵에서<br>의미 있는 특성 찾기</h1><p class="lead">이미지가 가진 패턴을 사람이 직접 숫자로 표현할 수 있을까?</p><div class="meta"><span>권장 학습 시간 · 약 3시간</span><span>실습 환경 · Google Colab</span><span>데이터 · LSWMD_labeled.pkl</span></div></header>
+<nav class="toc no-print"><strong>바로 이동</strong><a href="#intro">학습 목표</a><a href="#concept">개념 이해</a><a href="#activity-a">활동 A</a><a href="#activity-b">활동 B</a><a href="#activity-c">활동 C</a><a href="#activity-d">활동 D</a><a href="#wrapup">결과 정리</a></nav>
+<section id="intro"><h2>이번 미션에서 해결할 문제</h2>
+<p>지금까지 우리는 웨이퍼맵을 이미지로 변환하고, CNN을 학습시켜 불량 패턴을 분류했습니다. 데이터 증강을 적용하고, 모델이 어떤 패턴을 잘못 분류하는지도 살펴보았습니다.</p>
+<p>그런데 이미지의 특징을 반드시 CNN이 찾아야 할까요? 사람이 웨이퍼맵을 관찰하면 불량 칩의 개수, 불량이 집중된 위치, 불량이 퍼져 있는 모양 등을 파악할 수 있습니다. 이러한 특징을 숫자로 표현하여 모델에 제공한다면 어떨까요?</p>
+<div class="callout feature"><strong>이번 미션의 핵심</strong><p>도메인 지식을 활용해 웨이퍼맵에서 의미 있는 특성을 직접 추출합니다. 이번 미션에서는 모델을 학습하지 않고, 먼저 <b>모델에 어떤 정보를 제공할 것인지</b> 생각합니다.</p></div>
+<p>미션을 완료하면 다음을 할 수 있습니다.</p><ul><li>pickle 파일에 저장된 DataFrame을 불러오고 데이터 구조를 확인할 수 있습니다.</li><li>웨이퍼맵 배열에서 불량률과 가장자리 불량률을 계산할 수 있습니다.</li><li>추출한 특성을 DataFrame의 새로운 열로 추가할 수 있습니다.</li><li>불량 유형별 특성값을 비교하고 특성의 유용성을 판단할 수 있습니다.</li></ul>
+<div class="callout guide"><strong>질문과 보고서 작성 안내</strong><p><b>모든 질문의 답을 보고서에 포함할 필요는 없습니다.</b> 질문은 실습 중 코드를 읽고 결과를 해석하도록 돕는 장치입니다. <span class="required">필수 기록</span>이 붙은 질문은 실습 중 답을 기록해 두세요. 최종 보고서에는 마지막 「보고서에 기록할 내용」을 중심으로 정리합니다.</p></div>
+</section>
+<section id="concept"><h2>알아두기. 도메인 지식과 특성공학</h2><h3>도메인 지식(Domain Knowledge)</h3>
+<p>도메인 지식이란 특정 분야에서 사용되는 전문 지식과 경험을 의미합니다. 반도체 검사에서는 웨이퍼의 어느 위치에 불량이 발생했는지, 어떤 모양으로 분포하는지가 중요한 정보일 수 있습니다.</p>
+<p>예를 들어 웨이퍼 전체에 불량이 흩어져 있는 경우와 가장자리를 따라 불량이 발생한 경우는 서로 다른 패턴입니다. 이때 우리는 다음과 같은 질문을 할 수 있습니다.</p>
+<ul><li>불량 칩은 전체 칩의 몇 퍼센트인가?</li><li>불량 칩은 웨이퍼의 어느 위치에 많은가?</li><li>불량 칩은 한곳에 모여 있는가, 여러 곳에 흩어져 있는가?</li><li>불량 칩이 선이나 원 형태의 패턴을 만드는가?</li></ul>
+<p>이러한 질문을 데이터의 특성으로 바꾸는 것이 이번 실습의 출발점입니다.</p>
+<h3>특성공학(Feature Engineering)</h3>
+<p>특성공학은 데이터에서 유용한 정보를 추출하거나 기존 정보를 변환하여 모델이 활용할 새로운 특성을 만드는 과정입니다. CNN은 이미지의 공간적 특징을 학습 과정에서 자동으로 찾아냅니다. 반면 이번 실습에서는 사람이 특성의 의미와 계산 방법을 설계합니다.</p>
+<div class="table-scroll"><table><thead><tr><th>웨이퍼맵에서 관찰한 정보</th><th>숫자로 표현한 특성</th></tr></thead><tbody>
+<tr><td>불량 칩이 많다</td><td>전체 불량률</td></tr>
+<tr><td>불량이 가장자리에 집중되어 있다</td><td>가장자리 불량률</td></tr>
+<tr><td>불량이 위쪽에 많다</td><td>상단 영역 불량률</td></tr>
+<tr><td>불량이 특정 위치에 모여 있다</td><td>불량 중심 좌표</td></tr>
+</tbody></table></div>
+<p>이처럼 이미지에 담긴 정보를 숫자로 변환하면 일반적인 머신러닝 분류 모델에서도 활용할 수 있습니다. 다만 사람이 설계한 특성이 항상 유용한 것은 아닙니다. 실제로 분류 성능에 도움이 되는지는 이후 실험을 통해 확인해야 합니다.</p>
+</section>
+<section class="activity" id="activity-a"><div class="activity-kicker">ACTIVITY A</div><h2>pickle 파일을 다시 열어보자</h2>
+<h3>1. 오랜만에 만나는 pickle</h3>
+<p>앞선 수업에서는 여러 파일에 나누어 저장된 WM-811K 데이터를 불러오고, 불필요한 데이터를 정리한 뒤 pickle 파일로 저장했습니다. pickle은 Python 객체를 파일로 저장하고 다시 불러올 수 있도록 하는 방식입니다.</p>
+<p>이번에 사용할 파일은 <code>LSWMD_labeled.pkl</code>입니다. 라벨이 없는 데이터를 제외하고 불량 유형이 정리된 웨이퍼맵 데이터가 저장되어 있습니다. 이전에 학습했던 내용을 떠올리며 다음 코드를 실행해 보세요.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab <button class="copy-code" type="button" onclick="copyCode(this)">코드 복사</button></div><pre><code>import pandas as pd
+import numpy as np
+
+from google.colab import drive
+drive.mount(&#x27;/content/drive&#x27;)
+
+# 파일 경로는 자신의 저장 위치에 맞게 수정
+file_path = &#x27;/content/drive/MyDrive/LSWMD_labeled.pkl&#x27;
+
+df = pd.read_pickle(file_path)
+
+print(df.shape)
+display(df.head())</code></pre></div>
+<div class="explain"><b>코드 살펴보기</b><ul><li><code>pd.read_pickle()</code>: pickle 파일에 저장된 객체를 불러옵니다.</li><li><code>df.shape</code>: DataFrame의 행과 열 개수를 확인합니다.</li><li><code>df.head()</code>: 처음 5개 행을 확인합니다.</li></ul></div>
+<p>현재 사용 중인 데이터에는 총 <b>25,519개</b>의 웨이퍼맵이 포함되어 있습니다.</p>
+<div class="question "><div class="qhead"><strong>Q1.</strong> </div><div class="qtext"><code>df.shape</code>의 출력 결과에서 첫 번째 숫자와 두 번째 숫자는 각각 무엇을 의미하나요?</div></div>
+<div class="question "><div class="qhead"><strong>Q2.</strong> </div><div class="qtext"><code>waferMap</code> 열에는 일반적인 숫자 하나가 아니라 어떤 형태의 데이터가 저장되어 있나요?</div></div>
+<div class="question "><div class="qhead"><strong>Q3.</strong> </div><div class="qtext"><code>waferMap</code>과 <code>failureType_clean</code>은 이번 실습에서 각각 어떤 역할을 할까요?</div></div>
+<h3>2. DataFrame의 열 다시 확인하기</h3>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab <button class="copy-code" type="button" onclick="copyCode(this)">코드 복사</button></div><pre><code>print(df.columns.tolist())
+print(df.dtypes)
+
+display(df[&#x27;failureType_clean&#x27;].value_counts())</code></pre></div>
+<div class="table-scroll"><table><thead><tr><th>열 이름</th><th>의미</th></tr></thead><tbody>
+<tr><td><code>waferMap</code></td><td>칩의 상태를 기록한 2차원 배열</td></tr>
+<tr><td><code>dieSize</code></td><td>유효 칩의 개수</td></tr>
+<tr><td><code>lotName</code></td><td>제조 로트 식별 정보</td></tr>
+<tr><td><code>waferIndex</code></td><td>로트 내 웨이퍼 번호</td></tr>
+<tr><td><code>failureType</code></td><td>원래 불량 유형 정보</td></tr>
+<tr><td><code>failureType_clean</code></td><td>정리된 불량 유형</td></tr>
+<tr><td><code>waferShape</code></td><td>웨이퍼맵 배열의 크기</td></tr>
+<tr><td><code>source_file</code></td><td>원본 데이터 파일</td></tr>
+<tr><td><code>source_index</code></td><td>원본 파일에서의 위치</td></tr>
+</tbody></table></div>
+<p>이번 실습에서는 <code>waferMap</code>에서 새로운 특성을 추출하고, <code>failureType_clean</code>을 이용해 불량 유형별 차이를 분석합니다.</p>
+<div class="question "><div class="qhead"><strong>Q4.</strong> </div><div class="qtext"><code>value_counts()</code> 결과에서 데이터가 가장 많은 불량 유형과 가장 적은 불량 유형을 찾아보세요.</div></div>
+<div class="question "><div class="qhead"><strong>Q5.</strong> </div><div class="qtext">불량 유형에 따라 데이터 개수가 크게 다를 때, 모델의 성능을 평가하면서 어떤 점을 주의해야 할까요? 이전 수업에서 배운 내용을 떠올려 보세요.</div></div>
+<h3>3. 웨이퍼맵 배열의 구조 확인하기</h3>
+<p>DataFrame의 <code>waferMap</code> 열에는 웨이퍼맵을 구성하는 2차원 배열이 저장되어 있습니다. 이번에는 이미지를 저장하지 않고 배열을 직접 사용합니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab <button class="copy-code" type="button" onclick="copyCode(this)">코드 복사</button></div><pre><code>wafer = np.asarray(df.iloc[0][&#x27;waferMap&#x27;])
+
+print(&quot;배열 크기:&quot;, wafer.shape)
+print(&quot;데이터 타입:&quot;, wafer.dtype)
+print(&quot;배열에 포함된 값:&quot;, np.unique(wafer))</code></pre></div>
+<div class="table-scroll"><table><thead><tr><th>값</th><th>의미</th></tr></thead><tbody>
+<tr><td>0</td><td>유효하지 않은 영역</td></tr>
+<tr><td>1</td><td>정상 칩</td></tr>
+<tr><td>2</td><td>불량 칩</td></tr>
+</tbody></table></div>
+<p>이제 배열을 이미지로 확인해 보겠습니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab <button class="copy-code" type="button" onclick="copyCode(this)">코드 복사</button></div><pre><code>import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
+
+wafer_cmap = ListedColormap([
+    &#x27;#E8E8E8&#x27;,  # 0: 비유효
+    &#x27;#5B95C7&#x27;,  # 1: 정상
+    &#x27;#E85D5D&#x27;   # 2: 불량
+])
+
+plt.figure(figsize=(5, 5))
+plt.imshow(wafer, cmap=wafer_cmap, vmin=0, vmax=2)
+plt.title(df.iloc[0][&#x27;failureType_clean&#x27;])
+plt.axis(&#x27;off&#x27;)
+plt.show()</code></pre></div>
+<p>이 코드는 앞선 수업의 이미지 변환 과정과 비슷합니다. 하지만 이번에는 이미지 파일로 저장하지 않고 배열의 값과 불량 위치를 분석하는 데 사용합니다.</p>
+<div class="question "><div class="qhead"><strong>Q6.</strong> </div><div class="qtext">웨이퍼맵의 배열 크기와 실제 유효 칩의 개수가 항상 같을 수 없는 이유는 무엇인가요?</div></div>
+<div class="question is-required"><div class="qhead"><strong>Q7.</strong> <span class="required">필수 기록</span></div><div class="qtext">불량률을 계산할 때 배열 전체의 원소 개수를 기준으로 해야 할까요, 정상 칩과 불량 칩의 개수를 합한 값을 기준으로 해야 할까요? 이유도 설명해 보세요.</div></div>
+</section>
+<section class="activity" id="activity-b"><div class="activity-kicker">ACTIVITY B</div><h2>웨이퍼맵의 불량률 계산하기</h2>
+<h3>1. 불량률이란?</h3>
+<p>웨이퍼맵에서 가장 쉽게 추출할 수 있는 특성은 불량률입니다. 불량률은 유효 칩 중 불량 칩이 차지하는 비율입니다.</p>
+<div class="formula">불량률 = 불량 칩 수 ÷ (정상 칩 수 + 불량 칩 수)</div>
+<p>예를 들어 유효 칩 1,000개 중 불량 칩이 150개라면 불량률은 0.15, 즉 15%입니다. 웨이퍼맵에서는 <code>np.sum()</code>과 조건식을 이용해 칩의 개수를 계산할 수 있습니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab <button class="copy-code" type="button" onclick="copyCode(this)">코드 복사</button></div><pre><code>wafer = np.asarray(df.iloc[0][&#x27;waferMap&#x27;])
+
+valid_count = np.sum(wafer != 0)
+defect_count = np.sum(wafer == 2)
+
+print(&quot;유효 칩 수:&quot;, valid_count)
+print(&quot;불량 칩 수:&quot;, defect_count)
+print(&quot;불량률:&quot;, defect_count / valid_count)</code></pre></div>
+<div class="question "><div class="qhead"><strong>Q8.</strong> </div><div class="qtext">다음 두 조건식은 각각 어떤 칩을 선택하나요?<ul><li><code>wafer != 0</code></li><li><code>wafer == 2</code></li></ul></div></div>
+<div class="question "><div class="qhead"><strong>Q9.</strong> </div><div class="qtext"><code>np.sum(wafer == 2)</code>가 불량 칩의 개수를 계산할 수 있는 이유를 설명해 보세요.</div></div>
+<h3>2. 특성 추출 함수 만들기</h3>
+<p>한 개의 웨이퍼에서 불량률을 계산했으므로, 이제 모든 웨이퍼맵에 적용할 함수를 만들어 보겠습니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab <button class="copy-code" type="button" onclick="copyCode(this)">코드 복사</button></div><pre><code>def defect_ratio(wafer_map):
+    wafer_map = np.asarray(wafer_map)
+
+    valid_count = np.sum(wafer_map != 0)
+    defect_count = np.sum(wafer_map == 2)
+
+    if valid_count == 0:
+        return 0.0
+
+    return defect_count / valid_count</code></pre></div>
+<p>이 함수는 웨이퍼맵 배열을 입력받아 불량률을 반환합니다. 특히 <code>valid_count == 0</code>인 경우를 처리하여 0으로 나누는 오류가 발생하지 않도록 했습니다. 이제 DataFrame의 모든 행에 함수를 적용합니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab <button class="copy-code" type="button" onclick="copyCode(this)">코드 복사</button></div><pre><code>df[&#x27;defect_ratio&#x27;] = df[&#x27;waferMap&#x27;].apply(defect_ratio)
+
+display(
+    df[[&#x27;failureType_clean&#x27;, &#x27;defect_ratio&#x27;]].head()
+)</code></pre></div>
+<p><code>apply()</code>는 <code>waferMap</code> 열의 각 배열에 함수를 적용합니다. 실행 결과 기존 DataFrame에 <code>defect_ratio</code>라는 새로운 열이 추가됩니다.</p>
+<div class="question "><div class="qhead"><strong>Q10.</strong> </div><div class="qtext"><code>df['waferMap'].apply(defect_ratio)</code>에서 <code>apply()</code>가 하는 역할을 설명해 보세요.</div></div>
+<div class="question "><div class="qhead"><strong>Q11.</strong> </div><div class="qtext"><code>defect_ratio</code> 열에는 어떤 종류의 값이 저장되며, 값의 범위는 어디부터 어디까지인가요?</div></div>
+<h3>3. 불량 유형에 따라 불량률이 다를까?</h3>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab <button class="copy-code" type="button" onclick="copyCode(this)">코드 복사</button></div><pre><code>ratio_summary = (
+    df.groupby(&#x27;failureType_clean&#x27;)[&#x27;defect_ratio&#x27;]
+      .agg([&#x27;mean&#x27;, &#x27;std&#x27;, &#x27;min&#x27;, &#x27;max&#x27;])
+      .sort_values(&#x27;mean&#x27;, ascending=False)
+)
+
+display(ratio_summary)</code></pre></div>
+<p><code>groupby()</code>는 같은 불량 유형에 속한 데이터를 묶고, <code>agg()</code>는 묶인 데이터의 평균, 표준편차, 최솟값, 최댓값 등을 계산합니다. 이제 분포를 시각화해 보겠습니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab <button class="copy-code" type="button" onclick="copyCode(this)">코드 복사</button></div><pre><code>import seaborn as sns
+
+plt.figure(figsize=(11, 5))
+
+sns.boxplot(
+    data=df,
+    x=&#x27;failureType_clean&#x27;,
+    y=&#x27;defect_ratio&#x27;,
+    order=df[&#x27;failureType_clean&#x27;].value_counts().index
+)
+
+plt.xticks(rotation=30)
+plt.title(&#x27;Defect Ratio by Failure Type&#x27;)
+plt.xlabel(&#x27;Failure Type&#x27;)
+plt.ylabel(&#x27;Defect Ratio&#x27;)
+plt.show()</code></pre></div>
+<p>박스플롯은 데이터의 중앙값, 사분위 범위 및 이상치를 확인할 수 있는 그래프입니다.</p>
+<div class="question "><div class="qhead"><strong>Q12.</strong> </div><div class="qtext">평균 불량률이 가장 높은 유형과 가장 낮은 유형을 찾아보세요.</div></div>
+<div class="question is-required"><div class="qhead"><strong>Q13.</strong> <span class="required">필수 기록</span></div><div class="qtext">서로 다른 불량 유형이 비슷한 불량률을 가지는 경우가 있나요? 그렇다면 불량률 하나만으로 두 유형을 구분할 수 있을까요?</div></div>
+<div class="question "><div class="qhead"><strong>Q14.</strong> </div><div class="qtext">같은 불량 유형 안에서도 불량률이 크게 달라지는 경우가 있나요? 그래프를 근거로 설명해 보세요.</div></div>
+</section>
+<section class="activity" id="activity-c"><div class="activity-kicker">ACTIVITY C</div><h2>불량이 발생한 위치를 특성으로 만들기</h2>
+<h3>1. 불량의 개수만으로 충분할까?</h3>
+<p>불량률이 같아도 불량이 발생한 위치는 다를 수 있습니다. 예를 들어 불량률이 20%인 두 웨이퍼가 있다고 가정해 봅시다. 웨이퍼 A는 중앙에, 웨이퍼 B는 가장자리에 불량이 집중되어 있습니다. 두 웨이퍼의 불량률은 같지만 불량 패턴은 다릅니다.</p>
+<p>따라서 불량 칩의 개수뿐 아니라 <b>어느 위치에서 불량이 발생했는가</b>를 특성으로 표현할 필요가 있습니다.</p>
+<h3>2. 가장자리 영역을 정의하기</h3>
+<p>가장자리 불량률을 구하려면 먼저 웨이퍼의 어느 부분을 가장자리로 볼 것인지 결정해야 합니다. 이번 실습에서는 계산을 단순화하기 위해 다음 기준을 사용합니다.</p>
+<ol><li>유효 칩의 위치를 이용해 웨이퍼의 중심을 구합니다.</li><li>중심에서 각 칩까지의 거리를 계산합니다.</li><li>중심에서 가장 먼 유효 칩까지의 거리를 기준으로, 그 거리의 80% 이상인 영역을 가장자리로 정의합니다.</li></ol>
+<div class="callout note"><strong>영역 정의에 대한 주의</strong><p>이는 교육용으로 사용하는 단순화된 기준입니다. 실제 웨이퍼의 외곽을 정확하게 정의하는 방식과는 다를 수 있습니다.</p></div>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab <button class="copy-code" type="button" onclick="copyCode(this)">코드 복사</button></div><pre><code>def edge_defect_ratio(wafer_map):
+    wafer_map = np.asarray(wafer_map)
+
+    valid = wafer_map != 0
+    defect = wafer_map == 2
+
+    if not np.any(valid):
+        return 0.0
+
+    y, x = np.indices(wafer_map.shape)
+
+    # 유효 칩을 기준으로 중심 계산
+    cy = y[valid].mean()
+    cx = x[valid].mean()
+
+    # 중심에서 각 칩까지의 거리
+    distance = np.sqrt((y - cy)**2 + (x - cx)**2)
+
+    # 유효 칩 중 중심에서 가장 먼 거리
+    max_distance = distance[valid].max()
+
+    # 외곽 20% 영역을 가장자리로 정의
+    edge = valid &amp; (distance &gt;= max_distance * 0.8)
+
+    edge_count = np.sum(edge)
+
+    if edge_count == 0:
+        return 0.0
+
+    edge_defect_count = np.sum(defect &amp; edge)
+
+    return edge_defect_count / edge_count</code></pre></div>
+<p>이 함수는 가장자리로 정의한 <b>유효 칩 중 불량 칩의 비율</b>을 계산합니다. 전체 불량 중 가장자리 불량이 차지하는 비율과는 다릅니다.</p>
+<div class="question "><div class="qhead"><strong>Q15.</strong> </div><div class="qtext"><code>valid</code>, <code>defect</code>, <code>edge</code> 변수는 각각 어떤 칩의 위치를 나타내나요?</div></div>
+<div class="question is-required"><div class="qhead"><strong>Q16.</strong> <span class="required">필수 기록</span></div><div class="qtext"><code>max_distance * 0.8</code>에서 <code>0.8</code>을 <code>0.6</code>으로 변경하면 가장자리로 선택되는 영역은 어떻게 달라질까요?</div></div>
+<div class="question is-required"><div class="qhead"><strong>Q17.</strong> <span class="required">필수 기록</span></div><div class="qtext">가장자리 영역을 정의하는 기준이 바뀌면 계산된 특성값도 달라질까요? 그 이유를 설명해 보세요?</div></div>
+<h3>3. 가장자리 영역 확인하기</h3>
+<p>계산된 영역이 실제로 어떻게 생겼는지 확인해 보겠습니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab <button class="copy-code" type="button" onclick="copyCode(this)">코드 복사</button></div><pre><code>wafer = np.asarray(df.iloc[0][&#x27;waferMap&#x27;])
+
+valid = wafer != 0
+y, x = np.indices(wafer.shape)
+
+cy = y[valid].mean()
+cx = x[valid].mean()
+
+distance = np.sqrt((y - cy)**2 + (x - cx)**2)
+max_distance = distance[valid].max()
+
+edge = valid &amp; (distance &gt;= max_distance * 0.8)
+
+fig, axes = plt.subplots(1, 2, figsize=(10, 5))
+
+axes[0].imshow(wafer, cmap=wafer_cmap, vmin=0, vmax=2)
+axes[0].set_title(&#x27;Original Wafer Map&#x27;)
+
+axes[1].imshow(edge, cmap=&#x27;gray&#x27;)
+axes[1].set_title(&#x27;Selected Edge Region&#x27;)
+
+for ax in axes:
+    ax.axis(&#x27;off&#x27;)
+
+plt.tight_layout()
+plt.show()</code></pre></div>
+<p>두 이미지를 비교해 보세요.</p>
+<div class="question "><div class="qhead"><strong>Q18.</strong> </div><div class="qtext">선택된 가장자리 영역이 실제 웨이퍼맵에서 어떤 부분에 해당하는지 확인해 보세요.</div></div>
+<div class="question "><div class="qhead"><strong>Q19.</strong> </div><div class="qtext">이 방법이 모든 웨이퍼맵의 가장자리를 정확하게 표현할 수 있을까요? 한계가 있다면 무엇일까요?</div></div>
+<h3>4. 새로운 특성을 DataFrame에 추가하기</h3>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab <button class="copy-code" type="button" onclick="copyCode(this)">코드 복사</button></div><pre><code>df[&#x27;edge_ratio&#x27;] = df[&#x27;waferMap&#x27;].apply(edge_defect_ratio)
+
+display(
+    df[[&#x27;failureType_clean&#x27;,
+        &#x27;defect_ratio&#x27;,
+        &#x27;edge_ratio&#x27;]].head()
+)</code></pre></div>
+<p>이제 DataFrame에는 두 개의 특성이 추가되었습니다. <code>defect_ratio</code>는 전체 유효 칩 중 불량 칩의 비율, <code>edge_ratio</code>는 가장자리 유효 칩 중 불량 칩의 비율입니다.</p>
+<div class="question is-required"><div class="qhead"><strong>Q20.</strong> <span class="required">필수 기록</span></div><div class="qtext">두 특성은 모두 불량률을 계산하지만, 각각 어떤 정보를 표현하나요?</div></div>
+<div class="question "><div class="qhead"><strong>Q21.</strong> </div><div class="qtext"><code>edge_ratio</code>가 <code>defect_ratio</code>보다 훨씬 높다면 이 웨이퍼는 어떤 불량 분포를 가질 가능성이 있을까요?</div></div>
+</section>
+<section class="activity" id="activity-d"><div class="activity-kicker">ACTIVITY D</div><h2>두 특성으로 불량 패턴을 비교해 보자</h2>
+<h3>1. 두 특성의 관계 확인하기</h3>
+<p>추출한 두 특성을 산점도로 나타내 보겠습니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab <button class="copy-code" type="button" onclick="copyCode(this)">코드 복사</button></div><pre><code>plt.figure(figsize=(9, 7))
+
+sns.scatterplot(
+    data=df,
+    x=&#x27;defect_ratio&#x27;,
+    y=&#x27;edge_ratio&#x27;,
+    hue=&#x27;failureType_clean&#x27;,
+    alpha=0.35,
+    s=15
+)
+
+plt.title(&#x27;Wafer Defect Features&#x27;)
+plt.xlabel(&#x27;Defect Ratio&#x27;)
+plt.ylabel(&#x27;Edge Defect Ratio&#x27;)
+plt.legend(
+    title=&#x27;Failure Type&#x27;,
+    bbox_to_anchor=(1.05, 1),
+    loc=&#x27;upper left&#x27;
+)
+
+plt.tight_layout()
+plt.show()</code></pre></div>
+<p>산점도의 점 하나는 웨이퍼맵 하나를 의미합니다. 가로축은 전체 불량률, 세로축은 가장자리 불량률이며 색상은 불량 유형을 나타냅니다.</p>
+<div class="question "><div class="qhead"><strong>Q22.</strong> </div><div class="qtext">다른 유형과 비교했을 때 특정 영역에 집중되어 나타나는 불량 유형이 있나요?</div></div>
+<div class="question is-required"><div class="qhead"><strong>Q23.</strong> <span class="required">필수 기록</span></div><div class="qtext">여러 불량 유형이 겹쳐 있는 영역은 어디인가요? 이 영역에서 두 특성만으로 불량을 구분하기 어려운 이유를 설명해 보세요.</div></div>
+<div class="question "><div class="qhead"><strong>Q24.</strong> </div><div class="qtext">두 특성 중 어느 특성이 불량 유형을 구분하는 데 더 도움이 될 것 같나요? 그래프를 근거로 자신의 생각을 설명해 보세요.</div></div>
+<p>아직 모델을 학습하지 않았으므로 실제 분류 성능이 어느 정도인지 단정할 수는 없습니다. 지금은 특성값의 분포를 관찰하여 가설을 세우는 단계입니다.</p>
+<h3>2. 특정 불량 유형만 비교하기</h3>
+<p>전체 불량 유형이 한 그래프에 표시되면 복잡할 수 있습니다. 이번에는 두 유형만 선택해 비교해 보겠습니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab <button class="copy-code" type="button" onclick="copyCode(this)">코드 복사</button></div><pre><code>selected_types = [&#x27;Edge-Ring&#x27;, &#x27;Loc&#x27;]
+
+selected_df = df[
+    df[&#x27;failureType_clean&#x27;].isin(selected_types)
+]
+
+plt.figure(figsize=(8, 6))
+
+sns.scatterplot(
+    data=selected_df,
+    x=&#x27;defect_ratio&#x27;,
+    y=&#x27;edge_ratio&#x27;,
+    hue=&#x27;failureType_clean&#x27;,
+    alpha=0.4,
+    s=20
+)
+
+plt.title(&#x27;Feature Comparison&#x27;)
+plt.xlabel(&#x27;Defect Ratio&#x27;)
+plt.ylabel(&#x27;Edge Defect Ratio&#x27;)
+plt.show()</code></pre></div>
+<p><code>selected_types</code>의 값을 바꾸면 다른 불량 유형을 비교할 수 있습니다.</p>
+<div class="question "><div class="qhead"><strong>Q25.</strong> </div><div class="qtext"><code>selected_types</code>를 변경하여 구분하기 쉬워 보이는 유형 두 개와 구분하기 어려워 보이는 유형 두 개를 찾아보세요. 각 조합에서 어떤 차이가 나타나는지 설명해 보세요.</div></div>
+<h3>3. 새로운 특성 아이디어 생각하기</h3>
+<p>지금까지 불량의 개수와 위치를 이용해 두 가지 특성을 만들었습니다. 하지만 웨이퍼맵에는 더 많은 정보가 있습니다.</p>
+<div class="table-scroll"><table><thead><tr><th>특성 아이디어</th><th>확인하려는 정보</th><th>예상 난이도</th></tr></thead><tbody>
+<tr><td>상하 불량률 차이</td><td>위쪽과 아래쪽 중 어디에 불량이 많은가</td><td>쉬움</td></tr>
+<tr><td>좌우 불량률 차이</td><td>불량 분포가 좌우로 치우쳐 있는가</td><td>쉬움</td></tr>
+<tr><td>중앙 영역 불량률</td><td>중심 부근에 불량이 집중되어 있는가</td><td>보통</td></tr>
+<tr><td>불량 중심 좌표</td><td>불량 칩들의 평균 위치는 어디인가</td><td>보통</td></tr>
+<tr><td>최대 연결 불량 영역</td><td>서로 연결된 불량 칩이 얼마나 큰 영역을 이루는가</td><td>어려움</td></tr>
+<tr><td>불량 분포의 방향성</td><td>불량이 특정 방향으로 길게 이어지는가</td><td>어려움</td></tr>
+</tbody></table></div>
+<p>위의 후보 중 하나를 선택하거나 새로운 특성을 직접 제안해 보세요.</p>
+<div class="question is-required"><div class="qhead"><strong>Q26.</strong> <span class="required">필수 기록</span></div><div class="qtext"><b>나만의 특성 아이디어</b><ul><li>특성 이름:</li><li>어떤 정보를 숫자로 표현하는가?</li><li>어떤 불량 유형을 구분하는 데 도움이 될 것으로 예상하는가?</li><li>그렇게 예상한 이유는 무엇인가?</li><li>웨이퍼맵 배열에서 어떤 값을 계산하면 구현할 수 있을까?</li></ul>지금은 코드를 완성할 필요가 없습니다.</div></div>
+<p>다음 실습에서는 자신이 선택한 특성을 실제로 구현하고, 모델 성능에 어떤 영향을 주는지 확인하게 됩니다.</p>
+</section>
+<section id="wrapup"><h2>미션 01 결과 정리</h2>
+<p>이번 미션에서는 이미지로 변환하기 전의 웨이퍼맵 배열을 이용해 두 가지 특성을 추출했습니다.</p>
+<div class="table-scroll"><table><thead><tr><th>특성</th><th>계산 방법</th><th>표현하는 정보</th></tr></thead><tbody>
+<tr><td><code>defect_ratio</code></td><td>불량 칩 수 / 전체 유효 칩 수</td><td>웨이퍼 전체의 불량 정도</td></tr>
+<tr><td><code>edge_ratio</code></td><td>가장자리 불량 칩 수 / 가장자리 유효 칩 수</td><td>웨이퍼 외곽 영역의 불량 정도</td></tr>
+</tbody></table></div>
+<p>두 특성 모두 불량 칩의 비율을 계산하지만 서로 다른 정보를 표현합니다. 이제 특성을 추가한 DataFrame에서 필요한 열만 별도로 저장해 보겠습니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab <button class="copy-code" type="button" onclick="copyCode(this)">코드 복사</button></div><pre><code>feature_df = df[
+    [&#x27;failureType_clean&#x27;, &#x27;defect_ratio&#x27;, &#x27;edge_ratio&#x27;]
+].copy()
+
+display(feature_df.head())
+print(feature_df.shape)</code></pre></div>
+<p>필요하다면 결과를 pickle 파일로 저장할 수 있습니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab <button class="copy-code" type="button" onclick="copyCode(this)">코드 복사</button></div><pre><code>feature_df.to_pickle(
+    &#x27;/content/drive/MyDrive/wafer_features.pkl&#x27;
+)</code></pre></div>
+<div class="callout note"><strong>원본 데이터 보관</strong><p>저장한 파일에는 숫자 특성과 라벨만 포함됩니다. <code>waferMap</code> 배열은 포함되지 않으므로, 개인 특성공학 실습을 위해 <code>LSWMD_labeled.pkl</code> 파일도 계속 보관하세요.</p></div>
+<h3>완료 확인</h3>
+<label class="check"><input type="checkbox"> <span>LSWMD_labeled.pkl을 불러오고 데이터 구조를 확인했다.</span></label>
+<label class="check"><input type="checkbox"> <span>웨이퍼맵 배열의 값 0, 1, 2의 의미를 이해했다.</span></label>
+<label class="check"><input type="checkbox"> <span>전체 불량률을 계산하여 DataFrame에 추가했다.</span></label>
+<label class="check"><input type="checkbox"> <span>가장자리 불량률을 계산하여 DataFrame에 추가했다.</span></label>
+<label class="check"><input type="checkbox"> <span>두 특성의 분포를 그래프로 비교했다.</span></label>
+<label class="check"><input type="checkbox"> <span>자신이 추가하고 싶은 새로운 특성의 아이디어를 작성했다.</span></label>
+<h3>보고서에 기록할 내용</h3>
+<p>이번 미션에서 생성한 결과 중 다음 내용을 보관하세요. <b>모든 Q문항의 답을 보고서에 옮길 필요는 없습니다.</b></p>
+<ol><li>추출한 두 특성의 이름과 계산 방법</li><li>불량 유형별 불량률 분석 결과</li><li>두 특성의 관계를 나타낸 산점도와 해석</li><li>자신이 선택한 새로운 특성과 선택 이유</li></ol>
+<div class="callout feature"><strong>생각 정리</strong><p>CNN은 이미지로부터 특징을 학습하고, 특성공학은 사람이 데이터에서 유용한 정보를 선택하거나 만들어 냅니다. 두 방법 중 어느 것이 더 좋은지는 문제와 데이터에 따라 달라집니다. 중요한 것은 예상만으로 판단하지 않고 실제 실험을 통해 검증하는 것입니다.</p></div>
+</section></main><script>function copyCode(button){const code=button.closest('.code-wrap').querySelector('code').innerText;navigator.clipboard.writeText(code).then(()=>{button.textContent='복사 완료';setTimeout(()=>button.textContent='코드 복사',1500)}).catch(()=>{button.textContent='코드 선택 후 복사';});}</script></body></html>

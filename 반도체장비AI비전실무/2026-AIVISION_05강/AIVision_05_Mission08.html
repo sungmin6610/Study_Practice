@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>AI Vision 05 | Mission 08 시드 변경 실험</title><style>
+:root{--ink:#202a36;--muted:#627084;--line:#e2e8ee;--paper:#fff;--soft:#f5f8fb;--accent:#28668b;--code:#18222e}
+*{box-sizing:border-box}body{margin:0;background:#eef2f5;color:var(--ink);font:16px/1.75 system-ui,-apple-system,'Malgun Gothic','Apple SD Gothic Neo',sans-serif}main{max-width:860px;margin:32px auto;padding:45px 54px 64px;background:var(--paper);border:1px solid var(--line);border-radius:16px}header{padding-bottom:25px;border-bottom:2px solid #253b4d;margin-bottom:32px}.eyebrow{font-size:12px;font-weight:750;letter-spacing:.12em;color:var(--accent)}h1{font-size:29px;line-height:1.35;margin:10px 0 10px}h2{font-size:21px;line-height:1.4;margin:36px 0 14px}p{margin:10px 0}ul{padding-left:23px}li{margin:5px 0}.muted{color:var(--muted)}.goals{padding:16px 22px;background:var(--soft);border-left:3px solid var(--accent);border-radius:6px}.goals strong{display:block;margin-bottom:5px}table{width:100%;border-collapse:collapse;margin:15px 0 22px;font-size:14px}th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}th{background:var(--soft);font-weight:700}code{font-family:Consolas,'Courier New',monospace;font-size:.92em;background:#eef2f6;padding:1px 4px;border-radius:4px}.codebar{display:flex;justify-content:space-between;align-items:center;background:#263545;color:#e7f0f8;padding:9px 15px;border-radius:9px 9px 0 0;font-size:12px}.codebar button{border:1px solid #7891a8;background:transparent;color:white;border-radius:5px;padding:5px 12px;cursor:pointer;font:inherit}.codebar button:hover{background:#40566a}pre{margin:0 0 20px;padding:18px 20px;background:var(--code);color:#e9f0f7;border-radius:0 0 9px 9px;overflow:auto;line-height:1.7;font-size:14px}pre code{background:none;padding:0;color:inherit}.cm{color:#94ad9a}.str{color:#f7c58e}.num{color:#b3d6fa}.diagram{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:19px 0}.diagram>div{border:1px solid var(--line);border-radius:9px;padding:15px}.diagram strong{display:block;margin-bottom:8px}.diagram svg{display:block;width:100%;height:155px;background:#f5f7f9;border-radius:5px}.diagram p{font-size:13px;color:var(--muted);margin-bottom:0}.question{margin:13px 0;padding:15px 17px;background:var(--soft);border:1px solid var(--line);border-radius:8px}.question b{color:var(--accent)}.question p{margin:5px 0 0}.note{padding:13px 17px;border-left:3px solid #8ea9bb;background:var(--soft);border-radius:5px;font-size:14px}footer{margin-top:38px;border-top:1px solid var(--line);padding-top:15px;font-size:12px;color:var(--muted)}@media(max-width:680px){body{background:#fff}main{border:0;border-radius:0;padding:24px 20px;margin:0}h1{font-size:25px}h2{font-size:20px}.diagram{grid-template-columns:1fr}table{font-size:13px}th,td{padding:9px 7px}}
+
+.codebar button:focus-visible{outline:2px solid #fff;outline-offset:2px}.steps{padding:14px 18px;border-radius:8px;background:var(--soft);border:1px solid var(--line)}.steps ol{margin:4px 0;padding-left:22px}.mini{font-size:14px;color:var(--muted)}
+
+.flow{max-width:540px;margin:18px auto 22px;text-align:center}.flowbox{padding:12px 18px;border:1px solid var(--line);border-radius:8px;background:var(--soft);font-weight:650}.flowbox small{display:block;font-size:12px;font-weight:400;color:var(--muted)}.flowbox.accentbox{background:#e9f4fa;border:2px solid #6295b2;color:#174f72}.arrow{height:23px;line-height:23px;color:var(--accent);font-size:19px}.mini-diag{min-height:150px;padding:5px 0;font-size:12px}.mini-out{border:2px solid #62839c;border-radius:8px;padding:10px;background:#f3f8fb;font-weight:700}.mini-in{border:1px solid #88afc9;background:#e7f3fb;padding:10px;margin:8px 0;border-radius:6px}.mini-leaf{font-weight:500;background:#fff;border:1px solid #d5e2e9;padding:7px;margin-top:7px;border-radius:5px}.diagram>div{min-width:0}.question p{margin-top:5px}
+</style></head><body><main><header><div class="eyebrow">AI VISION LAB · 05 / STUDENT WORKBOOK</div><h1>Mission 08. 시드를 바꾸어 실험 다시 해보기</h1><p class="muted">이미지 데이터 증강과 재현 가능한 실험</p><div class="goals"><strong>학습 목표</strong><ul><li>데이터 분할을 유지한 상태에서 난수 시드를 바꾸어 CNN을 다시 학습할 수 있다.</li><li>서로 다른 시드로 학습한 모델의 성능을 공정한 기준으로 비교할 수 있다.</li><li>한 번의 학습 결과만으로 모델의 성능을 단정하기 어려운 이유를 설명할 수 있다.</li></ul></div></header>
+<section><h2>1. 같은 조건으로 학습하면 같은 결과가 나올까?</h2><p>Mission 07에서는 회전 범위를 바꾼 여러 CNN을 비교했다. 그런데 <strong>같은 회전 각도</strong>로 학습하더라도 난수 시드가 바뀌면 가중치 초기화, 이미지 증강 등 무작위 과정이 달라져 결과가 달라질 수 있다.</p><p>이번에는 <strong>회전 범위를 ±45°로 고정하고 난수 시드만 변경하는 실험</strong>을 진행한다. 정확도가 얼마나 달라지는지 확인하고, 한 번의 결과를 해석할 때 어떤 점을 조심해야 할지 생각해보자.</p>
+<div class="flow"><div class="flowbox">같은 데이터 분할 · 같은 CNN · 같은 회전 범위 (±45°)<small>IMG_SIZE · BATCH_SIZE · EPOCHS도 동일</small></div><div class="arrow">↓</div><div class="flowbox accentbox">실험할 난수 시드 변경<small>예: 42 → 123</small></div><div class="arrow">↓</div><div class="flowbox">모델 각각 저장 → 동일한 검증 데이터로 비교<small>정확도뿐 아니라 클래스별 변화도 살펴보기</small></div></div>
+<div class="note"><strong>구분하기:</strong> 시드 <code>42</code>는 ‘좋은 값’이나 정답이 아니다. 난수 생성의 출발점을 지정하는 숫자이며, 시드를 바꿔도 반드시 성능이 좋아지거나 나빠지는 것은 아니다.</div></section>
+<section><h2>2. 시드 변경으로 바뀌면 안 되는 것</h2><p>Mission 05에서 만든 <code>create_experiment_datasets()</code> 함수에는 <code>seed=SEED</code>가 들어 있다. 여기서 <code>SEED</code>를 바꾼 뒤 함수를 다시 실행하면, <strong>훈련·검증 데이터의 분할 자체가 달라질 수 있다.</strong></p><p>그렇게 되면 모델 초기화의 차이뿐 아니라 사용한 데이터의 차이도 함께 발생한다. 이번에는 먼저 <code>SEED=42</code>로 데이터를 준비하고, 그 데이터셋을 두 실험에 공통으로 사용하자.</p><div class="codebar"><span>PYTHON · 데이터 분할은 먼저 고정하기</span><button onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code># Mission 05의 함수가 정의되어 있어야 한다.
+# 데이터 분할에 사용할 시드는 42로 고정한다.
+SEED = 42
+keras.utils.set_random_seed(SEED)
+train_fixed, val_fixed = create_experiment_datasets()
+
+print("훈련 배치 수:", len(train_fixed))
+print("검증 배치 수:", len(val_fixed))</code></pre><div class="note">이 코드는 훈련·검증에 들어갈 <strong>원본 파일 구성</strong>을 고정하기 위한 것이다. <code>shuffle=True</code>인 훈련 데이터셋은 순회할 때 배치 순서가 달라질 수 있다. 따라서 시드를 바꾸는 이번 실험은 여러 무작위 효과를 함께 관찰하는 탐색 실험이며, 단일 요인의 인과효과를 엄밀하게 분리한 실험은 아니다.</div><div class="steps"><strong>실습 점검</strong><ol><li><code>create_experiment_datasets()</code>가 <code>SEED</code>를 어디에 사용하는지 찾아보자.</li><li>데이터를 먼저 고정한 뒤 학습 시드만 변경하면 어떤 조건을 일정하게 유지할 수 있을까?</li></ol></div></section>
+<section><h2>3. 새로운 시드로 CNN 다시 학습하기</h2><p>이번에는 <code>123</code>을 새로운 시드로 사용한다. <code>create_cnn_model()</code> 함수는 Mission 05에서 작성한 버전을 그대로 사용하며, 내부에서 전역 변수 <code>SEED</code>를 읽어 시드를 설정한다.</p><p>이미 Mission 06에서 저장한 <code>cnn_rotation_45.keras</code>는 시드 42로 학습한 기준 모델로 사용한다. <strong>새 모델은 다른 파일명으로 저장</strong>하여 덮어쓰지 않도록 한다.</p><div class="codebar"><span>PYTHON · 시드 123 · ±45° CNN 학습</span><button onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code># 바꾸는 조건: 모델 학습에 사용할 시드
+SEED = 123
+keras.utils.set_random_seed(SEED)
+
+# 회전 범위는 동일하게 ±45°
+model_seed123 = create_cnn_model(45)
+
+history_seed123 = model_seed123.fit(
+    train_fixed,
+    validation_data=val_fixed,
+    epochs=EPOCHS
+)
+
+# 저장 파일명에 시드를 포함한다.
+# 기존 시드 42 모델을 덮어쓰지 않도록 파일명에 시드를 기록한다.
+new_model_file = MODEL_DIR + "cnn_rotation_45_seed_123.keras"
+model_seed123.save(new_model_file)
+print("저장 완료:", new_model_file)</code></pre><p><code>fit()</code>의 <code>train_fixed</code>, <code>val_fixed</code>는 앞에서 준비한 데이터셋이다. 새 시드로 <strong>데이터셋 생성 함수를 다시 호출하지 않는 것</strong>이 이번 코드의 핵심이다.</p><p class="mini">실습 환경이 초기화되었다면 Mission 05의 함수 정의, Mission 06의 <code>MODEL_DIR</code>, <code>IMG_SIZE</code>, <code>BATCH_SIZE</code>, <code>EPOCHS</code>, <code>class_names</code>를 먼저 실행해야 한다.</p>
+<div class="steps"><strong>선택 실험</strong><ol><li>학습 시간이 허용된다면 <code>SEED = 2026</code> 등 다른 시드로 한 번 더 학습해보자.</li><li>모델 파일명에도 해당 시드를 기록하자. 예: <code>cnn_rotation_45_seed_2026.keras</code></li></ol></div></section>
+<section><h2>4. 시드가 다른 모델을 같은 기준으로 평가하기</h2><p>비교할 데이터도 같아야 한다. 이번 미션에서는 동일한 <code>val_fixed</code>를 사용해 두 모델의 <strong>검증 정확도</strong>를 비교한다. 실험 조건을 선택하기 위한 비교에서는 검증 데이터를 활용하고, 테스트 데이터는 최종 평가에 남겨두는 것이 원칙이다.</p><div class="codebar"><span>PYTHON · 저장된 모델로 검증 정확도 비교</span><button onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code>import pandas as pd
+
+# Mission 06의 시드 42 기준 모델과 이번 시드 123 모델
+model_files = {
+    42: MODEL_DIR + "cnn_rotation_45.keras",
+    123: MODEL_DIR + "cnn_rotation_45_seed_123.keras"
+}
+
+seed_results = []
+
+for seed, filename in model_files.items():
+    model_exp = keras.models.load_model(filename)
+    loss, accuracy = model_exp.evaluate(val_fixed, verbose=0)
+
+    seed_results.append({
+        "시드": seed,
+        "회전 범위": "±45°",
+        "검증 정확도": accuracy,
+        "검증 손실": loss
+    })
+
+seed_df = pd.DataFrame(seed_results)
+display(seed_df.round(4))</code></pre><div class="note"><strong>비교 조건 확인:</strong> 기준 모델이 실제로 시드 42와 같은 데이터 분할 조건에서 학습되었는지 Mission 06 코드를 확인하자. 다른 데이터 분할로 학습한 모델을 비교하면 해석이 달라진다.</div>
+<div class="steps"><strong>결과 기록</strong><ol><li>두 시드의 검증 정확도를 비교하여 차이를 기록한다.</li><li>차이가 작거나 동일한 경우에도 학습이 반드시 똑같이 진행되었다고 단정할 수 있을까?</li><li>차이가 크다면 회전 각도 효과와 시드에 따른 학습 변동성을 어떻게 구분해야 할까?</li></ol></div></section>
+<section><h2>5. 같은 시드로 다시 실행하면 어떨까?</h2><p>이번 미션에서는 <strong>서로 다른 시드</strong>로 학습해 보았다. 반대로 시드를 같게 두고 처음부터 다시 학습하면 동일한 결과가 나와야 할까?</p><table><thead><tr><th>비교</th><th>실험 조건</th><th>무엇을 확인할까?</th></tr></thead><tbody><tr><td><strong>시드 변경</strong></td><td>회전 ±45° 유지, 시드 42와 123</td><td>무작위 조건에 따른 결과의 변동</td></tr><tr><td><strong>같은 시드 재실행</strong></td><td>회전 ±45°와 시드 42 모두 유지</td><td>동일 환경에서 결과가 얼마나 재현되는지</td></tr></tbody></table><p>같은 시드를 사용하더라도 GPU 연산, 데이터 파이프라인의 실행 상태, 소프트웨어 환경에 따라 결과가 완전히 같지 않을 수 있다. 따라서 <strong>시드 고정은 재현성을 높이는 방법이지 모든 실행 결과를 보장하는 마법의 숫자는 아니다.</strong></p><div class="note">가능하면 동일한 설정을 여러 시드에서 반복하고, 정확도의 평균과 변동 범위를 함께 살펴보면 우연히 좋았던 한 번의 결과에 지나치게 의존하지 않을 수 있다.</div></section>
+<section><h2>6. 코드 이해 및 실험 결과 분석</h2><div class="question"><b>Q8.1.</b><p>이번 실험에서 회전 각도, CNN 구조, 에포크를 동일하게 유지하고 <code>SEED</code>만 바꾼 이유를 설명하시오.</p></div><div class="question"><b>Q8.2.</b><p><code>create_experiment_datasets()</code>를 <code>SEED=123</code>으로 다시 호출하면 어떤 조건이 달라질 수 있는가? 함수 안에서 근거가 되는 코드를 찾으시오.</p></div><div class="question"><b>Q8.3.</b><p><code>cnn_rotation_45.keras</code>와 <code>cnn_rotation_45_seed_123.keras</code>를 서로 다른 이름으로 저장한 이유를 설명하시오.</p></div><div class="question"><b>Q8.4.</b><p>시드 42와 시드 123 모델의 검증 정확도 및 차이를 기록하시오. 정확도가 더 높은 시드가 언제나 더 좋은 시드라고 말할 수 있는가?</p></div><div class="question"><b>Q8.5.</b><p>시드 42를 다시 설정하고 같은 회전 범위로 모델을 재학습한다면, 어떤 결과를 예상하는가? 예측한 이유를 작성하시오.</p></div><div class="question"><b>Q8.6.</b><p>회전 범위 ±45° 모델이 한 번의 실험에서 ±15° 모델보다 높은 정확도를 기록했다. 이것만으로 ±45°가 더 우수하다고 결론 내리기 어려운 이유를 이번 실험과 연결하여 설명하시오.</p></div></section><footer>AI Vision Lab · Mission 08 · 학생용 워크북</footer></main><script>function copyCode(button){const code=button.closest('.codebar').nextElementSibling.innerText;const reset=()=>button.textContent='코드 복사';const fallback=()=>{const ta=document.createElement('textarea');ta.value=code;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');button.textContent='복사 완료'}catch(e){button.textContent='복사 불가'}ta.remove();setTimeout(reset,1500)};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(code).then(()=>{button.textContent='복사 완료';setTimeout(reset,1500)}).catch(fallback)}else{fallback()}}</script></body></html>

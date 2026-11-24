@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>AI비전실무 6~7강 · 미션02 특성 추가 전후 성능 비교</title><style>
+:root{--ink:#243342;--sub:#566679;--line:#dbe3ea;--accent:#277c82;--accent-dark:#185960;--paper:#fff;--muted:#f3f7f8;--code:#152431;--coral:#b45c38}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#e9eff2;color:var(--ink);font-family:'Pretendard','Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:15px;line-height:1.82;word-break:keep-all}
+.page{max-width:940px;min-height:100vh;margin:24px auto 50px;background:var(--paper);box-shadow:0 12px 48px #24334219;padding:0 60px 76px}.hero{margin:0 -60px;padding:68px 60px 52px;color:#f8fcfc;background:linear-gradient(120deg,#133e4b,#286e78 78%,#3b8d8d)}.eyebrow{font-size:12px;letter-spacing:2.1px;font-weight:700;opacity:.83}.hero-number{font-size:13px;letter-spacing:2.5px;margin-top:44px;font-weight:800;color:#bfe4db}.hero h1{font-size:42px;line-height:1.32;font-weight:800;letter-spacing:-1.4px;margin:8px 0 18px}.lead{font-size:17px;opacity:.9;margin-bottom:30px}.meta{display:flex;gap:9px;flex-wrap:wrap}.meta span{font-size:12px;border:1px solid #ffffff66;border-radius:20px;padding:5px 12px}
+.toc{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:28px 0 42px;padding:12px 16px;border:1px solid var(--line);border-radius:10px;font-size:12px}.toc a{padding:2px 7px;text-decoration:none;color:var(--accent-dark)}.toc a:hover{text-decoration:underline}
+section{padding:25px 0 22px;border-bottom:1px solid var(--line)}h2{font-size:24px;line-height:1.42;letter-spacing:-.6px;color:#183944;margin:16px 0 20px;break-after:avoid}h3{font-size:17px;line-height:1.5;margin:32px 0 13px;break-after:avoid}p{margin:13px 0}ul,ol{padding-left:25px;margin:13px 0}li{margin:5px 0}strong,b{font-weight:750}code{font-family:'D2Coding','Cascadia Code','Consolas',monospace;word-break:break-word;font-size:.9em;background:#eef3f6;border-radius:4px;padding:1px 4px}
+.activity{margin-top:30px}.activity-kicker{letter-spacing:2px;color:var(--accent);font-size:12px;font-weight:800;margin-top:5px}.activity>h2{margin-top:4px}
+.callout{border-left:4px solid #91afb3;background:#f2f7f7;border-radius:0 9px 9px 0;padding:15px 18px;margin:22px 0}.callout p{margin:3px 0 0}.callout.feature{border-color:var(--accent);background:#eaf6f4}.callout.guide{border-color:#be9d60;background:#fbf7ed}.required{display:inline-block;background:#e5f2ed;color:#23735b;font-size:11px;line-height:1.6;padding:2px 8px;border-radius:20px;font-weight:800;vertical-align:middle;white-space:nowrap}
+.table-scroll{max-width:100%;overflow-x:auto;margin:18px 0 25px}table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.6}thead{background:#e9f0f2}th,td{padding:11px 12px;border-bottom:1px solid #dce5e9;text-align:left;vertical-align:top}th{font-weight:750;color:#294651}tbody tr:nth-child(even){background:#f8fafb}
+.code-wrap{border-radius:9px;overflow:hidden;margin:19px 0 18px;background:var(--code);break-inside:avoid-page}.code-label{color:#b9d0d4;border-bottom:1px solid #ffffff22;display:flex;align-items:center;gap:8px;padding:7px 14px;font:12px system-ui,sans-serif}.dot{height:7px;width:7px;background:#6db4a8;border-radius:50%}.copy-code{margin-left:auto;font-size:11px;color:#d4e8e6;border:1px solid #6e8a91;background:transparent;border-radius:4px;padding:4px 9px;cursor:pointer}.copy-code:hover{background:#ffffff1a}pre{margin:0;padding:17px 19px;overflow-x:auto;color:#eaf1f3;font-size:12.5px;line-height:1.64;tab-size:4}pre code{font-size:inherit;color:inherit;padding:0;background:transparent;border-radius:0;white-space:pre;word-break:normal}
+.explain{background:#f5f8fa;border-radius:8px;padding:12px 18px;margin:18px 0}.explain ul{margin:4px 0}.question{margin:12px 0;padding:12px 16px;background:#fafbfc;border:1px solid #e2e8ec;border-radius:8px;break-inside:avoid}.question.is-required{border-left:4px solid #469d82;background:#f4faf7}.qhead{display:flex;align-items:center;gap:9px;margin-bottom:3px}.qhead strong{color:#216f77;font-size:14px}.qtext{font-size:14px}.qtext ul{margin:5px 0 0}.formula{background:#f2f6f7;padding:16px 20px;text-align:center;border:1px solid var(--line);font-weight:750;border-radius:7px;margin:16px 0}.check{display:flex;align-items:baseline;gap:9px;margin:9px 0;break-inside:avoid}.check input{accent-color:#277c82}.check span{flex:1}
+@media(max-width:720px){body{background:white;font-size:14px}.page{margin:0;box-shadow:none;padding:0 22px 45px}.hero{margin:0 -22px;padding:50px 22px 40px}.hero h1{font-size:33px}h2{font-size:21px}pre{font-size:11px}.toc{gap:6px}.meta{gap:6px}}
+@page{size:A4;margin:15mm 13mm 16mm 13mm}
+@media print{html{scroll-behavior:auto}body{background:white;font-size:10pt;line-height:1.58;-webkit-print-color-adjust:exact;print-color-adjust:exact}.page{margin:0;max-width:100%;padding:0;box-shadow:none}.hero{margin:0 0 12mm;padding:16mm 12mm;background:#17515c!important}.hero h1{font-size:27pt}.hero-number{margin-top:13mm}.lead{font-size:12pt}.meta span{font-size:8pt}.no-print,.copy-code{display:none!important}section{padding:5mm 0 3mm}h2{font-size:17pt}h3{font-size:12pt}p,li{orphans:3;widows:3}.code-wrap{break-inside:avoid-page}pre{font-size:8.4pt;padding:11px 13px;white-space:pre-wrap;overflow:visible;overflow-wrap:anywhere}table{font-size:9pt}th,td{padding:7px 8px}.question{padding:8px 11px;margin:8px 0;break-inside:avoid}.qtext{font-size:9.5pt}.callout{break-inside:avoid}.table-scroll{overflow:visible}.activity{break-before:page}.activity h2{margin-top:0}}
+
+@media print{section.activity{break-before:auto} section.activity>h2{break-before:page} .copy-code{display:none!important}}</style></head><body><main class="page"><header class="hero"><div class="eyebrow">AI VISION LAB · 6–7강 통합 프로젝트</div><div class="hero-number">MISSION 02</div><h1>특성 추가 전후의<br/>모델 성능 비교하기</h1><p class="lead">새 특성 하나가 모델의 판단을 얼마나 바꿀까?</p><div class="meta"><span>권장 학습 시간 · 약 3~4시간</span><span>실습 환경 · Google Colab</span><span>데이터 · wafer_features.pkl</span></div></header><nav class="toc no-print"><strong>바로 이동</strong><a href="#intro">학습 목표</a><a href="#concept">재현성</a><a href="#activity-a">활동 A</a><a href="#activity-b">활동 B</a><a href="#activity-c">활동 C</a><a href="#activity-d">활동 D</a><a href="#wrapup">결과 정리</a><a href="#complete">완료 확인</a></nav><section id="intro"><h2>이번 미션에서 해결할 문제</h2>
+<p>미션 01에서는 웨이퍼맵 배열에서 두 가지 특성을 추출했습니다.</p>
+<ul>
+<li><strong>defect_ratio:</strong> 전체 유효 칩 중 불량 칩의 비율</li>
+<li><strong>edge_ratio:</strong> 가장자리 유효 칩 중 불량 칩의 비율</li>
+</ul>
+<p>두 특성은 모두 불량과 관련된 정보를 나타내지만 서로 다른 특징을 표현합니다.</p>
+<p>그렇다면 새로운 특성을 추가하면 분류 모델의 성능이 실제로 좋아질까요?</p>
+<p>특성이 많아질수록 항상 성능이 좋아지는 것은 아닙니다. 추가한 특성이 기존 특성과 비슷한 정보를 제공하거나, 불량 유형을 구분하는 데 별 도움이 되지 않을 수도 있습니다.</p>
+<p>이번 미션에서는 동일한 분류 모델을 두 번 학습시킵니다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>기준 모델 A</th>
+<th>비교 모델 B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>입력 특성</td>
+<td>defect_ratio</td>
+<td>defect_ratio + edge_ratio</td>
+</tr>
+<tr>
+<td>분류 알고리즘</td>
+<td>RandomForest</td>
+<td>RandomForest</td>
+</tr>
+<tr>
+<td>학습·테스트 데이터</td>
+<td>동일</td>
+<td>동일</td>
+</tr>
+<tr>
+<td>난수 시드</td>
+<td>42</td>
+<td>42</td>
+</tr>
+<tr>
+<td>평가 지표</td>
+<td>Accuracy, Macro F1</td>
+<td>Accuracy, Macro F1</td>
+</tr>
+</tbody>
+</table>
+<p>두 실험의 차이는 <strong>edge_ratio 특성의 추가 여부</strong>입니다.</p>
+<p>이번 미션을 완료하면 다음을 할 수 있습니다.</p>
+<ul>
+<li>실험 조건을 통제해야 하는 이유를 설명할 수 있습니다.</li>
+<li>난수 시드를 고정하고 동일한 데이터를 사용해 모델을 비교할 수 있습니다.</li>
+<li>특성 추가 전후의 정확도와 Macro F1-score를 비교할 수 있습니다.</li>
+<li>혼동행렬을 이용해 어떤 불량 유형에서 성능이 달라졌는지 분석할 수 있습니다.</li>
+<li>실험 결과를 바탕으로 새로운 특성의 유용성을 판단할 수 있습니다.</li>
+</ul>
+<blockquote>
+<p><strong>질문과 보고서 안내:</strong> 모든 질문에 대한 답을 보고서에 포함할 필요는 없습니다. <strong>[필수 기록]</strong> 질문은 실습 중 답을 남겨 두고, 최종 보고서에는 실험 결과와 분석을 중심으로 정리하세요.</p>
+</blockquote>
+
+</section><section id="concept"><h2>알아두기. 공정한 실험과 재현성</h2>
+<h3>1. 무엇을 비교하고 있는가?</h3>
+<p>샤인머스켓 농장에서 포도의 당도를 높이는 방법을 연구한다고 가정해 봅시다.</p>
+<p>농장에서는 포도의 당도에 여러 요소가 영향을 미칠 수 있다고 생각하고 있습니다.</p>
+<ul>
+<li><strong>영양제:</strong> 특정 영양제를 사용하면 당도가 높아질까?</li>
+<li><strong>온도:</strong> 비닐하우스의 온도가 당도에 영향을 줄까?</li>
+<li><strong>물의 양:</strong> 물을 많이 주거나 적게 주면 당도가 달라질까?</li>
+</ul>
+<p>농장에서는 새로운 영양제의 효과를 확인하기 위해 두 구역에서 샤인머스켓을 재배했습니다.</p>
+<table>
+<thead>
+<tr>
+<th>조건</th>
+<th>재배 구역 A</th>
+<th>재배 구역 B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>영양제</td>
+<td>사용하지 않음</td>
+<td>사용함</td>
+</tr>
+<tr>
+<td>비닐하우스 온도</td>
+<td>25℃</td>
+<td>30℃</td>
+</tr>
+<tr>
+<td>하루 물 공급량</td>
+<td>2L</td>
+<td>3L</td>
+</tr>
+<tr>
+<td>수확한 포도의 당도</td>
+<td>17 Brix</td>
+<td>20 Brix</td>
+</tr>
+</tbody>
+</table>
+<p>재배 구역 B에서 수확한 포도의 당도가 더 높았습니다.</p>
+<p><strong>그렇다면 영양제 덕분에 당도가 3 Brix 높아졌다고 결론 내릴 수 있을까요?</strong></p>
+<p>그렇게 판단하기는 어렵습니다. 영양제뿐 아니라 온도와 물의 양도 달랐기 때문입니다.</p>
+<p>영양제의 효과를 확인하려면 두 구역의 온도와 물 공급량 등 다른 조건을 가능한 한 동일하게 유지하고, <strong>영양제 사용 여부만 다르게 설정</strong>해야 합니다.</p>
+<p>머신러닝 실험도 마찬가지입니다.</p>
+<p>이번 실습에서는 새로운 특성인 <code>edge_ratio</code>를 추가했을 때 분류 성능이 어떻게 달라지는지 확인하려고 합니다.</p>
+<p>따라서 다음 조건을 동일하게 유지합니다.</p>
+<ul>
+<li>같은 데이터를 사용합니다.</li>
+<li>학습 데이터와 테스트 데이터를 동일하게 나눕니다.</li>
+<li>같은 분류 알고리즘을 사용합니다.</li>
+<li>모델의 하이퍼파라미터를 동일하게 설정합니다.</li>
+<li>난수 시드를 고정합니다.</li>
+<li>같은 평가 지표로 결과를 비교합니다.</li>
+</ul>
+<p><strong>이번 실험에서 달라지는 것은 <code>edge_ratio</code> 특성의 추가 여부뿐입니다.</strong></p>
+<p>이처럼 비교하려는 요소를 제외한 다른 조건을 통제하면, 실험 결과의 차이를 해석하기가 더 쉬워집니다.</p>
+<h3>2. 재현성과 난수 시드</h3>
+<p>머신러닝에서는 데이터를 무작위로 섞거나 모델을 학습할 때 난수가 사용되는 경우가 많습니다.</p>
+<p>난수 시드(Random Seed)는 난수 생성 과정을 일정하게 만드는 데 사용하는 시작값입니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">RANDOM_STATE = 42
+</code></pre></div>
+<p>여기서 42라는 숫자 자체에 특별한 의미는 없습니다. 중요한 것은 <strong>비교하는 실험에서 동일한 시드를 사용한다는 점</strong>입니다.</p>
+<p>단, 시드 고정만으로 모든 환경에서 완전히 같은 결과가 보장되는 것은 아닙니다. 사용하는 알고리즘, 라이브러리 버전, 실행 환경도 영향을 줄 수 있습니다.</p>
+<p>이번 실습에서는 동일한 Colab 환경에서 같은 데이터와 모델 설정을 유지하면서 실험합니다.</p>
+<div class="question"><div class="qhead"><strong>Q1.</strong></div><div class="qtext"> 모델 A와 B를 비교할 때 서로 다른 학습 데이터를 사용한다면, 성능 차이를 새로운 특성의 효과라고 판단하기 어려운 이유는 무엇인가요?</div></div>
+<div class="question"><div class="qhead"><strong>Q2.</strong></div><div class="qtext"> 난수 시드를 고정하는 것만으로 두 실험의 조건이 완전히 같아질까요? 추가로 유지해야 할 조건을 두 가지 이상 생각해 보세요.</div></div>
+
+</section><section class="activity" id="activity-a"><h2>활동 A. 실험 데이터와 기준 모델 준비하기</h2>
+<h3>1. 미션 01의 결과 불러오기</h3>
+<p>미션 01에서 저장한 <code>wafer_features.pkl</code> 파일을 사용합니다.</p>
+<p>이 파일에는 각 웨이퍼맵에서 추출한 특성과 불량 유형이 저장되어 있습니다.</p>
+<p>Colab을 새로 실행했다면 Google Drive를 먼저 마운트하세요.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">from google.colab import drive
+drive.mount('/content/drive')
+</code></pre></div>
+<p>이제 데이터를 불러옵니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+file_path = '/content/drive/MyDrive/wafer_features.pkl'
+
+df = pd.read_pickle(file_path)
+
+display(df.head())
+print("데이터 크기:", df.shape)
+</code></pre></div>
+<p>실습을 시작하기 전에 다음 세 열이 있는지 확인하세요.</p>
+<ul>
+<li><code>failureType_clean</code></li>
+<li><code>defect_ratio</code></li>
+<li><code>edge_ratio</code></li>
+</ul>
+<p>미션 01에서 직접 생성한 파일이므로 별도의 전처리 과정을 반복하지 않고 바로 사용합니다.</p>
+<p>다음 코드를 실행하여 두 특성의 값이 어떤 범위에 분포하는지 확인해 보세요.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">print("불량률 범위:")
+print(df['defect_ratio'].min(), df['defect_ratio'].max())
+
+print("가장자리 불량률 범위:")
+print(df['edge_ratio'].min(), df['edge_ratio'].max())
+</code></pre></div>
+<p>두 특성 모두 유효 칩 중 불량 칩이 차지하는 <strong>비율</strong>을 계산한 값입니다.</p>
+<p>따라서 계산 결과는 0 이상 1 이하의 범위에 있어야 합니다.</p>
+<ul>
+<li>0은 해당 영역에 불량 칩이 없다는 의미입니다.</li>
+<li>1은 해당 영역의 모든 유효 칩이 불량이라는 의미입니다.</li>
+<li>0.25는 해당 영역의 유효 칩 중 25%가 불량이라는 의미입니다.</li>
+</ul>
+<div class="question"><div class="qhead"><strong>Q3.</strong></div><div class="qtext"> 두 특성의 최솟값과 최댓값을 확인해 보세요. 예상한 범위에 들어 있나요? 두 특성의 최댓값이 서로 다르다면 어떤 이유 때문일까요?</div></div>
+<h3>2. 입력 특성과 정답 라벨 구분하기</h3>
+<p>머신러닝 모델을 학습시키려면 입력 데이터 X와 정답 데이터 y를 구분해야 합니다.</p>
+<p>이번 실험에서는 다음과 같이 사용합니다.</p>
+<ul>
+<li><strong>X:</strong> 웨이퍼맵에서 추출한 숫자 특성</li>
+<li><strong>y:</strong> 불량 유형인 <code>failureType_clean</code></li>
+</ul>
+<p>기준 모델 A는 불량률 하나만 입력받습니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">X_A = df[['defect_ratio']]
+y = df['failureType_clean']
+
+print("X_A 크기:", X_A.shape)
+print("y 크기:", y.shape)
+
+display(X_A.head())
+</code></pre></div>
+<p><code>X_A</code>를 만들 때 대괄호를 두 번 사용한 이유는 입력 데이터를 DataFrame 형태로 유지하기 위해서입니다.</p>
+<p><code>defect_ratio</code>는 하나의 특성이지만, 머신러닝에서는 여러 행과 여러 특성으로 이루어진 2차원 입력 구조를 사용합니다.</p>
+<div class="question"><div class="qhead"><strong>Q4.</strong></div><div class="qtext"> <code>X_A.shape</code>와 <code>y.shape</code>를 비교해 보세요. 두 데이터의 샘플 수가 같아야 하는 이유는 무엇인가요?</div></div>
+<h3>3. 학습 데이터와 테스트 데이터 분리하기</h3>
+<p>이제 데이터를 학습용과 테스트용으로 나눕니다.</p>
+<p>이번 실습에서는 전체 데이터의 80%를 학습에 사용하고, 20%를 테스트에 사용합니다.</p>
+<p>또한 클래스별 데이터 비율을 가능한 한 유지하기 위해 <code>stratify</code> 옵션을 사용합니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">from sklearn.model_selection import train_test_split
+
+RANDOM_STATE = 42
+
+train_idx, test_idx = train_test_split(
+    np.arange(len(df)),
+    test_size=0.2,
+    random_state=RANDOM_STATE,
+    stratify=y
+)
+
+X_A_train = X_A.iloc[train_idx]
+X_A_test = X_A.iloc[test_idx]
+
+y_train = y.iloc[train_idx]
+y_test = y.iloc[test_idx]
+
+print("학습 데이터:", X_A_train.shape)
+print("테스트 데이터:", X_A_test.shape)
+</code></pre></div>
+<p>이번에는 데이터를 직접 분할하지 않고 <strong>행의 위치를 나타내는 인덱스</strong>를 먼저 분할했습니다.</p>
+<p>이렇게 하면 나중에 새로운 특성을 추가하더라도 같은 행을 학습용과 테스트용으로 사용할 수 있습니다.</p>
+<p>이 방법은 이번 비교 실험의 중요한 장치입니다.</p>
+<div class="question is-required"><div class="qhead"><strong>Q5.</strong><span class="required">필수 기록</span></div><div class="qtext"> 이번 코드에서 <code>random_state</code>와 <code>stratify</code>는 각각 어떤 역할을 하나요? 또한 데이터를 직접 분할하는 대신 행 인덱스를 저장한 이유를 설명해 보세요.</div></div>
+<h3>4. 기준 모델 A 학습하기</h3>
+<p>이번 실습에서는 RandomForest 분류 모델을 사용합니다.</p>
+<p>RandomForest는 여러 개의 결정트리를 만들어 각 트리의 예측을 종합하는 머신러닝 알고리즘입니다.</p>
+<p>복잡한 수학적 계산 과정을 이해할 필요는 없습니다. 이번 미션에서는 알고리즘의 내부 구조보다 <strong>입력 특성이 바뀌었을 때 결과가 어떻게 달라지는지</strong>에 집중합니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, f1_score
+
+model_A = RandomForestClassifier(
+    n_estimators=100,
+    random_state=RANDOM_STATE,
+    n_jobs=-1
+)
+
+model_A.fit(X_A_train, y_train)
+
+pred_A = model_A.predict(X_A_test)
+
+acc_A = accuracy_score(y_test, pred_A)
+f1_A = f1_score(y_test, pred_A, average='macro')
+
+print(f"기준 모델 A 정확도: {acc_A:.4f}")
+print(f"기준 모델 A Macro F1: {f1_A:.4f}")
+</code></pre></div>
+<p><code>n_estimators=100</code>은 결정트리 100개를 사용한다는 의미입니다.</p>
+<p><code>n_jobs=-1</code>은 사용 가능한 CPU 코어를 병렬로 활용하도록 지정합니다.</p>
+<h3>5. Accuracy와 Macro F1-score</h3>
+<p><strong>Accuracy(정확도)</strong>는 전체 예측 중 올바르게 분류한 비율입니다.</p>
+<p>하지만 현재 데이터에는 클래스 불균형이 존재합니다.</p>
+<p>예를 들어 Edge-Ring은 9,680개이지만 Near-full은 149개뿐입니다.</p>
+<p>이러한 데이터에서는 샘플 수가 많은 유형을 잘 분류하는 모델이 전체 정확도에서 높은 점수를 받을 수 있습니다.</p>
+<p>앞선 실습에서는 Precision(정밀도)과 Recall(재현율)을 각각 확인했습니다.</p>
+<ul>
+<li><strong>Precision:</strong> 해당 클래스로 예측한 샘플 중 실제로 맞힌 비율</li>
+<li><strong>Recall:</strong> 실제 해당 클래스인 샘플 중 올바르게 찾아낸 비율</li>
+</ul>
+<p>그런데 두 지표 중 하나만 높다고 해서 좋은 분류 모델이라고 판단하기는 어렵습니다.</p>
+<p>예를 들어 어떤 모델이 특정 불량 유형을 매우 신중하게 예측한다면 정밀도는 높을 수 있지만, 실제 불량을 많이 놓쳐 재현율이 낮을 수 있습니다.</p>
+<p><strong>F1-score는 정밀도와 재현율을 함께 고려하기 위한 지표</strong>입니다. 두 값의 조화평균을 계산하므로 어느 한쪽이 지나치게 낮으면 F1-score도 낮아집니다.</p>
+<p>이번 실습에서 사용하는 Macro F1-score는 각 불량 유형의 F1-score를 계산한 뒤 단순 평균한 값입니다.</p>
+<p>각 클래스를 동일한 비중으로 반영하므로 데이터가 적은 클래스의 성능도 살펴볼 수 있습니다.</p>
+<p>Accuracy와 Macro F1-score는 모두 0에서 1 사이의 값을 가지며, 일반적으로 값이 클수록 분류 성능이 좋다는 의미입니다.</p>
+<div class="question"><div class="qhead"><strong>Q6.</strong></div><div class="qtext"> 모델의 정확도가 높지만 Macro F1-score가 낮다면 어떤 상황일 가능성이 있을까요?</div></div>
+
+</section><section class="activity" id="activity-b"><h2>활동 B. 새로운 특성을 추가하고 성능 비교하기</h2>
+<h3>1. 비교 모델 B 만들기</h3>
+<p>기준 모델 A에서는 <code>defect_ratio</code> 하나만 사용했습니다.</p>
+<p>이번에는 <code>edge_ratio</code>를 추가하겠습니다.</p>
+<p>두 모델의 차이는 입력 특성의 개수입니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">X_B = df[['defect_ratio', 'edge_ratio']]
+
+X_B_train = X_B.iloc[train_idx]
+X_B_test = X_B.iloc[test_idx]
+
+print("기준 모델 입력:", X_A_train.shape)
+print("비교 모델 입력:", X_B_train.shape)
+</code></pre></div>
+<p>이때 <code>train_idx</code>와 <code>test_idx</code>를 새로 생성하지 않고 활동 A에서 만든 값을 그대로 사용했습니다.</p>
+<p>따라서 모델 A와 B는 동일한 웨이퍼 샘플로 학습하고 평가합니다.</p>
+<h3>2. 모델 B 학습하기</h3>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">model_B = RandomForestClassifier(
+    n_estimators=100,
+    random_state=RANDOM_STATE,
+    n_jobs=-1
+)
+
+model_B.fit(X_B_train, y_train)
+
+pred_B = model_B.predict(X_B_test)
+
+acc_B = accuracy_score(y_test, pred_B)
+f1_B = f1_score(y_test, pred_B, average='macro')
+
+print(f"비교 모델 B 정확도: {acc_B:.4f}")
+print(f"비교 모델 B Macro F1: {f1_B:.4f}")
+</code></pre></div>
+<p>모델 A와 B에서 동일한 알고리즘과 하이퍼파라미터를 사용했는지 확인하세요.</p>
+<div class="question"><div class="qhead"><strong>Q7.</strong></div><div class="qtext"> 두 모델의 코드에서 서로 다른 부분을 찾아보세요. 그 차이가 이번 실험에서 어떤 의미를 갖나요?</div></div>
+<h3>3. 성능 비교표 만들기</h3>
+<p>이제 두 모델의 결과를 하나의 표로 정리하겠습니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">results = pd.DataFrame({
+    'Model': ['A: Defect Ratio',
+              'B: + Edge Ratio'],
+    'Accuracy': [acc_A, acc_B],
+    'Macro F1': [f1_A, f1_B]
+})
+
+display(results.round(4))
+</code></pre></div>
+<p>두 모델의 성능 차이도 계산해 봅니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">print(f"정확도 변화: {acc_B - acc_A:+.4f}")
+print(f"Macro F1 변화: {f1_B - f1_A:+.4f}")
+</code></pre></div>
+<p>양수는 성능 향상을, 음수는 성능 하락을 의미합니다.</p>
+<p>다만 이 값은 성능 지표의 절대 차이입니다. 예를 들어 0.60에서 0.65로 상승했다면 정확도가 5% 상대 증가한 것이 아니라 <strong>5%p 증가</strong>한 것입니다.</p>
+<div class="question is-required"><div class="qhead"><strong>Q8.</strong><span class="required">필수 기록</span></div><div class="qtext"> 두 모델의 Accuracy와 Macro F1-score를 비교해 보세요. 새로운 특성을 추가한 후 성능이 어떻게 변화했나요?</div></div>
+<div class="question"><div class="qhead"><strong>Q9.</strong></div><div class="qtext"> 정확도와 Macro F1-score가 서로 다른 방향으로 변화할 수도 있을까요? 실제 실험 결과를 보고 생각해 보세요.</div></div>
+<h3>4. 성능을 그래프로 비교하기</h3>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">results_plot = results.melt(
+    id_vars='Model',
+    value_vars=['Accuracy', 'Macro F1'],
+    var_name='Metric',
+    value_name='Score'
+)
+
+plt.figure(figsize=(8, 5))
+
+sns.barplot(
+    data=results_plot,
+    x='Model',
+    y='Score',
+    hue='Metric'
+)
+
+plt.ylim(0, 1)
+plt.title('Model Performance Comparison')
+plt.ylabel('Score')
+plt.xlabel('')
+plt.show()
+</code></pre></div>
+<p>이 그래프를 보고 새로운 특성이 전체 성능을 얼마나 변화시켰는지 확인하세요.</p>
+<p>성능 차이가 작더라도 의미 없는 결과라고 단정하지 마세요.</p>
+<p>이미 기존 특성이 충분한 정보를 제공하고 있을 수도 있고, 추가한 특성이 특정 클래스에서만 도움이 되었을 수도 있습니다.</p>
+
+</section><section class="activity" id="activity-c"><h2>활동 C. 어떤 불량 유형에서 성능이 달라졌을까?</h2>
+<h3>1. 혼동행렬 비교하기</h3>
+<p>전체 정확도만으로는 모델이 어떤 불량 유형을 잘 분류했는지 확인하기 어렵습니다.</p>
+<p>혼동행렬(Confusion Matrix)을 이용하면 실제 불량 유형과 예측한 유형의 관계를 볼 수 있습니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+
+labels = sorted(y.unique())
+
+fig, axes = plt.subplots(1, 2, figsize=(16, 6))
+
+for ax, pred, title in zip(
+    axes,
+    [pred_A, pred_B],
+    ['Model A', 'Model B']
+):
+    cm = confusion_matrix(
+        y_test,
+        pred,
+        labels=labels,
+        normalize='true'
+    )
+
+    disp = ConfusionMatrixDisplay(
+        confusion_matrix=cm,
+        display_labels=labels
+    )
+
+    disp.plot(
+        ax=ax,
+        cmap='Blues',
+        values_format='.2f',
+        colorbar=False
+    )
+
+    ax.set_title(title)
+    ax.tick_params(axis='x', rotation=45)
+
+plt.tight_layout()
+plt.show()
+</code></pre></div>
+<p>이번에는 혼동행렬을 <code>normalize='true'</code>로 정규화했습니다.</p>
+<p>각 실제 클래스의 샘플 수가 서로 다르기 때문에, 클래스별 비율로 비교하기 위해서입니다.</p>
+<p>혼동행렬에서 행은 실제 불량 유형, 열은 모델이 예측한 유형입니다.</p>
+<p>대각선의 값이 높을수록 해당 유형을 올바르게 분류한 비율이 높습니다.</p>
+<div class="question is-required"><div class="qhead"><strong>Q10.</strong><span class="required">필수 기록</span></div><div class="qtext"> 모델 A와 B의 혼동행렬을 비교해 보세요.</div></div>
+<ul>
+<li>성능이 가장 크게 개선된 불량 유형은 무엇인가요?</li>
+<li>성능이 오히려 낮아진 유형이 있나요?</li>
+<li><code>edge_ratio</code>가 특히 유용했을 것으로 생각되는 유형은 무엇인가요?</li>
+</ul>
+<p>각 질문에 대해 실제 결과를 근거로 설명해 보세요.</p>
+<h3>2. 클래스별 성능 비교하기</h3>
+<p>혼동행렬에서 확인한 내용을 더 자세히 분석하기 위해 클래스별 평가 결과를 출력하겠습니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">from sklearn.metrics import classification_report
+
+print("=== Model A ===")
+print(
+    classification_report(
+        y_test,
+        pred_A,
+        zero_division=0
+    )
+)
+
+print("\n=== Model B ===")
+print(
+    classification_report(
+        y_test,
+        pred_B,
+        zero_division=0
+    )
+)
+</code></pre></div>
+<p>각 클래스의 Precision, Recall, F1-score를 비교할 수 있습니다.</p>
+<ul>
+<li><strong>Precision(정밀도):</strong> 해당 클래스로 예측한 샘플 중 실제로 맞힌 비율</li>
+<li><strong>Recall(재현율):</strong> 실제 해당 클래스인 샘플 중 올바르게 찾아낸 비율</li>
+<li><strong>F1-score:</strong> 정밀도와 재현율을 함께 고려한 지표</li>
+</ul>
+<p>이번 실습에서는 특히 클래스별 Recall과 F1-score 변화에 주목해 보세요.</p>
+<div class="question"><div class="qhead"><strong>Q11.</strong></div><div class="qtext"> 전체 정확도가 상승했더라도 특정 클래스의 Recall이 낮아질 수 있을까요? 실제 결과에서 그런 사례가 있는지 확인해 보세요.</div></div>
+<h3>3. 새로운 특성은 얼마나 중요했을까?</h3>
+<p>RandomForest는 학습한 모델에서 특성 중요도(Feature Importance)를 확인할 수 있습니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">importance = pd.DataFrame({
+    'Feature': X_B.columns,
+    'Importance': model_B.feature_importances_
+})
+
+display(
+    importance.sort_values(
+        'Importance',
+        ascending=False
+    )
+)
+</code></pre></div>
+<p>특성 중요도는 모델이 분류 과정에서 각 특성을 얼마나 활용했는지 살펴보는 지표입니다.</p>
+<p>다만 RandomForest의 기본 특성 중요도는 학습 과정에서 불순도를 얼마나 감소시켰는지를 기준으로 계산합니다.</p>
+<p>따라서 중요도가 높다는 사실만으로 그 특성이 반드시 분류 성능을 개선했다고 판단할 수는 없습니다.</p>
+<p>특히 두 특성이 서로 비슷한 정보를 담고 있다면 중요도가 나뉘어 나타날 수도 있습니다.</p>
+<div class="question"><div class="qhead"><strong>Q12.</strong></div><div class="qtext"> 두 특성 중 중요도가 높은 것은 무엇인가요? 특성 중요도와 실제 모델 성능 변화를 함께 고려했을 때 어떤 결론을 내릴 수 있을까요?</div></div>
+
+</section><section class="activity" id="activity-d"><h2>활동 D. 실험 조건을 바꾸면 어떤 일이 생길까?</h2>
+<h3>1. 난수 시드를 변경해 보기</h3>
+<p>이번 실험에서는 난수 시드를 42로 고정했습니다.</p>
+<p>그렇다면 난수 시드를 바꾸면 결과도 달라질까요?</p>
+<p>다음 코드는 모델 B에서 사용한 특성은 그대로 유지하면서 학습·테스트 데이터 분할에 사용하는 난수 시드만 바꿉니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">seed_results = []
+
+for seed in [10, 21, 42, 100]:
+    tr_idx, te_idx = train_test_split(
+        np.arange(len(df)),
+        test_size=0.2,
+        random_state=seed,
+        stratify=y
+    )
+
+    model = RandomForestClassifier(
+        n_estimators=100,
+        random_state=RANDOM_STATE,
+        n_jobs=-1
+    )
+
+    model.fit(
+        X_B.iloc[tr_idx],
+        y.iloc[tr_idx]
+    )
+
+    preds = model.predict(X_B.iloc[te_idx])
+
+    seed_results.append({
+        'Seed': seed,
+        'Accuracy': accuracy_score(y.iloc[te_idx], preds),
+        'Macro F1': f1_score(
+            y.iloc[te_idx],
+            preds,
+            average='macro'
+        )
+    })
+
+seed_df = pd.DataFrame(seed_results)
+
+display(seed_df.round(4))
+</code></pre></div>
+<p>이번 코드에서는 모델 자체의 <code>random_state</code>는 42로 유지하고, 데이터 분할에 사용하는 시드만 변경했습니다.</p>
+<p>따라서 결과가 달라진다면 학습·테스트 데이터 구성의 변화가 영향을 주었을 가능성을 살펴볼 수 있습니다.</p>
+<p>다만 학습 데이터가 바뀌면서 모델의 학습 결과도 함께 달라집니다.</p>
+<div class="question"><div class="qhead"><strong>Q13.</strong></div><div class="qtext"> 시드를 변경했을 때 성능이 완전히 같았나요? 달라졌다면 무엇이 달라졌기 때문이라고 생각하나요?</div></div>
+<div class="question is-required"><div class="qhead"><strong>Q14.</strong><span class="required">필수 기록</span></div><div class="qtext"> 어떤 시드에서는 모델의 성능이 높고 다른 시드에서는 낮게 나왔다고 가정해 봅시다.</div></div>
+<p>이 중 가장 높은 결과만 선택해 보고하면 어떤 문제가 발생할 수 있을까요?</p>
+<h3>2. 실험 결과를 어떻게 해석해야 할까?</h3>
+<p>머신러닝 실험에서는 성능이 향상되었다는 사실만큼이나 <strong>어떤 조건에서 향상되었는지</strong>가 중요합니다.</p>
+<p>이번 실험에서는 기준 모델 A와 비교 모델 B의 학습·테스트 데이터와 모델 설정을 동일하게 유지했습니다.</p>
+<p>이를 통해 새로운 특성의 추가가 성능에 어떤 영향을 주었는지 비교할 수 있었습니다.</p>
+<p>하지만 이번 결과만으로 모든 데이터에서 동일한 효과가 나타난다고 결론 내릴 수는 없습니다.</p>
+<p>특히 이번 WM-811K 데이터에는 다음과 같은 특징이 있습니다.</p>
+<ul>
+<li>불량 유형별 데이터 개수가 크게 다릅니다.</li>
+<li>일부 웨이퍼는 같은 제조 로트에서 수집되었을 수 있습니다.</li>
+<li>이번 실험은 무작위로 나눈 하나의 테스트 데이터셋을 이용했습니다.</li>
+</ul>
+<p>같은 로트의 웨이퍼가 학습과 테스트에 모두 포함되면 서로 비슷한 데이터를 평가하는 문제가 발생할 수도 있습니다. 따라서 실제 산업 현장에서 사용할 모델이라면 로트별 데이터 분리 등 더 엄격한 평가도 필요할 수 있습니다.</p>
+<p>이번 미션에서는 특성의 효과를 비교하는 방법을 익히기 위해 무작위 분할을 사용합니다.</p>
+
+</section><section id="wrapup"><h2>미션 02 결과 정리</h2>
+<p>이번 미션에서는 같은 머신러닝 알고리즘에 서로 다른 특성 조합을 입력하여 분류 성능을 비교했습니다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>기준 모델 A</th>
+<th>비교 모델 B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>입력 특성</td>
+<td>defect_ratio</td>
+<td>defect_ratio, edge_ratio</td>
+</tr>
+<tr>
+<td>모델</td>
+<td>RandomForest</td>
+<td>RandomForest</td>
+</tr>
+<tr>
+<td>데이터 분할</td>
+<td>80:20</td>
+<td>80:20</td>
+</tr>
+<tr>
+<td>난수 시드</td>
+<td>42</td>
+<td>42</td>
+</tr>
+<tr>
+<td>Accuracy</td>
+<td>실험 결과 기록</td>
+<td>실험 결과 기록</td>
+</tr>
+<tr>
+<td>Macro F1</td>
+<td>실험 결과 기록</td>
+<td>실험 결과 기록</td>
+</tr>
+</tbody>
+</table>
+<p>이제 새로운 특성의 효과에 대해 자신의 결론을 작성해 보세요.</p>
+<h3>Q15. <span class="required">필수 기록</span> 실험의 종합 결론</h3>
+<p>다음 내용을 포함하여 5~8문장 정도로 작성해 보세요.</p>
+<ol>
+<li>새로운 특성을 추가한 후 전체 분류 성능은 어떻게 변했나요?</li>
+<li>어떤 불량 유형에서 가장 뚜렷한 변화가 나타났나요?</li>
+<li>이러한 변화가 나타난 이유는 무엇이라고 생각하나요?</li>
+<li>실험을 통해 알게 된 점이나 실험의 한계는 무엇인가요?</li>
+</ol>
+<p>성능이 개선되지 않았더라도 괜찮습니다. 중요한 것은 결과를 바꾸는 것이 아니라 관찰한 결과를 근거로 설명하는 것입니다.</p>
+<h3>결과 저장하기</h3>
+<p>실험 결과를 다음 미션에서 활용할 수 있도록 저장합니다.</p>
+<div class="code-wrap"><div class="code-label"><span class="dot"></span>Python · Google Colab<button class="copy-code" onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code class="language-python">results.to_csv(
+    '/content/drive/MyDrive/feature_comparison.csv',
+    index=False
+)
+</code></pre></div>
+<p><code>feature_comparison.csv</code>에는 모델 A와 모델 B의 성능 비교 결과가 저장됩니다.</p>
+<p>다음 미션에서는 새로운 특성을 직접 설계하고 추가하여 모델 C를 만들 것입니다.</p>
+<p>모델 C는 <strong>모델 B에 학생이 선택한 특성을 추가한 모델</strong>입니다.</p>
+<p>따라서 개인 실험에서는 이번에 사용한 <code>train_idx</code>, <code>test_idx</code>, 모델 설정을 동일하게 유지해야 합니다.</p>
+<p>Colab에서 실습을 이어서 진행할 예정이라면 현재 노트북도 저장해 두세요. CSV 파일에는 성능 결과만 기록되며, 학습된 모델이나 데이터 분할 인덱스는 포함되지 않습니다.</p>
+
+</section><section id="complete"><h2>완료 확인</h2>
+<ul>
+<li class="check"><input type="checkbox"/><span>미션 01의 특성 데이터를 불러왔다.</span></li>
+<li class="check"><input type="checkbox"/><span>동일한 학습·테스트 데이터 분할을 만들었다.</span></li>
+<li class="check"><input type="checkbox"/><span>기준 모델 A를 학습하고 성능을 평가했다.</span></li>
+<li class="check"><input type="checkbox"/><span><code>edge_ratio</code>를 추가한 모델 B를 학습했다.</span></li>
+<li class="check"><input type="checkbox"/><span>두 모델의 Accuracy와 Macro F1-score를 비교했다.</span></li>
+<li class="check"><input type="checkbox"/><span>혼동행렬과 클래스별 성능을 확인했다.</span></li>
+<li class="check"><input type="checkbox"/><span>난수 시드를 바꾸었을 때 나타나는 변화를 관찰했다.</span></li>
+<li class="check"><input type="checkbox"/><span>실험 결과에 대한 종합 결론을 작성했다.</span></li>
+</ul>
+<h3>보고서에 기록할 내용</h3>
+<p>워크북의 모든 질문에 답할 필요는 없습니다.</p>
+<p><strong>[필수 기록]</strong>으로 표시된 질문은 실험 보고서를 작성할 때 활용할 수 있도록 답을 남겨 두세요. 다른 질문은 코드를 이해하고 결과를 해석하기 위한 학습 활동입니다.</p>
+<p>이번 미션에서 보관할 결과는 다음과 같습니다.</p>
+<ol>
+<li>모델 A와 B의 입력 특성과 실험 조건</li>
+<li>Accuracy와 Macro F1-score 비교표</li>
+<li>두 모델의 혼동행렬과 클래스별 성능 분석</li>
+<li>새로운 특성의 효과에 대한 종합 결론</li>
+<li>실험 조건 통제 및 재현성에 대한 설명</li>
+</ol>
+<p><strong>마지막으로 생각해 보기</strong></p>
+<p>모델의 성능이 좋아졌다는 사실은 새로운 특성이 유용할 가능성을 보여줍니다.</p>
+<p>하지만 그 결과를 신뢰하려면 실험 조건이 공정했는지, 다른 데이터에서도 비슷한 결과가 나타날지 함께 생각해야 합니다.</p>
+<p>특성공학은 단순히 열을 추가하는 작업이 아닙니다.</p>
+<p><strong>데이터에 대한 가설을 세우고, 실험으로 검증하고, 결과를 해석하는 과정</strong>입니다.</p>
+</section></main><script>async function copyCode(btn){const text=btn.closest('.code-wrap').querySelector('pre code').innerText;try{await navigator.clipboard.writeText(text)}catch(e){const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()}const original=btn.textContent;btn.textContent='복사 완료';setTimeout(()=>btn.textContent=original,1300)}</script></body></html>

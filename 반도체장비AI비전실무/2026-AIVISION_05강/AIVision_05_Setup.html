@@ -1,0 +1,100 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AI Vision 05 | 사전 준비</title><style>
+:root{--ink:#202a36;--muted:#627084;--line:#e2e8ee;--paper:#fff;--soft:#f5f8fb;--accent:#28668b;--code:#18222e}
+*{box-sizing:border-box}body{margin:0;background:#eef2f5;color:var(--ink);font:16px/1.75 system-ui,-apple-system,'Malgun Gothic','Apple SD Gothic Neo',sans-serif}main{max-width:860px;margin:32px auto;padding:45px 54px 64px;background:var(--paper);border:1px solid var(--line);border-radius:16px}header{padding-bottom:25px;border-bottom:2px solid #253b4d;margin-bottom:32px}.eyebrow{font-size:12px;font-weight:750;letter-spacing:.12em;color:var(--accent)}h1{font-size:29px;line-height:1.35;margin:10px 0 10px}h2{font-size:21px;line-height:1.4;margin:36px 0 14px}p{margin:10px 0}ul{padding-left:23px}li{margin:5px 0}.muted{color:var(--muted)}.goals{padding:16px 22px;background:var(--soft);border-left:3px solid var(--accent);border-radius:6px}.goals strong{display:block;margin-bottom:5px}table{width:100%;border-collapse:collapse;margin:15px 0 22px;font-size:14px}th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}th{background:var(--soft);font-weight:700}code{font-family:Consolas,'Courier New',monospace;font-size:.92em;background:#eef2f6;padding:1px 4px;border-radius:4px}.codebar{display:flex;justify-content:space-between;align-items:center;background:#263545;color:#e7f0f8;padding:9px 15px;border-radius:9px 9px 0 0;font-size:12px}.codebar button{border:1px solid #7891a8;background:transparent;color:white;border-radius:5px;padding:5px 12px;cursor:pointer;font:inherit}.codebar button:hover{background:#40566a}pre{margin:0 0 20px;padding:18px 20px;background:var(--code);color:#e9f0f7;border-radius:0 0 9px 9px;overflow:auto;line-height:1.7;font-size:14px}pre code{background:none;padding:0;color:inherit}.cm{color:#94ad9a}.str{color:#f7c58e}.num{color:#b3d6fa}.diagram{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:19px 0}.diagram>div{border:1px solid var(--line);border-radius:9px;padding:15px}.diagram strong{display:block;margin-bottom:8px}.diagram svg{display:block;width:100%;height:155px;background:#f5f7f9;border-radius:5px}.diagram p{font-size:13px;color:var(--muted);margin-bottom:0}.question{margin:13px 0;padding:15px 17px;background:var(--soft);border:1px solid var(--line);border-radius:8px}.question b{color:var(--accent)}.question p{margin:5px 0 0}.note{padding:13px 17px;border-left:3px solid #8ea9bb;background:var(--soft);border-radius:5px;font-size:14px}footer{margin-top:38px;border-top:1px solid var(--line);padding-top:15px;font-size:12px;color:var(--muted)}@media(max-width:680px){body{background:#fff}main{border:0;border-radius:0;padding:24px 20px;margin:0}h1{font-size:25px}h2{font-size:20px}.diagram{grid-template-columns:1fr}table{font-size:13px}th,td{padding:9px 7px}}
+
+.codebar button:focus-visible{outline:2px solid #fff;outline-offset:2px}.steps{padding:14px 18px;border-radius:8px;background:var(--soft);border:1px solid var(--line)}.steps ol{margin:4px 0;padding-left:22px}.mini{font-size:14px;color:var(--muted)}
+
+.flow{max-width:540px;margin:18px auto 22px;text-align:center}.flowbox{padding:12px 18px;border:1px solid var(--line);border-radius:8px;background:var(--soft);font-weight:650}.flowbox small{display:block;font-size:12px;font-weight:400;color:var(--muted)}.flowbox.accentbox{background:#e9f4fa;border:2px solid #6295b2;color:#174f72}.arrow{height:23px;line-height:23px;color:var(--accent);font-size:19px}.mini-diag{min-height:150px;padding:5px 0;font-size:12px}.mini-out{border:2px solid #62839c;border-radius:8px;padding:10px;background:#f3f8fb;font-weight:700}.mini-in{border:1px solid #88afc9;background:#e7f3fb;padding:10px;margin:8px 0;border-radius:6px}.mini-leaf{font-weight:500;background:#fff;border:1px solid #d5e2e9;padding:7px;margin-top:7px;border-radius:5px}.diagram>div{min-width:0}.question p{margin-top:5px}
+</style></head><body><main><header><div class="eyebrow">AI VISION LAB · 05 / STUDENT WORKBOOK</div><h1>사전 준비. 5강 실습 환경 설정하기</h1><p class="muted">Mission 01을 시작하기 전 · Colab 환경 준비</p><div class="goals"><strong>준비 목표</strong><ul><li>Google Drive를 연결하고 작업 폴더 경로를 설정한다.</li><li>필요한 라이브러리, 상수, 데이터셋과 클래스 이름을 준비한다.</li><li>Mission 01~08에서 재사용할 변수와 데이터셋을 확인한다.</li></ul></div></header><div class="note"><strong>실습 환경:</strong> 이 페이지의 코드는 제공된 <code>AIVision_05강_실습코드_v261021.ipynb</code>를 바탕으로 구성했다. 순서대로 Colab 셀에 실행하자. <code>root_path</code>는 자신의 Drive 폴더에 맞게 반드시 확인한다.</div><section><h2>1. Google Drive 연결</h2><div class="codebar"><span>PYTHON · 사전 준비 1</span><button type="button" onclick="copyCode(this)">코드 복사</button></div><pre><code>#----------------------------
+# 1. 구글 드라이브 마운트
+#----------------------------
+from google.colab import drive
+drive.mount(&#x27;/content/drive&#x27;)</code></pre></section><section><h2>2. 라이브러리 불러오기</h2><div class="codebar"><span>PYTHON · 사전 준비 2</span><button type="button" onclick="copyCode(this)">코드 복사</button></div><pre><code>#----------------------------
+# 2. 라이브러리 로딩
+#----------------------------
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
+from tensorflow.keras.models import load_model
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dropout, Dense, Input
+
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.metrics import ConfusionMatrixDisplay</code></pre></section><section><h2>3. 작업 폴더 지정</h2><p class="note">이 경로 아래에 <code>Train/</code>과 <code>Test/</code> 폴더가 있어야 한다. 아래 코드의 경로 끝 <code>/</code>는 유지하자.</p><div class="codebar"><span>PYTHON · 사전 준비 3</span><button type="button" onclick="copyCode(this)">코드 복사</button></div><pre><code>#----------------------------
+# 3. 본인의 작업 폴더 경로 지정하기
+#----------------------------
+
+root_path = &quot;/content/drive/MyDrive/AIVision/&quot;</code></pre></section><section><h2>4. 실습 상수와 경로 설정</h2><div class="codebar"><span>PYTHON · 사전 준비 4</span><button type="button" onclick="copyCode(this)">코드 복사</button></div><pre><code>#----------------------------
+# 4. 설정값을 상수로 선언하기
+#----------------------------
+
+# 모델 학습에 필요한 설정값(하이퍼파라미터)을 상수로 관리해보자.
+IMG_SIZE = 64
+BATCH_SIZE = 32
+EPOCHS = 10
+
+# 훈련 데이터와 테스트 데이터의 경로
+TRAIN_DIR = root_path + &quot;Train/&quot;
+TEST_DIR = root_path + &quot;Test/&quot;</code></pre></section><section><h2>5. 학습·검증·테스트 데이터셋 준비</h2><p class="note">훈련·검증 데이터는 동일한 원본 폴더를 시드 42로 나누고, 테스트 데이터는 별도 폴더에서 <code>shuffle=False</code>로 읽는다. 이미지가 다른 파일로 중복되어 있다면 자동으로 중복 내용까지 제거하지는 않는다.</p><div class="codebar"><span>PYTHON · 사전 준비 5</span><button type="button" onclick="copyCode(this)">코드 복사</button></div><pre><code>#----------------------------
+# 5. 데이터셋 준비하기
+#----------------------------
+# image_dataset_from_directory를 사용하여 데이터의 크기를 맞춰준다.
+
+# 학습 데이터셋
+train_ds = keras.utils.image_dataset_from_directory(
+    TRAIN_DIR,
+    validation_split=0.2,
+    subset=&quot;training&quot;,
+    seed=42,
+    image_size=(IMG_SIZE, IMG_SIZE),
+    batch_size=BATCH_SIZE
+)
+
+# 검증 데이터셋
+val_ds = keras.utils.image_dataset_from_directory(
+    TRAIN_DIR,
+    validation_split=0.2,
+    subset=&quot;validation&quot;,
+    seed=42,
+    image_size=(IMG_SIZE, IMG_SIZE),
+    batch_size=BATCH_SIZE
+)
+
+# 참고 코드
+# : 학습 데이터셋과 검증 데이터셋을 아래 코드처럼 한꺼번에 셋팅해줄 수도 있다.
+# train_ds, val_ds = keras.utils.image_dataset_from_directory(
+#     TRAIN_DIR,
+#     validation_split=0.2,
+#     subset=&quot;both&quot;,
+#     seed=42,
+#     image_size=(IMG_SIZE, IMG_SIZE),
+#     batch_size=BATCH_SIZE
+# )
+
+# 테스트 데이터셋
+test_ds = keras.utils.image_dataset_from_directory(
+    TEST_DIR,
+    image_size=(IMG_SIZE, IMG_SIZE),
+    batch_size=BATCH_SIZE,
+    label_mode=&quot;int&quot;,
+    shuffle=False
+)
+
+
+# 데이터 shape 확인 : (32, 64, 64, 3)
+# 32 = batch size
+# 64, 64 = resize된 크기
+# 3 = RGB 채널.
+for images, labels in train_ds.take(1):
+    print(images.shape)</code></pre></section><section><h2>6. 클래스 이름 확인</h2><p class="note">이후 미션에서 클래스별 출력층 크기와 성능 평가 시 클래스 순서에 사용한다. 출력된 클래스 순서를 확인하자.</p><div class="codebar"><span>PYTHON · 사전 준비 6</span><button type="button" onclick="copyCode(this)">코드 복사</button></div><pre><code>#----------------------------
+# 6. class_names 셋팅하기
+#----------------------------
+# 다음에 이어질 코드에서 클래스의 이름이 필요할 때 class_names 변수로 참조하는 코드가 많다.
+
+# 클래스 순서 : [&#x27;Center&#x27;, &#x27;Edge-Loc&#x27;, &#x27;Edge-Ring&#x27;, &#x27;Loc&#x27;, &#x27;Scratch&#x27;]
+class_names = train_ds.class_names
+print(class_names)</code></pre></section><footer>AI Vision Lab · 사전 준비 · 학생용 워크북</footer></main><script>function copyCode(button){const code=button.closest('.codebar').nextElementSibling.innerText;const reset=()=>button.textContent='코드 복사';const fallback=()=>{const ta=document.createElement('textarea');ta.value=code;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');button.textContent='복사 완료'}catch(e){button.textContent='복사 불가'}ta.remove();setTimeout(reset,1500)};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(code).then(()=>{button.textContent='복사 완료';setTimeout(reset,1500)}).catch(fallback)}else{fallback()}}</script></body></html>

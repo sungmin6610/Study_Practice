@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>AI Vision 05 | Mission 02 회전 증강 이미지 관찰하기</title><style>
+:root{--ink:#202a36;--muted:#627084;--line:#e2e8ee;--paper:#fff;--soft:#f5f8fb;--accent:#28668b;--code:#18222e}
+*{box-sizing:border-box}body{margin:0;background:#eef2f5;color:var(--ink);font:16px/1.75 system-ui,-apple-system,'Malgun Gothic','Apple SD Gothic Neo',sans-serif}main{max-width:860px;margin:32px auto;padding:45px 54px 64px;background:var(--paper);border:1px solid var(--line);border-radius:16px}header{padding-bottom:25px;border-bottom:2px solid #253b4d;margin-bottom:32px}.eyebrow{font-size:12px;font-weight:750;letter-spacing:.12em;color:var(--accent)}h1{font-size:29px;line-height:1.35;margin:10px 0 10px}h2{font-size:21px;line-height:1.4;margin:36px 0 14px}p{margin:10px 0}ul{padding-left:23px}li{margin:5px 0}.muted{color:var(--muted)}.goals{padding:16px 22px;background:var(--soft);border-left:3px solid var(--accent);border-radius:6px}.goals strong{display:block;margin-bottom:5px}table{width:100%;border-collapse:collapse;margin:15px 0 22px;font-size:14px}th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}th{background:var(--soft);font-weight:700}code{font-family:Consolas,'Courier New',monospace;font-size:.92em;background:#eef2f6;padding:1px 4px;border-radius:4px}.codebar{display:flex;justify-content:space-between;align-items:center;background:#263545;color:#e7f0f8;padding:9px 15px;border-radius:9px 9px 0 0;font-size:12px}.codebar button{border:1px solid #7891a8;background:transparent;color:white;border-radius:5px;padding:5px 12px;cursor:pointer;font:inherit}.codebar button:hover{background:#40566a}pre{margin:0 0 20px;padding:18px 20px;background:var(--code);color:#e9f0f7;border-radius:0 0 9px 9px;overflow:auto;line-height:1.7;font-size:14px}pre code{background:none;padding:0;color:inherit}.cm{color:#94ad9a}.str{color:#f7c58e}.num{color:#b3d6fa}.diagram{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:19px 0}.diagram>div{border:1px solid var(--line);border-radius:9px;padding:15px}.diagram strong{display:block;margin-bottom:8px}.diagram svg{display:block;width:100%;height:155px;background:#f5f7f9;border-radius:5px}.diagram p{font-size:13px;color:var(--muted);margin-bottom:0}.question{margin:13px 0;padding:15px 17px;background:var(--soft);border:1px solid var(--line);border-radius:8px}.question b{color:var(--accent)}.question p{margin:5px 0 0}.note{padding:13px 17px;border-left:3px solid #8ea9bb;background:var(--soft);border-radius:5px;font-size:14px}footer{margin-top:38px;border-top:1px solid var(--line);padding-top:15px;font-size:12px;color:var(--muted)}@media(max-width:680px){body{background:#fff}main{border:0;border-radius:0;padding:24px 20px;margin:0}h1{font-size:25px}h2{font-size:20px}.diagram{grid-template-columns:1fr}table{font-size:13px}th,td{padding:9px 7px}}
+
+.codebar button:focus-visible{outline:2px solid #fff;outline-offset:2px}.steps{padding:14px 18px;border-radius:8px;background:var(--soft);border:1px solid var(--line)}.steps ol{margin:4px 0;padding-left:22px}.mini{font-size:14px;color:var(--muted)}
+</style></head><body><main>
+<header><div class="eyebrow">AI VISION LAB · 05 / STUDENT WORKBOOK</div><h1>Mission 02. 회전 증강 이미지 관찰하기</h1><p class="muted">이미지 데이터 증강과 재현 가능한 실험</p><div class="goals"><strong>학습 목표</strong><ul><li><code>train_ds</code>에서 이미지 한 장과 정답 라벨을 가져올 수 있다.</li><li>같은 이미지에 무작위 회전을 여러 번 적용하여 결과를 시각화할 수 있다.</li><li><code>take()</code>, 배치 차원, <code>training=True</code>의 역할을 설명할 수 있다.</li></ul></div></header>
+<section><h2>1. 실습 준비: 데이터셋과 증강 레이어</h2>
+<p>Mission 01에서 만든 <code>data_augmentation</code>을 사용하여 실제 웨이퍼맵을 회전시켜 보자. 이번 미션에서는 <strong>모델을 학습하지 않고 이미지 변형 결과만 확인한다.</strong></p>
+<div class="steps"><strong>필요한 준비물</strong><ol><li>4강에서 생성한 <code>train_ds</code>와 <code>class_names</code></li><li>Mission 01에서 생성한 <code>data_augmentation</code> (±90° 회전, 검은 배경, nearest 보간)</li><li><code>matplotlib.pyplot</code> (이미지 출력)</li></ol></div>
+<p class="mini">Colab 런타임을 새로 시작했다면 데이터셋과 증강 레이어를 만드는 셀부터 실행해야 한다.</p></section>
+<section><h2>2. 데이터셋에서 이미지 한 장 가져오기</h2>
+<p><code>train_ds</code>는 이미지를 한 장씩이 아니라 <strong>배치(batch)</strong> 단위로 제공한다. 4강에서 <code>BATCH_SIZE=32</code>로 설정했으므로 일반적으로 한 배치에는 이미지 32장과 대응하는 라벨 32개가 들어 있다.</p>
+<div class="codebar"><span>PYTHON · 배치 하나 살펴보기</span><button onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code><span class="cm"># 앞에서 배치 하나 선택</span>
+for images, labels in train_ds.take(<span class="num">1</span>):
+    print(<span class="str">"이미지 배치:"</span>, images.shape)
+    print(<span class="str">"라벨 배치:"</span>, labels.shape)</code></pre>
+<p><code>take(n)</code>은 데이터셋의 앞에서 <strong>n개 요소</strong>를 가져오는 메서드이다. 여기서는 요소 하나가 이미지 한 장이 아니라 배치 하나이므로, <code>take(1)</code>을 순회하는 <code>for</code>문은 한 번 실행된다.</p>
+<table><thead><tr><th>코드</th><th>선택되는 데이터</th><th>반복문 실행</th></tr></thead><tbody><tr><td><code>take(0)</code></td><td>없음</td><td>0회</td></tr><tr><td><code>take(1)</code></td><td>배치 1개</td><td>1회</td></tr><tr><td><code>take(3)</code></td><td>배치 최대 3개</td><td>최대 3회</td></tr></tbody></table>
+<p>이제 가져온 배치에서 <strong>첫 번째 이미지와 라벨</strong>을 선택하자.</p>
+<div class="codebar"><span>PYTHON · 이미지 한 장 선택</span><button onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code>for images, labels in train_ds.take(1):
+    # 배치에서 이미지 한 장만 선택
+    sample_image = images[0]
+    sample_label = labels[0]
+
+print("이미지 형태:", sample_image.shape)
+print("정답 클래스:", class_names[int(sample_label)])</code></pre>
+<p><code>sample_image.shape</code>은 <code>(64, 64, 3)</code>으로 출력될 것이다. 높이 64, 너비 64, RGB 채널 3개를 뜻한다.</p>
+<p class="note"><code>take(1)</code>의 <code>1</code>은 가져올 배치의 개수이고, <code>images[0]</code>의 <code>0</code>은 배치 안에서 첫 번째 이미지를 가리키는 인덱스이다. 두 숫자의 의미를 구분하자.</p></section>
+<section><h2>3. 이미지에 회전 증강 적용하기</h2>
+<p><code>data_augmentation</code>은 <code>keras.Sequential</code>로 만든 객체이다. 함수처럼 호출하면 입력 이미지를 내부 레이어에 순서대로 통과시켜 변형 결과를 반환한다.</p>
+<div class="codebar"><span>PYTHON · 이미지 한 장 회전시키기</span><button onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code>augmented = data_augmentation(
+    sample_image[None, ...],
+    training=<span class="num">True</span>
+)
+
+print(<span class="str">"변형 결과 형태:"</span>, augmented.shape)</code></pre>
+<table><thead><tr><th>표현</th><th>의미</th></tr></thead><tbody><tr><td><code>sample_image[None, ...]</code></td><td>이미지 한 장에 배치 차원을 추가: <code>(64,64,3)</code> → <code>(1,64,64,3)</code></td></tr><tr><td><code>data_augmentation(...)</code></td><td>Sequential 객체를 호출해 포함된 <code>RandomRotation</code> 실행</td></tr><tr><td><code>training=True</code></td><td>훈련 모드 동작을 활성화하여 무작위 회전 적용</td></tr></tbody></table>
+<p><strong>훈련 모드(training mode)</strong>는 학습 과정에서만 다르게 작동하는 레이어의 동작을 지정한다. <code>RandomRotation</code>은 훈련 모드에서 이미지를 회전시키고, 추론 모드에서는 회전시키지 않는다.</p>
+<p class="note"><code>training=True</code>는 <strong>모델을 학습시키라는 명령이 아니다.</strong> 실제 가중치 학습은 <code>fit()</code>에서 이루어진다. 현재 증강 레이어에는 학습할 가중치가 없다.</p></section>
+<section><h2>4. 원본과 회전 이미지 6장 출력하기</h2>
+<p>같은 이미지라도 증강 레이어를 여러 번 호출하면 무작위 회전 각도가 달라질 수 있다. 다음 코드를 작성하여 원본과 증강 이미지를 나란히 비교해 보자.</p>
+<div class="codebar"><span>PYTHON · 원본 1장 + 증강 6장</span><button onclick="copyCode(this)" type="button">코드 복사</button></div><pre><code>import matplotlib.pyplot as plt
+
+plt.figure(figsize=(<span class="num">14</span>, <span class="num">4</span>))
+
+<span class="cm"># 원본 이미지</span>
+plt.subplot(<span class="num">1</span>, <span class="num">7</span>, <span class="num">1</span>)
+plt.imshow(sample_image.numpy().astype(<span class="str">"uint8"</span>))
+plt.title(<span class="str">"Original"</span>)
+plt.axis(<span class="str">"off"</span>)
+
+<span class="cm"># 동일한 이미지를 6번 무작위 회전</span>
+for i in range(<span class="num">6</span>):
+    augmented = data_augmentation(
+        sample_image[None, ...], training=<span class="num">True</span>
+    )
+
+    plt.subplot(<span class="num">1</span>, <span class="num">7</span>, i + <span class="num">2</span>)
+    plt.imshow(augmented[<span class="num">0</span>].numpy().astype(<span class="str">"uint8"</span>))
+    plt.title(f<span class="str">"Rotation {i + 1}"</span>)
+    plt.axis(<span class="str">"off"</span>)
+
+plt.tight_layout()
+plt.show()</code></pre>
+<p>이 코드는 <code>subplot(1, 7, ...)</code>을 사용하여 <strong>1행 7열</strong>에 이미지를 배치한다. 회전 결과의 실제 각도는 실행할 때마다 달라질 수 있다.</p>
+<p class="mini">표시된 결함 유형이 적합한지 판단하기 어려우면, 다른 이미지로 다시 실행하여 비교해도 된다.</p></section>
+<section><h2>5. 실행 결과 관찰 및 코드 이해 활동</h2>
+<p>출력된 이미지를 확인하고 질문에 답해보자. 관찰 결과는 이미지와 함께 기록해도 좋다.</p>
+<div class="question"><b>Q2.1.</b><p><code>take(1)</code>의 <code>1</code>과 <code>images[0]</code>의 <code>0</code>은 각각 무엇을 의미하는가? <code>take(2)</code>로 변경하면 <code>for</code>문은 몇 번 실행되는가?</p></div>
+<div class="question"><b>Q2.2.</b><p>코드에서 <code>sample_image</code>의 차원을 <code>(64, 64, 3)</code>에서 <code>(1, 64, 64, 3)</code>으로 바꾸는 부분을 찾고, 앞에 추가된 <code>1</code>이 무엇을 나타내는지 설명하시오.</p></div>
+<div class="question"><b>Q2.3.</b><p><code>training=True</code>를 <code>training=False</code>로 바꾸어 다시 실행하시오. 출력된 회전 이미지에 어떤 변화가 있는가? 그 이유를 설명하시오.</p></div>
+<div class="question"><b>Q2.4.</b><p>같은 이미지에 무작위 회전을 적용한 여섯 결과를 관찰하시오. 결함 패턴이 여전히 같은 클래스로 보이는가? 회전 후 분류가 모호해지는 사례가 있다면 어떤 특징 때문인지 작성하시오.</p></div>
+<div class="question"><b>Q2.5.</b><p>Mission 01에서 설정한 <code>interpolation="nearest"</code>를 <code>"bilinear"</code>로 변경하고 같은 이미지의 결과를 비교하시오. 결함 영역의 경계와 픽셀값 표현에서 어떤 차이가 나타나는가?</p></div>
+</section><footer>AI Vision Lab · Mission 02 · 학생용 워크북</footer></main>
+<script>
+function copyCode(button){const code=button.closest('.codebar').nextElementSibling.innerText;const reset=()=>{button.textContent='코드 복사'};navigator.clipboard.writeText(code).then(()=>{button.textContent='복사 완료';setTimeout(reset,1500)}).catch(()=>{const ta=document.createElement('textarea');ta.value=code;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');button.textContent='복사 완료'}catch(e){button.textContent='복사 불가'}ta.remove();setTimeout(reset,1500)});}
+</script></body></html>

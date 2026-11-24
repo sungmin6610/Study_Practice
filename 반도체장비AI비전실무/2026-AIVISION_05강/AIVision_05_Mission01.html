@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>AI Vision 05 | Mission 01 데이터 증강 레이어 만들기</title>
+<style>
+:root{--ink:#202a36;--muted:#627084;--line:#e2e8ee;--paper:#fff;--soft:#f5f8fb;--accent:#28668b;--code:#18222e}
+*{box-sizing:border-box}body{margin:0;background:#eef2f5;color:var(--ink);font:16px/1.75 system-ui,-apple-system,'Malgun Gothic','Apple SD Gothic Neo',sans-serif}main{max-width:860px;margin:32px auto;padding:45px 54px 64px;background:var(--paper);border:1px solid var(--line);border-radius:16px}header{padding-bottom:25px;border-bottom:2px solid #253b4d;margin-bottom:32px}.eyebrow{font-size:12px;font-weight:750;letter-spacing:.12em;color:var(--accent)}h1{font-size:29px;line-height:1.35;margin:10px 0 10px}h2{font-size:21px;line-height:1.4;margin:36px 0 14px}p{margin:10px 0}ul{padding-left:23px}li{margin:5px 0}.muted{color:var(--muted)}.goals{padding:16px 22px;background:var(--soft);border-left:3px solid var(--accent);border-radius:6px}.goals strong{display:block;margin-bottom:5px}table{width:100%;border-collapse:collapse;margin:15px 0 22px;font-size:14px}th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}th{background:var(--soft);font-weight:700}code{font-family:Consolas,'Courier New',monospace;font-size:.92em;background:#eef2f6;padding:1px 4px;border-radius:4px}.codebar{display:flex;justify-content:space-between;align-items:center;background:#263545;color:#e7f0f8;padding:9px 15px;border-radius:9px 9px 0 0;font-size:12px}.codebar button{border:1px solid #7891a8;background:transparent;color:white;border-radius:5px;padding:5px 12px;cursor:pointer;font:inherit}.codebar button:hover{background:#40566a}pre{margin:0 0 20px;padding:18px 20px;background:var(--code);color:#e9f0f7;border-radius:0 0 9px 9px;overflow:auto;line-height:1.7;font-size:14px}pre code{background:none;padding:0;color:inherit}.cm{color:#94ad9a}.str{color:#f7c58e}.num{color:#b3d6fa}.diagram{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:19px 0}.diagram>div{border:1px solid var(--line);border-radius:9px;padding:15px}.diagram strong{display:block;margin-bottom:8px}.diagram svg{display:block;width:100%;height:155px;background:#f5f7f9;border-radius:5px}.diagram p{font-size:13px;color:var(--muted);margin-bottom:0}.question{margin:13px 0;padding:15px 17px;background:var(--soft);border:1px solid var(--line);border-radius:8px}.question b{color:var(--accent)}.question p{margin:5px 0 0}.note{padding:13px 17px;border-left:3px solid #8ea9bb;background:var(--soft);border-radius:5px;font-size:14px}footer{margin-top:38px;border-top:1px solid var(--line);padding-top:15px;font-size:12px;color:var(--muted)}@media(max-width:680px){body{background:#fff}main{border:0;border-radius:0;padding:24px 20px;margin:0}h1{font-size:25px}h2{font-size:20px}.diagram{grid-template-columns:1fr}table{font-size:13px}th,td{padding:9px 7px}}
+</style>
+</head>
+<body><main>
+<header><div class="eyebrow">AI VISION LAB · 05 / STUDENT WORKBOOK</div><h1>Mission 01. 데이터 증강 레이어 만들기</h1><p class="muted">이미지 데이터 증강과 재현 가능한 실험</p>
+<div class="goals"><strong>학습 목표</strong><ul><li>데이터 증강의 개념과 목적을 설명할 수 있다.</li><li><code>RandomRotation</code>을 사용하여 회전 증강 레이어를 생성할 수 있다.</li><li>회전 범위와 이미지 보간 방식을 설정할 수 있다.</li></ul></div></header>
+<section><h2>1. 데이터 증강이란?</h2>
+<p><strong>데이터 증강(Data Augmentation)</strong>은 기존 학습 데이터에 변형을 적용하여 다양한 학습 사례를 만드는 기법이다.</p>
+<p>이미지를 학습하는 CNN은 학습 데이터에서 이미지의 특징을 찾아낸다. 그러나 학습 이미지가 특정 방향이나 위치에 치우쳐 있다면, 다른 방향이나 위치의 이미지에서는 예측 성능이 떨어질 수 있다.</p>
+<p>예를 들어 세로 방향의 Scratch가 포함된 웨이퍼맵을 학습한 CNN이 가로 방향의 Scratch도 잘 분류할 수 있을까?</p>
+<p>CNN은 이미지가 회전하더라도 반드시 같은 클래스로 분류하는 것은 아니다. 따라서 학습 이미지에 다양한 방향의 Scratch를 포함시키면 새로운 방향의 패턴을 인식하는 데 도움이 될 가능성이 있다.</p>
+<p>하지만 <strong>데이터 증강이 항상 모델 성능을 개선하는 것은 아니다.</strong> 증강으로 만들어진 이미지가 실제 데이터의 특성과 맞지 않거나, 클래스 사이의 차이를 구분하기 어렵게 만들 수도 있다.</p>
+<p>이번 실습에서는 회전 증강을 적용해보고 실제로 모델 성능에 어떤 변화가 발생하는지 확인한다.</p></section>
+<section><h2>2. 이미지 증강에는 어떤 방법이 있을까?</h2>
+<table><thead><tr><th>기법</th><th>Keras 레이어</th><th>이미지 변형</th></tr></thead><tbody><tr><td>회전</td><td><code>RandomRotation</code></td><td>무작위 각도로 회전</td></tr><tr><td>반전</td><td><code>RandomFlip</code></td><td>좌우 또는 상하 반전</td></tr><tr><td>이동</td><td><code>RandomTranslation</code></td><td>상하좌우로 위치 이동</td></tr><tr><td>확대·축소</td><td><code>RandomZoom</code></td><td>이미지 크기 변경</td></tr></tbody></table>
+<p>모두 Keras가 제공하는 데이터 증강 레이어이며, CNN 모델에 추가하거나 별도로 실행할 수 있다. 이번 실습에서는 <code>RandomRotation</code>을 사용한다. 다른 증강 레이어도 유사한 방식으로 활용할 수 있다.</p></section>
+<section><h2>3. RandomRotation 사용하기</h2>
+<p><code>RandomRotation</code>은 지정한 범위 안에서 이미지를 무작위로 회전시키는 레이어이다. 다음 코드를 작성하여 회전 증강 레이어를 생성하자.</p>
+<div class="codebar"><span>PYTHON · 회전 증강 레이어</span><button onclick="copyCode(this)" type="button">코드 복사</button></div>
+<pre><code id="code1"><span class="cm"># 회전 증강 레이어 생성</span>
+data_augmentation = keras.Sequential([
+    layers.RandomRotation(
+        factor=<span class="num">0.25</span>,
+        fill_mode=<span class="str">"constant"</span>,
+        fill_value=<span class="num">0.0</span>,
+        interpolation=<span class="str">"nearest"</span>
+    )
+])</code></pre>
+<p><code>keras.Sequential</code>은 여러 레이어를 순서대로 실행하도록 묶는 객체이다. 현재는 <code>RandomRotation</code> 레이어 하나만 포함하고 있다.</p>
+<table><thead><tr><th>파라미터</th><th>설정값</th><th>의미</th></tr></thead><tbody><tr><td><code>factor</code></td><td><code>0.25</code></td><td>−90° ~ +90° 사이에서 무작위 회전</td></tr><tr><td><code>fill_mode</code></td><td><code>"constant"</code></td><td>회전 후 빈 공간을 일정한 값으로 채움</td></tr><tr><td><code>fill_value</code></td><td><code>0.0</code></td><td>빈 공간을 검은색으로 채움</td></tr><tr><td><code>interpolation</code></td><td><code>"nearest"</code></td><td>가장 가까운 픽셀값을 사용</td></tr></tbody></table>
+<p><code>factor</code>는 각도를 직접 입력하는 값이 아니다. 전체 360도를 기준으로 회전 범위를 지정한다. 예를 들어 <code>factor=0.25</code>는 최대 ±90°의 무작위 회전을 의미한다.</p></section>
+<section><h2>4. 이미지 보간(Interpolation)</h2>
+<p>이미지를 회전시키면 원래 픽셀들이 새로운 위치로 이동한다. 이 과정에서 새로운 위치의 픽셀값을 결정해야 한다. 대표적인 보간 방법에는 <code>bilinear</code>와 <code>nearest</code>가 있다.</p>
+<div class="diagram">
+<div><strong>Bilinear</strong><svg aria-label="경계 픽셀에 중간 밝기가 나타나는 bilinear 보간 개념도" role="img" viewbox="0 0 230 155"><defs><lineargradient id="blur" x1="0" x2="1" y1="1" y2="0"><stop offset="35%" stop-color="#343d47"></stop><stop offset="48%" stop-color="#66727d"></stop><stop offset="56%" stop-color="#c4cbd0"></stop><stop offset="65%" stop-color="#f7fafc"></stop></lineargradient></defs><rect fill="url(#blur)" height="128" width="200" x="15" y="14"></rect><g opacity=".45" stroke="#a0adb6" stroke-width=".5"><path d="M40 14V142 M65 14V142 M90 14V142 M115 14V142 M140 14V142 M165 14V142 M190 14V142 M15 40H215 M15 66H215 M15 92H215 M15 118H215"></path></g></svg><p>주변 픽셀값을 혼합하므로 중간 밝기 값이 생기고 경계가 부드럽게 보일 수 있다.</p></div>
+<div><strong>Nearest</strong><svg aria-label="중간 밝기 없이 픽셀 경계가 계단 모양으로 표현되는 nearest 보간 개념도" role="img" viewbox="0 0 230 155"><rect fill="#343d47" height="128" width="200" x="15" y="14"></rect><path d="M15 116 H40 V102 H65 V88 H90 V74 H115 V60 H140 V46 H165 V32 H190 V14 H215 V142 H15Z" fill="#f7fafc"></path><g opacity=".48" stroke="#a0adb6" stroke-width=".5"><path d="M40 14V142 M65 14V142 M90 14V142 M115 14V142 M140 14V142 M165 14V142 M190 14V142 M15 40H215 M15 66H215 M15 92H215 M15 118H215"></path></g></svg><p>가장 가까운 픽셀값을 그대로 사용하므로 중간값이 생기지 않지만 경계가 계단처럼 보일 수 있다.</p></div>
+</div>
+<p class="note">그림은 보간 원리를 단순화한 개념도이다. 웨이퍼맵에서는 픽셀값이 배경, 정상 다이, 불량 다이 등의 정보를 나타내므로 <code>nearest</code>가 적절할 수 있다. 다만 모든 이미지에서 가장 좋은 보간 방법이라는 뜻은 아니다.</p></section>
+<section><h2>5. 코드 확인 활동</h2>
+<p>작성한 코드를 다시 살펴보고 다음 질문에 답해보자.</p>
+<div class="question"><b>Q1.1.</b><p><code>factor=0.25</code>를 <code>factor=0.125</code>로 변경하면 이미지의 회전 범위는 어떻게 달라지는가?</p></div>
+<div class="question"><b>Q1.2.</b><p>현재 웨이퍼맵의 배경은 검은색이다. 회전 후에도 배경을 검은색으로 유지하기 위해 설정한 파라미터 두 가지는 무엇인가?</p></div>
+<div class="question"><b>Q1.3.</b><p><code>interpolation="nearest"</code>를 <code>"bilinear"</code>로 변경하면 회전된 이미지의 픽셀값은 어떤 차이가 발생할 수 있는가?</p></div>
+<div class="question"><b>Q1.4.</b><p>현재 <code>data_augmentation</code>은 Sequential 객체로 만들었다. 이 객체 안에는 어떤 레이어가 포함되어 있는가?</p></div>
+</section><footer>AI Vision Lab · Mission 01 · 학생용 워크북</footer></main>
+<script>function copyCode(button){const code=button.closest('.codebar').nextElementSibling.innerText;const reset=()=>button.textContent='코드 복사';const fallback=()=>{const ta=document.createElement('textarea');ta.value=code;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');button.textContent='복사 완료'}catch(e){button.textContent='복사 불가'}ta.remove();setTimeout(reset,1500)};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(code).then(()=>{button.textContent='복사 완료';setTimeout(reset,1500)}).catch(fallback)}else{fallback()}}</script></body></html>
